@@ -1,24 +1,37 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import "./style.css";
+import { signal, computed, effect } from "@preact/signals-core";
+const counter = signal(1);
+const result = computed(() => counter.value * 10);
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
+    <h1>Signals in Vanilla JS</h1>
     <div class="card">
-      <button id="counter" type="button"></button>
+      <button type="button">count is <span class="counter">${counter.value}</span></button>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
+    <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
   </div>
-`
+`;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+function setCounter() {
+    const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
+    const resultElement = document.querySelector<HTMLSpanElement>(".result");
+
+    if (!counterElements?.length || !resultElement) {
+        return;
+    }
+
+    counterElements.forEach((element) => {
+        element.innerText = counter.value.toString();
+    });
+
+    resultElement.innerText = result.value.toString();
+}
+
+const button = document.querySelector<HTMLButtonElement>("button");
+
+button?.addEventListener("click", () => {
+    counter.value++;
+});
+
+effect(setCounter);
