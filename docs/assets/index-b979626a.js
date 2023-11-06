@@ -6,6 +6,6 @@
       <button type="reset" id="reset">Reset</button>
     </div>
     <p>Result: <span class="counter">${u.value}</span> * 10 = <span class="result">10</span></p>
-    <p>Randomized result: <span class="counter">${u.value}</span> * ${a.value} = <span class="randomizedResult">10</span></p>
+    <p>Randomized result: <span class="counter">${u.value}</span> * <span class="randomSeed">${a.value}</span> = <span class="randomizedResult">10</span></p>
   </div>
 `;function $(){const i=document.querySelectorAll(".counter"),t=document.querySelector(".result"),e=document.querySelector(".randomizedResult");!(i!=null&&i.length)||!t||!e||(i.forEach(r=>{r.innerText=u.value.toString()}),t.innerText=M.value.toString(),e.innerText=T.value.toString())}const S=document.getElementById("incrementCounter"),g=document.getElementById("reset");S==null||S.addEventListener("click",()=>{u.value++});g==null||g.addEventListener("click",()=>{u.value=0,a.value=l(1,9),console.info({new:a.value}),q.value=!0});U($);setInterval(()=>{q.value===!1&&(u.value=l(4,9),a.value=l(3,6))},200);
