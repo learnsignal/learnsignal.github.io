@@ -15,16 +15,17 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <button type="reset" id="reset">Reset</button>
     </div>
     <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
-    <p>Randomized result: <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> = <span class="randomizedResult">10</span></p>
+    <p>Randomized result h-i-v-e: <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> = <span class="randomizedResult">10</span></p>
   </div>
 `;
 
 function setCounter() {
   const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
   const resultElement = document.querySelector<HTMLSpanElement>(".result");
+  const randomSeedElement = document.querySelector<HTMLSpanElement>(".randomSeed");
   const randomizedResultElement = document.querySelector<HTMLSpanElement>(".randomizedResult");
 
-  if (!counterElements?.length || !resultElement || !randomizedResultElement) {
+  if (!counterElements?.length || !resultElement || !randomSeedElement || !randomizedResultElement) {
     return;
   }
 
@@ -33,6 +34,7 @@ function setCounter() {
   });
 
   resultElement.innerText = result.value.toString();
+  randomSeedElement.innerText = randomSeed.value.toString();
   randomizedResultElement.innerText = randomizedResult.value.toString();
 }
 
@@ -54,7 +56,7 @@ effect(setCounter);
 
 setInterval(() => {
   if (resetPressed.value === false) {
-    counter.value = randomIntFromInterval(4, 9);
-    randomSeed.value = randomIntFromInterval(3, 6);
+    counter.value = randomIntFromInterval(1, 9);
+    randomSeed.value = randomIntFromInterval(1, 9);
   }
 }, 200)
