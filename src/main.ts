@@ -15,7 +15,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <button type="reset" id="reset">Reset</button>
     </div>
     <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
-    <p>Randomized result: <span class="counter">${counter.value}</span> * ${randomSeed.value} = <span class="randomizedResult">10</span></p>
+    <p>Randomized result: <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> = <span class="randomizedResult">10</span></p>
   </div>
 `;
 
