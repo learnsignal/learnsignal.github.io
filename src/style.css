@@ -94,4 +94,61 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+
+  :root {
+    /* Define the base hue, saturation, and lightness values */
+    --base-hue: 0;
+    --base-saturation: 40%;
+    --base-lightness: 80%;
+    /* Define the animation duration and direction */
+    --animation-duration: 1s;
+    --animation-direction: alternate;
+  }
+  
+  body {
+    /* Use the hsl() function with the CSS variables to set the background color */
+    background-color: hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));
+    /* Use the animation property to animate the hue value over time */
+    animation: hue-change var(--animation-duration) infinite var(--animation-direction);
+  }
+  
+  /* Use the @keyframes rule to define how the hue value changes */
+  @keyframes hue-change {
+    /* Start from the base hue value */
+    0% {
+      --base-hue: 0;
+    }
+    10% {
+     --base-hue: 36deg; 
+    }
+    20% {
+     --base-hue: 72deg; 
+    }
+    30% {
+     --base-hue: 108deg; 
+    }
+    40% {
+     --base-hue: 144deg; 
+    }
+    50% {
+     --base-hue: 180deg; 
+    }
+    60% {
+     --base-hue: 216deg; 
+    }
+    70% {
+     --base-hue: 252deg; 
+    }
+    80% {
+     --base-hue: 288deg; 
+    }
+    90% {
+     --base-hue: 324deg; 
+    }
+    /* End at the base hue value plus 360 degrees (one full circle) */
+    100% {
+      --base-hue: 360deg;
+    }
+  }  
 }
+
