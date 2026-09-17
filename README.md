@@ -3,7 +3,7 @@
 A tiny, deliberately boring demo of **fine-grained reactivity without a framework**.
 
 No React. No Preact. No virtual DOM. No components, no JSX, no hooks. Just
-`@preact/signals-core`, a handful of `<span>` elements, and about 90 lines of TypeScript.
+`@preact/signals-core`, a handful of `<span>` elements, and under 100 lines of TypeScript.
 
 **Live demo:** https://learnsignal.github.io/
 **Source:** https://github.com/learnsignal/learnsignal.github.io
@@ -23,7 +23,7 @@ This repo exists to make that separation obvious by removing everything else:
 
 - **Signals are a data structure, not a framework feature.** `@preact/signals-core` is a
   standalone library with zero UI dependencies, and the whole production bundle here —
-  signals runtime plus app logic — is a few kilobytes uncompressed.
+  signals runtime plus app logic — is under 7 KB uncompressed.
 - **Dependency tracking is automatic.** You never declare what depends on what. No
   dependency arrays, no `useMemo` bookkeeping, no subscribe/unsubscribe lifecycle. You
   read a value; the graph notices.
@@ -209,32 +209,41 @@ steps 4 or 5, and why the pause button needed no new rendering code.
 ├── src/
 │   ├── main.ts           the entire application
 │   ├── random.ts         randomIntFromInterval helper
+│   ├── counter.ts        unused leftover from the Vite starter
 │   ├── style.css         Vite starter styles, trimmed
 │   ├── typescript.svg
 │   └── vite-env.d.ts
 ├── public/vite.svg
 ├── docs/                 BUILD OUTPUT, committed on purpose — this is what GitHub Pages serves
+│   └── llm/              export.sh output, excluded from the dump it produces
 ├── export.sh             dumps the whole repo to docs/llm/dump.txt for feeding to an LLM
 ├── vite.config.ts
 ├── tsconfig.json
-└── package.json
+├── package.json
+└── yarn.lock
 ```
 
 `docs/` is generated. Don't edit it by hand; run the build.
+
+`src/counter.ts` is dead code — nothing imports it. It survives from the Vite scaffold and
+is a fine thing to delete.
 
 ---
 
 ## Running it
 
-Requires Node and Yarn. The repo uses **Yarn Plug'n'Play with Zero-Installs** — the
-lockfile, `.pnp.cjs`, and `.pnp.loader.mjs` are committed, so there is usually no install
-step at all.
+Requires Node and Yarn (the lockfile is Yarn classic, v1). Dependencies install into
+`node_modules`, which is gitignored, so clone and install before anything else:
 
 ```bash
-yarn dev       # https://localhost:3000
-yarn build     # type-check, then bundle into docs/
-yarn preview   # serve the built docs/ locally
+yarn install
+yarn dev
+yarn build
+yarn preview
 ```
+
+`yarn dev` serves https://localhost:3000. `yarn build` type-checks and then bundles into
+`docs/`. `yarn preview` serves the built `docs/` locally.
 
 **The dev server is HTTPS.** `@vitejs/plugin-basic-ssl` mints a self-signed certificate,
 so your browser will warn you the first time; accept it and move on. Config:
@@ -283,8 +292,8 @@ assets with **absolute** paths (`/assets/index-*.js`). That works because this i
 `docs/llm/dump.txt`: repo metadata, working-tree status, a file tree, then each file with
 its size, permissions, mtime, SHA-256, MIME type, and last commit. Binary files get a
 placeholder instead of raw bytes. It includes its own source first, excludes its own
-output directory, and excludes the Yarn PnP artifacts — which are tracked for Zero-Installs
-but are pure noise in a context window.
+output directory, and excludes `yarn.lock` — 22 KB of resolved URLs and integrity hashes
+that is pure noise in a context window.
 
 ```bash
 bash export.sh
@@ -292,7 +301,8 @@ bash export.sh
 
 It writes to a temp file and atomically renames, so a concurrent reader never sees a
 partial dump. It is unrelated to the signals demo; it exists so the whole repo can be
-handed to an AI assistant in one paste.
+handed to an AI assistant in one paste. `docs/llm/terminal.txt` sitting beside it is just
+a saved shell transcript of an install-and-build run, kept for the same purpose.
 
 ---
 
