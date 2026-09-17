@@ -7,7 +7,7 @@
 
 DUMP METADATA
 ═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : 2026-09-17T08:56:18-04:00
+  Generated at   : 2026-09-17T08:58:52-04:00
   Generator      : export.sh
   Host           : fedora
   User           : kushal
@@ -17,23 +17,23 @@ REPOSITORY METADATA
 ═════════════════════════════════════════════════════════════════════════════════
   Repository root: /home/kushal/src/ts/learnsignal.github.io
   Branch         : main
-  Commit (full)  : 70636336b780061524a51f8b8c769bcd75e1aeec
-  Commit (short) : 7063633
-  Commit date    : 2026-09-17 08:56:07 -0400
-  Commit message : update all packages
+  Commit (full)  : 46dc15a95b27483cf1ae0aa60598f0c435fe5498
+  Commit (short) : 46dc15a
+  Commit date    : 2026-09-17 08:56:57 -0400
+  Commit message : run scripts
   Remote origin  : git@github.com:learnsignal/learnsignal.github.io.git
-  Files included : 18
+  Files included : 17
   Excluded path  : docs/llm/
   Excluded files : yarn.lock, .pnp.cjs, .pnp.loader.mjs
 
 GIT WORKING TREE STATUS (first 20 lines)
 ═════════════════════════════════════════════════════════════════════════════════
- D docs/assets/index-1f8fe633.js
- D docs/assets/index-4dd0c42a.css
+ D docs/assets/index-Crn50l-9.js
  M docs/index.html
- M yarn.lock
-?? docs/assets/index-CDc0323N.css
-?? docs/assets/index-Crn50l-9.js
+ D docs/llm/dump.txt
+ D docs/llm/terminal.txt
+ M src/main.ts
+?? docs/assets/index-BIdlVyUp.js
 
 ################################################################################
 # FILE: export.sh  [THIS SCRIPT — included for full context]
@@ -435,14 +435,13 @@ FOOTER
 mv -f "$TMP_FILE" "$OUTPUT_FILE"
 
 ################################################################################
-# FILE TREE  (all 18 included files)
+# FILE TREE  (all 17 included files)
 ################################################################################
 .
 .
 ├── docs
 │   ├── assets
-│   │   ├── index-1f8fe633.js
-│   │   ├── index-4dd0c42a.css
+│   │   ├── index-BIdlVyUp.js
 │   │   ├── index-CDc0323N.css
 │   │   └── index-Crn50l-9.js
 │   ├── index.html
@@ -464,43 +463,21 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
 
 
 ################################################################################
-# FILE: docs/assets/index-CDc0323N.css
+# FILE: docs/assets/index-BIdlVyUp.js
 ################################################################################
 
 --- METADATA ---
-  File name:             index-CDc0323N.css
-  Relative path:         docs/assets/index-CDc0323N.css
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CDc0323N.css
-  Size:                  1.9 KiB (1954 bytes)
-  Last modified:         2026-09-17 08:56:18.939381849 -0400
+  File name:             index-BIdlVyUp.js
+  Relative path:         docs/assets/index-BIdlVyUp.js
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-BIdlVyUp.js
+  Size:                  6.4 KiB (6646 bytes)
+  Last modified:         2026-09-17 08:58:52.374299136 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833412
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               2a8a44b4fd4d4bd83160fdaef73d916a39f27d82db61716309fdea35f21552bc
-  Last git commit:       
-
---- CONTENT ---
-:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;color:#ffffffde;font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;background-color:#242424;font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}a{color:#646cff;-webkit-text-decoration:inherit;text-decoration:inherit;font-weight:500}a:hover{color:#535bf2}body{place-items:center;min-width:320px;min-height:100vh;margin:0;display:flex}h1{font-size:3.2em;line-height:1.1}#app{text-align:center;max-width:1280px;margin:0 auto;padding:2rem}.logo{will-change:filter;height:6em;padding:1.5em;transition:filter .3s}.logo:hover{filter:drop-shadow(0 0 2em #646cffaa)}.logo.vanilla:hover{filter:drop-shadow(0 0 2em #3178c6aa)}.card{padding:2em}.read-the-docs{color:#888}button{cursor:pointer;background-color:#1a1a1a;border:1px solid #0000;border-radius:8px;padding:.6em 1.2em;font-family:inherit;font-size:1em;font-weight:500;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-color-scheme:light){:root{color:#213547;background-color:#fff}a:hover{color:#747bff}button{background-color:#f9f9f9}:root{--base-hue:0;--base-saturation:40%;--base-lightness:80%;--animation-duration:1s;--animation-direction:alternate}body{background-color:hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));animation:hue-change var(--animation-duration) infinite var(--animation-direction)}@keyframes hue-change{0%{--base-hue:0}10%{--base-hue:36deg}20%{--base-hue:72deg}30%{--base-hue:108deg}40%{--base-hue:144deg}50%{--base-hue:180deg}60%{--base-hue:216deg}70%{--base-hue:252deg}80%{--base-hue:288deg}90%{--base-hue:324deg}to{--base-hue:360deg}}}
-
-
-################################################################################
-# FILE: docs/assets/index-Crn50l-9.js
-################################################################################
-
---- METADATA ---
-  File name:             index-Crn50l-9.js
-  Relative path:         docs/assets/index-Crn50l-9.js
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-Crn50l-9.js
-  Size:                  6.4 KiB (6637 bytes)
-  Last modified:         2026-09-17 08:56:18.937942769 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63833411
+  Inode:                 63833730
   Hard links:            1
   MIME type:             application/javascript
-  SHA-256:               c4d0b31d94e4f02e9e3d201d13d5f448effb17cc44d7194f8ee9c2221cc622ba
+  SHA-256:               982fc204bc47f114179df72708fe9b4d39060e56fb92ab5bc74e68af15cd2ee1
   Last git commit:       
 
 --- CONTENT ---
@@ -513,10 +490,33 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
     </div>
     <p>Result: <span class="counter">${T.value}</span> * 10 = <span class="result">10</span></p>
     <h1>
-      <span class="counter">${T.value}</span> * <span class="randomSeed">${O.value}</span> = <span class="randomizedResult">${k}</span>.
+      <span class="counter">${T.value}</span> * <span class="randomSeed">${O.value}</span> 
+        = <span class="randomizedResult">${k}</span>.
     </h1>
   </div>
 `;function A(){let e=document.querySelectorAll(`.counter`),t=document.querySelector(`.result`),n=document.querySelectorAll(`.randomSeed`),r=document.querySelectorAll(`.randomizedResult`);e?.length&&t&&n?.length&&r?.length&&(e.forEach(e=>{e.innerText=T.value.toString()}),t.innerText=D.value.toString(),n.forEach(e=>{e.innerText=O.value.toString()}),r.forEach(e=>{e.innerText=k.value.toString()}))}var j=document.getElementById(`incrementCounter`),M=document.getElementById(`reset`);j?.addEventListener(`click`,()=>{T.value++}),M?.addEventListener(`click`,()=>{T.value=0,O.value=e(1,99),console.info({new:O.value}),E.value=!0}),w(A),setInterval(()=>{E.value===!1&&(T.value=e(1,9),O.value=e(1,9),console.info({counter:T.value}),console.info({randomSeed:O.value}))},5e3);
+
+################################################################################
+# FILE: docs/assets/index-CDc0323N.css
+################################################################################
+
+--- METADATA ---
+  File name:             index-CDc0323N.css
+  Relative path:         docs/assets/index-CDc0323N.css
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CDc0323N.css
+  Size:                  1.9 KiB (1954 bytes)
+  Last modified:         2026-09-17 08:58:52.375488433 -0400
+  Permissions:           -rw-r--r--
+  Owner:                 kushal:kushal
+  Inode:                 63833731
+  Hard links:            1
+  MIME type:             text/plain
+  SHA-256:               2a8a44b4fd4d4bd83160fdaef73d916a39f27d82db61716309fdea35f21552bc
+  Last git commit:       46dc15a 2026-09-17 08:56:57 -0400 run scripts
+
+--- CONTENT ---
+:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;color:#ffffffde;font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;background-color:#242424;font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}a{color:#646cff;-webkit-text-decoration:inherit;text-decoration:inherit;font-weight:500}a:hover{color:#535bf2}body{place-items:center;min-width:320px;min-height:100vh;margin:0;display:flex}h1{font-size:3.2em;line-height:1.1}#app{text-align:center;max-width:1280px;margin:0 auto;padding:2rem}.logo{will-change:filter;height:6em;padding:1.5em;transition:filter .3s}.logo:hover{filter:drop-shadow(0 0 2em #646cffaa)}.logo.vanilla:hover{filter:drop-shadow(0 0 2em #3178c6aa)}.card{padding:2em}.read-the-docs{color:#888}button{cursor:pointer;background-color:#1a1a1a;border:1px solid #0000;border-radius:8px;padding:.6em 1.2em;font-family:inherit;font-size:1em;font-weight:500;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-color-scheme:light){:root{color:#213547;background-color:#fff}a:hover{color:#747bff}button{background-color:#f9f9f9}:root{--base-hue:0;--base-saturation:40%;--base-lightness:80%;--animation-duration:1s;--animation-direction:alternate}body{background-color:hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));animation:hue-change var(--animation-duration) infinite var(--animation-direction)}@keyframes hue-change{0%{--base-hue:0}10%{--base-hue:36deg}20%{--base-hue:72deg}30%{--base-hue:108deg}40%{--base-hue:144deg}50%{--base-hue:180deg}60%{--base-hue:216deg}70%{--base-hue:252deg}80%{--base-hue:288deg}90%{--base-hue:324deg}to{--base-hue:360deg}}}
+
 
 ################################################################################
 # FILE: docs/index.html
@@ -527,14 +527,14 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/index.html
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/index.html
   Size:                  455 B (455 bytes)
-  Last modified:         2026-09-17 08:56:18.939381849 -0400
+  Last modified:         2026-09-17 08:58:52.375488433 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833413
+  Inode:                 63833732
   Hard links:            1
   MIME type:             text/html
-  SHA-256:               b1f679e289a9969aa62fed23aa5e99ca395b6c3e590a55f38f937a52c692a1fe
-  Last git commit:       4a4ba8b 2023-12-27 13:15:46 -0500 build
+  SHA-256:               788d58dbe02e5598629c4aa84e4b4f5f326c0bb4f95e029975adc897cf479c2f
+  Last git commit:       46dc15a 2026-09-17 08:56:57 -0400 run scripts
 
 --- CONTENT ---
 <!doctype html>
@@ -544,7 +544,7 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
-    <script type="module" crossorigin src="/assets/index-Crn50l-9.js"></script>
+    <script type="module" crossorigin src="/assets/index-BIdlVyUp.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CDc0323N.css">
   </head>
   <body>
@@ -562,10 +562,10 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/vite.svg
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/vite.svg
   Size:                  1.4 KiB (1497 bytes)
-  Last modified:         2026-09-17 08:56:18.923112414 -0400
+  Last modified:         2026-09-17 08:58:52.364871575 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833409
+  Inode:                 63833728
   Hard links:            1
   MIME type:             image/svg+xml
   SHA-256:               4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb
@@ -1160,14 +1160,14 @@ export function randomIntFromInterval(min: number, max: number) { // min and max
   File name:             main.ts
   Relative path:         src/main.ts
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/main.ts
-  Size:                  2.6 KiB (2673 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
+  Size:                  2.6 KiB (2682 bytes)
+  Last modified:         2026-09-17 08:58:38.735717469 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
   Inode:                 63830127
   Hard links:            1
   MIME type:             application/javascript
-  SHA-256:               d354cd5562c0a815b62cc75d2543d07cb7ae27c297a32ed8c76429b97ba3bed1
+  SHA-256:               0fa5996f91a4cc28f91b576a5e82da7ef24e545a371cec7c8f4ef7cd614a8dc5
   Last git commit:       079245b 2023-11-12 09:16:51 -0500 build signals
 
 --- CONTENT ---
@@ -1189,7 +1189,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     </div>
     <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
     <h1>
-      <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> = <span class="randomizedResult">${randomizedResult}</span>.
+      <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> 
+        = <span class="randomizedResult">${randomizedResult}</span>.
     </h1>
   </div>
 `;
@@ -1543,10 +1544,10 @@ export default defineConfig({
 ################################################################################
 # DUMP SUMMARY
 ################################################################################
-  Files dumped   : 18
-  Total size     : 37.7 KiB (38614 bytes)
+  Files dumped   : 17
+  Total size     : 37.7 KiB (38632 bytes)
   Output file    : /home/kushal/src/ts/learnsignal.github.io/docs/llm/dump.txt
-  Completed at   : 2026-09-17T08:56:19-04:00
+  Completed at   : 2026-09-17T08:58:52-04:00
 ################################################################################
 # END OF DUMP
 ################################################################################

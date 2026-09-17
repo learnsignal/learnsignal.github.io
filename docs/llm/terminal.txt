@@ -1,1619 +1,22 @@
-kushal@fedora:~/src/dotnet/terlingua$ cd ~/src/ts/learnsignal.github.io/; time bash export.sh; time yarn; time yarn outdated; time yarn build;
-################################################################################
-#                                                                              #
-#   REPOSITORY CONTEXT DUMP                                                    #
-#   Generated for LLM consumption — do not edit manually                       #
-#                                                                              #
-################################################################################
-
-DUMP METADATA
-═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : 2026-09-17T08:53:47-04:00
-  Generator      : export.sh
-  Host           : fedora
-  User           : kushal
-  OS             : Linux 7.2.5-200.fc44.x86_64 x86_64
-
-REPOSITORY METADATA
-═════════════════════════════════════════════════════════════════════════════════
-  Repository root: /home/kushal/src/ts/learnsignal.github.io
-  Branch         : main
-  Commit (full)  : e39015548d523d455818aa63fdaae55d6ff2efc1
-  Commit (short) : e390155
-  Commit date    : 2026-09-17 08:49:13 -0400
-  Commit message : add a dump
-  Remote origin  : git@github.com:learnsignal/learnsignal.github.io.git
-  Files included : 16
-  Excluded path  : docs/llm/
-  Excluded files : yarn.lock, .pnp.cjs, .pnp.loader.mjs
-
-GIT WORKING TREE STATUS (first 20 lines)
-═════════════════════════════════════════════════════════════════════════════════
-  (clean — no uncommitted changes)
-
-################################################################################
-# FILE: export.sh  [THIS SCRIPT — included for full context]
-################################################################################
-
---- METADATA ---
-  File name:             export.sh
-  Relative path:         export.sh
-  Size:                  16.9 KiB (17371 bytes)
-  Last modified:         2026-09-17 08:48:34.754182273 -0400
-  Permissions:           -rwxr-xr-x
-  SHA-256:               79327602cacaf51fe10f4714c4bb277264cd2d2bb76f1a2d614999add655ab11
-  MIME type:             text/x-shellscript
-
---- CONTENT ---
-#!/usr/bin/env bash
-# =============================================================================
-# export.sh — Repository context dump for LLM consumption
-#
-# Location: <repo root>/export.sh
-#
-# Usage:  bash export.sh
-#         time bash export.sh
-#
-# Behaviour:
-#   • Resolves its own location; works regardless of CWD.
-#   • Silently exits if no Git repository is found at that location.
-#   • Dumps all Git-tracked files (excluding docs/llm/**, yarn.lock, .pnp.cjs,
-#     and .pnp.loader.mjs) to docs/llm/dump.txt.
-#   • Prepends its own source to the dump (self-documentation).
-#   • Emits rich per-file metadata (name, path, size, permissions, mtime, SHA-256).
-#   • Includes a file-tree view of all included files.
-#   • Prints the complete dump to stdout before writing the file.
-# =============================================================================
-
-set -euo pipefail
-IFS=$'\n\t'
-
-# ---------------------------------------------------------------------------
-# 0. Resolve script's own directory — immune to CWD
-# ---------------------------------------------------------------------------
-SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-SCRIPT_NAME="$(basename "$SCRIPT_PATH")"
-
-# ---------------------------------------------------------------------------
-# 1. Validate: must be inside a working Git repository
-# ---------------------------------------------------------------------------
-if ! git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
-    exit 0
-fi
-
-# Ensure git is usable (index readable, not a bare repo, etc.)
-if ! git -C "$SCRIPT_DIR" status --porcelain &>/dev/null 2>&1; then
-    exit 0
-fi
-
-REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)" || exit 0
-
-# ---------------------------------------------------------------------------
-# 2. Constants & derived paths
-# ---------------------------------------------------------------------------
-EXCLUDE_DIR="docs/llm"
-
-# Individual files to exclude from the dump, in addition to EXCLUDE_DIR.
-# A bare name (no slash) is excluded wherever it appears; a name containing a
-# slash is treated as an exact repo-relative path.
-#
-# yarn.lock, .pnp.cjs, and .pnp.loader.mjs are all Yarn-generated artifacts
-# (lockfile + PnP resolution map + PnP loader shim). They stay tracked in git
-# for Yarn's Zero-Installs workflow, but they are pure noise for an LLM
-# context dump, so they're excluded here rather than from git itself.
-EXCLUDE_FILES=("yarn.lock" ".pnp.cjs" ".pnp.loader.mjs")
-EXCLUDE_FILES_DISPLAY="$(printf '%s, ' "${EXCLUDE_FILES[@]}")"
-EXCLUDE_FILES_DISPLAY="${EXCLUDE_FILES_DISPLAY%, }"
-
-OUTPUT_DIR="${REPO_ROOT}/${EXCLUDE_DIR}"
-OUTPUT_FILE="${OUTPUT_DIR}/dump.txt"
-
-TIMESTAMP="$(date --iso-8601=seconds)"
-GIT_BRANCH="$(git -C "$REPO_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo 'unknown')"
-GIT_COMMIT="$(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || echo 'unknown')"
-GIT_COMMIT_SHORT="$(git -C "$REPO_ROOT" rev-parse --short HEAD 2>/dev/null || echo 'unknown')"
-GIT_COMMIT_MSG="$(git -C "$REPO_ROOT" log -1 --pretty=format:'%s' 2>/dev/null || echo 'unknown')"
-GIT_COMMIT_DATE="$(git -C "$REPO_ROOT" log -1 --pretty=format:'%ci' 2>/dev/null || echo 'unknown')"
-GIT_REMOTE="$(git -C "$REPO_ROOT" remote get-url origin 2>/dev/null || echo 'none')"
-GIT_STATUS_SUMMARY="$(git -C "$REPO_ROOT" status --short 2>/dev/null | head -20 || echo '')"
-
-HOSTNAME_VAL="$(hostname -f 2>/dev/null || hostname 2>/dev/null || echo 'unknown')"
-USER_VAL="$(id -un 2>/dev/null || echo 'unknown')"
-OS_VAL="$(uname -srm 2>/dev/null || echo 'unknown')"
-
-# ---------------------------------------------------------------------------
-# 3. Collect tracked files, excluding the output directory and EXCLUDE_FILES
-#    git ls-files guarantees only committed/staged files; no build artefacts.
-# ---------------------------------------------------------------------------
-mapfile -t _RAW_FILES < <(
-    git -C "$REPO_ROOT" ls-files \
-        --cached \
-        --others \
-        --exclude-standard \
-        -z \
-        2>/dev/null \
-    | tr '\0' '\n' \
-    | sort -u
-)
-
-ALL_FILES=()
-for _f in "${_RAW_FILES[@]}"; do
-    [[ -z "$_f" ]] && continue
-    # Skip the entire excluded directory tree.
-    [[ "$_f" == "${EXCLUDE_DIR}/"* ]] && continue
-    # Skip any individually-excluded file.
-    _skip=0
-    for _ex in "${EXCLUDE_FILES[@]}"; do
-        if [[ "$_ex" == */* ]]; then
-            [[ "$_f" == "$_ex" ]] && { _skip=1; break; }
-        else
-            [[ "$_f" == "$_ex" || "$_f" == */"$_ex" ]] && { _skip=1; break; }
-        fi
-    done
-    (( _skip )) && continue
-    ALL_FILES+=("$_f")
-done
-
-FILE_COUNT="${#ALL_FILES[@]}"
-
-# ---------------------------------------------------------------------------
-# 4. Helper: human-readable file size
-# ---------------------------------------------------------------------------
-human_size() {
-    local bytes="$1"
-    if   (( bytes < 1024 ));               then printf '%d B'      "$bytes"
-    elif (( bytes < 1048576 ));            then printf '%.1f KiB'  "$(echo "scale=1; $bytes/1024"       | bc)"
-    elif (( bytes < 1073741824 ));         then printf '%.1f MiB'  "$(echo "scale=1; $bytes/1048576"    | bc)"
-    else                                        printf '%.1f GiB'  "$(echo "scale=1; $bytes/1073741824" | bc)"
-    fi
-}
-
-# ---------------------------------------------------------------------------
-# 5. Helper: SHA-256 of a file (portable across Linux distros)
-# ---------------------------------------------------------------------------
-file_sha256() {
-    local path="$1"
-    if command -v sha256sum &>/dev/null; then
-        sha256sum "$path" | awk '{print $1}'
-    elif command -v shasum &>/dev/null; then
-        shasum -a 256 "$path" | awk '{print $1}'
-    else
-        echo 'unavailable'
-    fi
-}
-
-# ---------------------------------------------------------------------------
-# 6. Helper: MIME type (best-effort, no error on missing tool)
-# ---------------------------------------------------------------------------
-file_mime() {
-    local path="$1"
-    if command -v file &>/dev/null; then
-        file --brief --mime-type "$path" 2>/dev/null || echo 'unknown'
-    else
-        echo 'unknown'
-    fi
-}
-
-# ---------------------------------------------------------------------------
-# 7. Build the tree view using 'tree' if available, else pure bash fallback
-# ---------------------------------------------------------------------------
-build_tree() {
-    if command -v tree &>/dev/null; then
-        # --fromfile reads the path list from stdin and renders a tree
-        printf '%s\n' "${ALL_FILES[@]}" \
-        | tree --fromfile -a --noreport 2>/dev/null \
-        || _bash_tree
-    else
-        _bash_tree
-    fi
-}
-
-_bash_tree() {
-    # Pure-bash tree: reconstruct directory hierarchy from the flat file list
-    local -A SEEN_DIRS=()
-    local prev_depth=0
-    local line
-
-    for f in "${ALL_FILES[@]}"; do
-        local dir parts depth i prefix
-        dir="$(dirname "$f")"
-        IFS='/' read -ra parts <<< "$f"
-        depth=$(( ${#parts[@]} - 1 ))
-
-        # Print intermediate directories we haven't seen yet
-        local partial=""
-        for (( i=0; i<depth; i++ )); do
-            if [[ -z "$partial" ]]; then
-                partial="${parts[$i]}"
-            else
-                partial="${partial}/${parts[$i]}"
-            fi
-            if [[ -z "${SEEN_DIRS[$partial]+_}" ]]; then
-                SEEN_DIRS["$partial"]=1
-                prefix="$(printf '│   %.0s' $(seq 1 $i))├── "
-                printf '%s%s/\n' "$prefix" "${parts[$i]}"
-            fi
-        done
-
-        # Print the file itself
-        prefix="$(printf '│   %.0s' $(seq 1 $depth))└── "
-        printf '%s%s\n' "$prefix" "${parts[$depth]}"
-    done
-}
-
-# ---------------------------------------------------------------------------
-# 8. Assemble the dump into a variable (stdout + file simultaneously)
-# ---------------------------------------------------------------------------
-mkdir -p "$OUTPUT_DIR"
-
-# We use a temp file to build, then atomic-rename at the end.
-TMP_FILE="$(mktemp "${OUTPUT_DIR}/.dump.XXXXXX")"
-trap 'rm -f "$TMP_FILE"' EXIT
-
-# Tee everything to both stdout and the temp file
-exec > >(tee "$TMP_FILE") 2>&1
-
-# ── Preamble banner ──────────────────────────────────────────────────────────
-cat <<BANNER
-################################################################################
-#                                                                              #
-#   REPOSITORY CONTEXT DUMP                                                    #
-#   Generated for LLM consumption — do not edit manually                       #
-#                                                                              #
-################################################################################
-
-DUMP METADATA
-═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : ${TIMESTAMP}
-  Generator      : ${SCRIPT_NAME}
-  Host           : ${HOSTNAME_VAL}
-  User           : ${USER_VAL}
-  OS             : ${OS_VAL}
-
-REPOSITORY METADATA
-═════════════════════════════════════════════════════════════════════════════════
-  Repository root: ${REPO_ROOT}
-  Branch         : ${GIT_BRANCH}
-  Commit (full)  : ${GIT_COMMIT}
-  Commit (short) : ${GIT_COMMIT_SHORT}
-  Commit date    : ${GIT_COMMIT_DATE}
-  Commit message : ${GIT_COMMIT_MSG}
-  Remote origin  : ${GIT_REMOTE}
-  Files included : ${FILE_COUNT}
-  Excluded path  : ${EXCLUDE_DIR}/
-  Excluded files : ${EXCLUDE_FILES_DISPLAY}
-
-GIT WORKING TREE STATUS (first 20 lines)
-═════════════════════════════════════════════════════════════════════════════════
-BANNER
-
-if [[ -n "$GIT_STATUS_SUMMARY" ]]; then
-    printf '%s\n' "$GIT_STATUS_SUMMARY"
-else
-    echo "  (clean — no uncommitted changes)"
-fi
-
-# ── Self-documentation: dump this script first ───────────────────────────────
-cat <<SELF_HEADER
-
-################################################################################
-# FILE: ${SCRIPT_NAME}  [THIS SCRIPT — included for full context]
-################################################################################
-SELF_HEADER
-
-printf '\n--- METADATA ---\n'
-_self_size="$(wc -c < "$SCRIPT_PATH")"
-_self_mtime="$(stat --format='%y' "$SCRIPT_PATH" 2>/dev/null \
-               || stat -f '%Sm' -t '%Y-%m-%d %H:%M:%S %z' "$SCRIPT_PATH" 2>/dev/null \
-               || echo 'unavailable')"
-_self_perms="$(stat --format='%A' "$SCRIPT_PATH" 2>/dev/null \
-               || stat -f '%Sp' "$SCRIPT_PATH" 2>/dev/null \
-               || echo 'unavailable')"
-_self_sha="$(file_sha256 "$SCRIPT_PATH")"
-
-printf '  %-22s %s\n'  "File name:"       "$SCRIPT_NAME"
-printf '  %-22s %s\n'  "Relative path:"   "$(realpath --relative-to="$REPO_ROOT" "$SCRIPT_PATH" 2>/dev/null || echo "$SCRIPT_PATH")"
-printf '  %-22s %s\n'  "Size:"            "$(human_size "$_self_size") (${_self_size} bytes)"
-printf '  %-22s %s\n'  "Last modified:"   "$_self_mtime"
-printf '  %-22s %s\n'  "Permissions:"     "$_self_perms"
-printf '  %-22s %s\n'  "SHA-256:"         "$_self_sha"
-printf '  %-22s %s\n'  "MIME type:"       "$(file_mime "$SCRIPT_PATH")"
-printf '\n--- CONTENT ---\n'
-cat "$SCRIPT_PATH"
-
-# ── File tree ─────────────────────────────────────────────────────────────────
-cat <<TREE_HEADER
-
-################################################################################
-# FILE TREE  (all ${FILE_COUNT} included files)
-################################################################################
-.
-TREE_HEADER
-
-build_tree
-echo ""
-
-# ── Per-file content dump ─────────────────────────────────────────────────────
-TOTAL_BYTES=0
-
-for rel_path in "${ALL_FILES[@]}"; do
-    abs_path="${REPO_ROOT}/${rel_path}"
-
-    # Skip if the file no longer exists on disk (deleted but still indexed)
-    [[ -f "$abs_path" ]] || continue
-
-    # ── Metadata collection ────────────────────────────────────────────────
-    file_size="$(wc -c < "$abs_path" 2>/dev/null || echo 0)"
-    TOTAL_BYTES=$(( TOTAL_BYTES + file_size ))
-
-    file_mtime="$(stat --format='%y' "$abs_path" 2>/dev/null \
-                  || stat -f '%Sm' -t '%Y-%m-%d %H:%M:%S %z' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_perms="$(stat --format='%A' "$abs_path" 2>/dev/null \
-                  || stat -f '%Sp' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_owner="$(stat --format='%U:%G' "$abs_path" 2>/dev/null \
-                  || stat -f '%Su:%Sg' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_inode="$(stat --format='%i' "$abs_path" 2>/dev/null \
-                  || stat -f '%i' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_links="$(stat --format='%h' "$abs_path" 2>/dev/null \
-                  || stat -f '%l' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_sha="$(file_sha256 "$abs_path")"
-    file_type="$(file_mime "$abs_path")"
-
-    git_log_line="$(git -C "$REPO_ROOT" log -1 --pretty=format:'%h %ai %s' -- "$rel_path" 2>/dev/null || echo 'unavailable')"
-
-    # ── Section header ─────────────────────────────────────────────────────
-    printf '\n'
-    printf '################################################################################\n'
-    printf '# FILE: %s\n' "$rel_path"
-    printf '################################################################################\n'
-    printf '\n--- METADATA ---\n'
-    printf '  %-22s %s\n'  "File name:"       "$(basename "$rel_path")"
-    printf '  %-22s %s\n'  "Relative path:"   "$rel_path"
-    printf '  %-22s %s\n'  "Absolute path:"   "$abs_path"
-    printf '  %-22s %s\n'  "Size:"            "$(human_size "$file_size") (${file_size} bytes)"
-    printf '  %-22s %s\n'  "Last modified:"   "$file_mtime"
-    printf '  %-22s %s\n'  "Permissions:"     "$file_perms"
-    printf '  %-22s %s\n'  "Owner:"           "$file_owner"
-    printf '  %-22s %s\n'  "Inode:"           "$file_inode"
-    printf '  %-22s %s\n'  "Hard links:"      "$file_links"
-    printf '  %-22s %s\n'  "MIME type:"       "$file_type"
-    printf '  %-22s %s\n'  "SHA-256:"         "$file_sha"
-    printf '  %-22s %s\n'  "Last git commit:" "$git_log_line"
-    printf '\n--- CONTENT ---\n'
-
-    # ── Content emission ───────────────────────────────────────────────────
-    # Binary files: emit a notice instead of raw bytes
-    if [[ "$file_type" == application/octet-stream ]] \
-    || [[ "$file_type" == image/* ]] \
-    || [[ "$file_type" == audio/* ]] \
-    || [[ "$file_type" == video/* ]] \
-    || ! file --brief "$abs_path" 2>/dev/null | grep -qi 'text\|script\|xml\|json\|yaml\|svg\|source\|empty'; then
-        printf '[Binary file — content omitted. Size: %s, SHA-256: %s]\n' \
-            "$(human_size "$file_size")" "$file_sha"
-    else
-        cat "$abs_path"
-        # Ensure there is always a trailing newline so the next header aligns
-        [[ "$(tail -c1 "$abs_path" | wc -c)" -gt 0 ]] \
-            && [[ "$(tail -c1 "$abs_path")" != $'\n' ]] \
-            && printf '\n'
-    fi
-done
-
-# ── Summary footer ────────────────────────────────────────────────────────────
-cat <<FOOTER
-
-################################################################################
-# DUMP SUMMARY
-################################################################################
-  Files dumped   : ${FILE_COUNT}
-  Total size     : $(human_size "$TOTAL_BYTES") (${TOTAL_BYTES} bytes)
-  Output file    : ${OUTPUT_FILE}
-  Completed at   : $(date --iso-8601=seconds)
-################################################################################
-# END OF DUMP
-################################################################################
-FOOTER
-
-# ---------------------------------------------------------------------------
-# 9. Atomic rename — avoids partial writes being read by concurrent processes
-# ---------------------------------------------------------------------------
-mv -f "$TMP_FILE" "$OUTPUT_FILE"
-
-################################################################################
-# FILE TREE  (all 16 included files)
-################################################################################
-.
-.
-├── docs
-│   ├── assets
-│   │   ├── index-1f8fe633.js
-│   │   └── index-4dd0c42a.css
-│   ├── index.html
-│   └── vite.svg
-├── export.sh
-├── .gitignore
-├── index.html
-├── package.json
-├── public
-│   └── vite.svg
-├── src
-│   ├── counter.ts
-│   ├── main.ts
-│   ├── style.css
-│   ├── typescript.svg
-│   └── vite-env.d.ts
-├── tsconfig.json
-└── vite.config.ts
-
-
-################################################################################
-# FILE: docs/assets/index-1f8fe633.js
-################################################################################
-
---- METADATA ---
-  File name:             index-1f8fe633.js
-  Relative path:         docs/assets/index-1f8fe633.js
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-1f8fe633.js
-  Size:                  6.0 KiB (6237 bytes)
-  Last modified:         2026-09-17 08:47:46.004484044 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830117
-  Hard links:            1
-  MIME type:             application/javascript
-  SHA-256:               3c77bed02566c53ecc2a0b80f60c7212d01f96a6d48c364c0af4f0ceccc14d76
-  Last git commit:       4a4ba8b 2023-12-27 13:15:46 -0500 build
-
---- CONTENT ---
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))r(o);new MutationObserver(o=>{for(const f of o)if(f.type==="childList")for(const S of f.addedNodes)S.tagName==="LINK"&&S.rel==="modulepreload"&&r(S)}).observe(document,{childList:!0,subtree:!0});function e(o){const f={};return o.integrity&&(f.integrity=o.integrity),o.referrerPolicy&&(f.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?f.credentials="include":o.crossOrigin==="anonymous"?f.credentials="omit":f.credentials="same-origin",f}function r(o){if(o.ep)return;o.ep=!0;const f=e(o);fetch(o.href,f)}})();function l(i,t){return Math.floor(Math.random()*(t-i+1)+i)}function y(){throw new Error("Cycle detected")}var $=Symbol.for("preact-signals");function x(){if(v>1)v--;else{for(var i,t=!1;a!==void 0;){var e=a;for(a=void 0,w++;e!==void 0;){var r=e.o;if(e.o=void 0,e.f&=-3,!(8&e.f)&&L(e))try{e.c()}catch(o){t||(i=o,t=!0)}e=r}}if(w=0,v--,t)throw i}}var n=void 0,a=void 0,v=0,w=0,p=0;function E(i){if(n!==void 0){var t=i.n;if(t===void 0||t.t!==n)return t={i:0,S:i,p:n.s,n:void 0,t:n,e:void 0,x:void 0,r:t},n.s!==void 0&&(n.s.n=t),n.s=t,i.n=t,32&n.f&&i.S(t),t;if(t.i===-1)return t.i=0,t.n!==void 0&&(t.n.p=t.p,t.p!==void 0&&(t.p.n=t.n),t.p=n.s,t.n=void 0,n.s.n=t,n.s=t),t}}function s(i){this.v=i,this.i=0,this.n=void 0,this.t=void 0}s.prototype.brand=$;s.prototype.h=function(){return!0};s.prototype.S=function(i){this.t!==i&&i.e===void 0&&(i.x=this.t,this.t!==void 0&&(this.t.e=i),this.t=i)};s.prototype.U=function(i){if(this.t!==void 0){var t=i.e,e=i.x;t!==void 0&&(t.x=e,i.e=void 0),e!==void 0&&(e.e=t,i.x=void 0),i===this.t&&(this.t=e)}};s.prototype.subscribe=function(i){var t=this;return U(function(){var e=t.value,r=32&this.f;this.f&=-33;try{i(e)}finally{this.f|=r}})};s.prototype.valueOf=function(){return this.value};s.prototype.toString=function(){return this.value+""};s.prototype.toJSON=function(){return this.value};s.prototype.peek=function(){return this.v};Object.defineProperty(s.prototype,"value",{get:function(){var i=E(this);return i!==void 0&&(i.i=this.i),this.v},set:function(i){if(n instanceof h&&function(){throw new Error("Computed cannot have side-effects")}(),i!==this.v){w>100&&y(),this.v=i,this.i++,p++,v++;try{for(var t=this.t;t!==void 0;t=t.x)t.t.N()}finally{x()}}}});function b(i){return new s(i)}function L(i){for(var t=i.s;t!==void 0;t=t.n)if(t.S.i!==t.i||!t.S.h()||t.S.i!==t.i)return!0;return!1}function N(i){for(var t=i.s;t!==void 0;t=t.n){var e=t.S.n;if(e!==void 0&&(t.r=e),t.S.n=t,t.i=-1,t.n===void 0){i.s=t;break}}}function P(i){for(var t=i.s,e=void 0;t!==void 0;){var r=t.p;t.i===-1?(t.S.U(t),r!==void 0&&(r.n=t.n),t.n!==void 0&&(t.n.p=r)):e=t,t.S.n=t.r,t.r!==void 0&&(t.r=void 0),t=r}i.s=e}function h(i){s.call(this,void 0),this.x=i,this.s=void 0,this.g=p-1,this.f=4}(h.prototype=new s).h=function(){if(this.f&=-3,1&this.f)return!1;if((36&this.f)==32||(this.f&=-5,this.g===p))return!0;if(this.g=p,this.f|=1,this.i>0&&!L(this))return this.f&=-2,!0;var i=n;try{N(this),n=this;var t=this.x();(16&this.f||this.v!==t||this.i===0)&&(this.v=t,this.f&=-17,this.i++)}catch(e){this.v=e,this.f|=16,this.i++}return n=i,P(this),this.f&=-2,!0};h.prototype.S=function(i){if(this.t===void 0){this.f|=36;for(var t=this.s;t!==void 0;t=t.n)t.S.S(t)}s.prototype.S.call(this,i)};h.prototype.U=function(i){if(this.t!==void 0&&(s.prototype.U.call(this,i),this.t===void 0)){this.f&=-33;for(var t=this.s;t!==void 0;t=t.n)t.S.U(t)}};h.prototype.N=function(){if(!(2&this.f)){this.f|=6;for(var i=this.t;i!==void 0;i=i.x)i.t.N()}};h.prototype.peek=function(){if(this.h()||y(),16&this.f)throw this.v;return this.v};Object.defineProperty(h.prototype,"value",{get:function(){1&this.f&&y();var i=E(this);if(this.h(),i!==void 0&&(i.i=this.i),16&this.f)throw this.v;return this.v}});function q(i){return new h(i)}function I(i){var t=i.u;if(i.u=void 0,typeof t=="function"){v++;var e=n;n=void 0;try{t()}catch(r){throw i.f&=-2,i.f|=8,O(i),r}finally{n=e,x()}}}function O(i){for(var t=i.s;t!==void 0;t=t.n)t.S.U(t);i.x=void 0,i.s=void 0,I(i)}function A(i){if(n!==this)throw new Error("Out-of-order effect");P(this),n=i,this.f&=-2,8&this.f&&O(this),x()}function d(i){this.x=i,this.u=void 0,this.s=void 0,this.o=void 0,this.f=32}d.prototype.c=function(){var i=this.S();try{if(8&this.f||this.x===void 0)return;var t=this.x();typeof t=="function"&&(this.u=t)}finally{i()}};d.prototype.S=function(){1&this.f&&y(),this.f|=1,this.f&=-9,I(this),N(this),v++;var i=n;return n=this,A.bind(this,i)};d.prototype.N=function(){2&this.f||(this.f|=2,this.o=a,a=this)};d.prototype.d=function(){this.f|=8,1&this.f||O(this)};function U(i){var t=new d(i);try{t.c()}catch(e){throw t.d(),e}return t.d.bind(t)}const u=b(1),C=b(!1),M=q(()=>u.value*10);let c=b(l(1,9)),T=q(()=>u.value*c.value);document.querySelector("#app").innerHTML=`
-  <div>
-    <h1>Signals in Vanilla JS</h1>
-    <div class="card">
-      <button type="button" id="incrementCounter">count is <span class="counter">${u.value}</span></button>
-      <button type="reset" id="reset">Reset</button>
-    </div>
-    <p>Result: <span class="counter">${u.value}</span> * 10 = <span class="result">10</span></p>
-    <h1>
-      <span class="counter">${u.value}</span> * <span class="randomSeed">${c.value}</span> = <span class="randomizedResult">${T}</span>.
-    </h1>
-  </div>
-`;function R(){const i=document.querySelectorAll(".counter"),t=document.querySelector(".result"),e=document.querySelectorAll(".randomSeed"),r=document.querySelectorAll(".randomizedResult");!(i!=null&&i.length)||!t||!(e!=null&&e.length)||!(r!=null&&r.length)||(i.forEach(o=>{o.innerText=u.value.toString()}),t.innerText=M.value.toString(),e.forEach(o=>{o.innerText=c.value.toString()}),r.forEach(o=>{o.innerText=T.value.toString()}))}const m=document.getElementById("incrementCounter"),g=document.getElementById("reset");m==null||m.addEventListener("click",()=>{u.value++});g==null||g.addEventListener("click",()=>{u.value=0,c.value=l(1,99),console.info({new:c.value}),C.value=!0});U(R);setInterval(()=>{C.value===!1&&(u.value=l(1,9),c.value=l(1,9),console.info({counter:u.value}),console.info({randomSeed:c.value}))},5e3);
-
-
-################################################################################
-# FILE: docs/assets/index-4dd0c42a.css
-################################################################################
-
---- METADATA ---
-  File name:             index-4dd0c42a.css
-  Relative path:         docs/assets/index-4dd0c42a.css
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-4dd0c42a.css
-  Size:                  1.7 KiB (1799 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830118
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               4dd0c42afeebdc36af5dc0fdbb73020deb014eee926f22a844c5583551a1b8e1
-  Last git commit:       4a4ba8b 2023-12-27 13:15:46 -0500 build
-
---- CONTENT ---
-:root{font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;line-height:1.5;font-weight:400;color-scheme:light dark;color:#ffffffde;background-color:#242424;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%}a{font-weight:500;color:#646cff;text-decoration:inherit}a:hover{color:#535bf2}body{margin:0;display:flex;place-items:center;min-width:320px;min-height:100vh}h1{font-size:3.2em;line-height:1.1}#app{max-width:1280px;margin:0 auto;padding:2rem;text-align:center}.logo{height:6em;padding:1.5em;will-change:filter;transition:filter .3s}.logo:hover{filter:drop-shadow(0 0 2em #646cffaa)}.logo.vanilla:hover{filter:drop-shadow(0 0 2em #3178c6aa)}.card{padding:2em}.read-the-docs{color:#888}button{border-radius:8px;border:1px solid transparent;padding:.6em 1.2em;font-size:1em;font-weight:500;font-family:inherit;background-color:#1a1a1a;cursor:pointer;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-color-scheme: light){:root{color:#213547;background-color:#fff}a:hover{color:#747bff}button{background-color:#f9f9f9}:root{--base-hue: 0;--base-saturation: 40%;--base-lightness: 80%;--animation-duration: 1s;--animation-direction: alternate}body{background-color:hsl(var(--base-hue),var(--base-saturation),var(--base-lightness));animation:hue-change var(--animation-duration) infinite var(--animation-direction)}@keyframes hue-change{0%{--base-hue: 0}10%{--base-hue: 36deg}20%{--base-hue: 72deg}30%{--base-hue: 108deg}40%{--base-hue: 144deg}50%{--base-hue: 180deg}60%{--base-hue: 216deg}70%{--base-hue: 252deg}80%{--base-hue: 288deg}90%{--base-hue: 324deg}to{--base-hue: 360deg}}}
-
-
-################################################################################
-# FILE: docs/index.html
-################################################################################
-
---- METADATA ---
-  File name:             index.html
-  Relative path:         docs/index.html
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/index.html
-  Size:                  448 B (448 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830119
-  Hard links:            1
-  MIME type:             text/html
-  SHA-256:               c8ae02562cac6f5e7bffcbe98b4e5e82a4924e4601d3e0dc9764935b036c4580
-  Last git commit:       4a4ba8b 2023-12-27 13:15:46 -0500 build
-
---- CONTENT ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-    <script type="module" crossorigin src="/assets/index-1f8fe633.js"></script>
-    <link rel="stylesheet" href="/assets/index-4dd0c42a.css">
-  </head>
-  <body>
-    <div id="app"></div>
-    
-  </body>
-</html>
-
-
-################################################################################
-# FILE: docs/vite.svg
-################################################################################
-
---- METADATA ---
-  File name:             vite.svg
-  Relative path:         docs/vite.svg
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/vite.svg
-  Size:                  1.4 KiB (1497 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830120
-  Hard links:            1
-  MIME type:             image/svg+xml
-  SHA-256:               4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb
-  Last git commit:       f1dfa9e 2023-11-05 18:20:06 -0500 output to docs folder
-
---- CONTENT ---
-[Binary file — content omitted. Size: 1.4 KiB, SHA-256: 4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb]
-
-################################################################################
-# FILE: export.sh
-################################################################################
-
---- METADATA ---
-  File name:             export.sh
-  Relative path:         export.sh
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/export.sh
-  Size:                  16.9 KiB (17371 bytes)
-  Last modified:         2026-09-17 08:48:34.754182273 -0400
-  Permissions:           -rwxr-xr-x
-  Owner:                 kushal:kushal
-  Inode:                 63830247
-  Hard links:            1
-  MIME type:             text/x-shellscript
-  SHA-256:               79327602cacaf51fe10f4714c4bb277264cd2d2bb76f1a2d614999add655ab11
-  Last git commit:       e390155 2026-09-17 08:49:13 -0400 add a dump
-
---- CONTENT ---
-#!/usr/bin/env bash
-# =============================================================================
-# export.sh — Repository context dump for LLM consumption
-#
-# Location: <repo root>/export.sh
-#
-# Usage:  bash export.sh
-#         time bash export.sh
-#
-# Behaviour:
-#   • Resolves its own location; works regardless of CWD.
-#   • Silently exits if no Git repository is found at that location.
-#   • Dumps all Git-tracked files (excluding docs/llm/**, yarn.lock, .pnp.cjs,
-#     and .pnp.loader.mjs) to docs/llm/dump.txt.
-#   • Prepends its own source to the dump (self-documentation).
-#   • Emits rich per-file metadata (name, path, size, permissions, mtime, SHA-256).
-#   • Includes a file-tree view of all included files.
-#   • Prints the complete dump to stdout before writing the file.
-# =============================================================================
-
-set -euo pipefail
-IFS=$'\n\t'
-
-# ---------------------------------------------------------------------------
-# 0. Resolve script's own directory — immune to CWD
-# ---------------------------------------------------------------------------
-SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-SCRIPT_NAME="$(basename "$SCRIPT_PATH")"
-
-# ---------------------------------------------------------------------------
-# 1. Validate: must be inside a working Git repository
-# ---------------------------------------------------------------------------
-if ! git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
-    exit 0
-fi
-
-# Ensure git is usable (index readable, not a bare repo, etc.)
-if ! git -C "$SCRIPT_DIR" status --porcelain &>/dev/null 2>&1; then
-    exit 0
-fi
-
-REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)" || exit 0
-
-# ---------------------------------------------------------------------------
-# 2. Constants & derived paths
-# ---------------------------------------------------------------------------
-EXCLUDE_DIR="docs/llm"
-
-# Individual files to exclude from the dump, in addition to EXCLUDE_DIR.
-# A bare name (no slash) is excluded wherever it appears; a name containing a
-# slash is treated as an exact repo-relative path.
-#
-# yarn.lock, .pnp.cjs, and .pnp.loader.mjs are all Yarn-generated artifacts
-# (lockfile + PnP resolution map + PnP loader shim). They stay tracked in git
-# for Yarn's Zero-Installs workflow, but they are pure noise for an LLM
-# context dump, so they're excluded here rather than from git itself.
-EXCLUDE_FILES=("yarn.lock" ".pnp.cjs" ".pnp.loader.mjs")
-EXCLUDE_FILES_DISPLAY="$(printf '%s, ' "${EXCLUDE_FILES[@]}")"
-EXCLUDE_FILES_DISPLAY="${EXCLUDE_FILES_DISPLAY%, }"
-
-OUTPUT_DIR="${REPO_ROOT}/${EXCLUDE_DIR}"
-OUTPUT_FILE="${OUTPUT_DIR}/dump.txt"
-
-TIMESTAMP="$(date --iso-8601=seconds)"
-GIT_BRANCH="$(git -C "$REPO_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo 'unknown')"
-GIT_COMMIT="$(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || echo 'unknown')"
-GIT_COMMIT_SHORT="$(git -C "$REPO_ROOT" rev-parse --short HEAD 2>/dev/null || echo 'unknown')"
-GIT_COMMIT_MSG="$(git -C "$REPO_ROOT" log -1 --pretty=format:'%s' 2>/dev/null || echo 'unknown')"
-GIT_COMMIT_DATE="$(git -C "$REPO_ROOT" log -1 --pretty=format:'%ci' 2>/dev/null || echo 'unknown')"
-GIT_REMOTE="$(git -C "$REPO_ROOT" remote get-url origin 2>/dev/null || echo 'none')"
-GIT_STATUS_SUMMARY="$(git -C "$REPO_ROOT" status --short 2>/dev/null | head -20 || echo '')"
-
-HOSTNAME_VAL="$(hostname -f 2>/dev/null || hostname 2>/dev/null || echo 'unknown')"
-USER_VAL="$(id -un 2>/dev/null || echo 'unknown')"
-OS_VAL="$(uname -srm 2>/dev/null || echo 'unknown')"
-
-# ---------------------------------------------------------------------------
-# 3. Collect tracked files, excluding the output directory and EXCLUDE_FILES
-#    git ls-files guarantees only committed/staged files; no build artefacts.
-# ---------------------------------------------------------------------------
-mapfile -t _RAW_FILES < <(
-    git -C "$REPO_ROOT" ls-files \
-        --cached \
-        --others \
-        --exclude-standard \
-        -z \
-        2>/dev/null \
-    | tr '\0' '\n' \
-    | sort -u
-)
-
-ALL_FILES=()
-for _f in "${_RAW_FILES[@]}"; do
-    [[ -z "$_f" ]] && continue
-    # Skip the entire excluded directory tree.
-    [[ "$_f" == "${EXCLUDE_DIR}/"* ]] && continue
-    # Skip any individually-excluded file.
-    _skip=0
-    for _ex in "${EXCLUDE_FILES[@]}"; do
-        if [[ "$_ex" == */* ]]; then
-            [[ "$_f" == "$_ex" ]] && { _skip=1; break; }
-        else
-            [[ "$_f" == "$_ex" || "$_f" == */"$_ex" ]] && { _skip=1; break; }
-        fi
-    done
-    (( _skip )) && continue
-    ALL_FILES+=("$_f")
-done
-
-FILE_COUNT="${#ALL_FILES[@]}"
-
-# ---------------------------------------------------------------------------
-# 4. Helper: human-readable file size
-# ---------------------------------------------------------------------------
-human_size() {
-    local bytes="$1"
-    if   (( bytes < 1024 ));               then printf '%d B'      "$bytes"
-    elif (( bytes < 1048576 ));            then printf '%.1f KiB'  "$(echo "scale=1; $bytes/1024"       | bc)"
-    elif (( bytes < 1073741824 ));         then printf '%.1f MiB'  "$(echo "scale=1; $bytes/1048576"    | bc)"
-    else                                        printf '%.1f GiB'  "$(echo "scale=1; $bytes/1073741824" | bc)"
-    fi
-}
-
-# ---------------------------------------------------------------------------
-# 5. Helper: SHA-256 of a file (portable across Linux distros)
-# ---------------------------------------------------------------------------
-file_sha256() {
-    local path="$1"
-    if command -v sha256sum &>/dev/null; then
-        sha256sum "$path" | awk '{print $1}'
-    elif command -v shasum &>/dev/null; then
-        shasum -a 256 "$path" | awk '{print $1}'
-    else
-        echo 'unavailable'
-    fi
-}
-
-# ---------------------------------------------------------------------------
-# 6. Helper: MIME type (best-effort, no error on missing tool)
-# ---------------------------------------------------------------------------
-file_mime() {
-    local path="$1"
-    if command -v file &>/dev/null; then
-        file --brief --mime-type "$path" 2>/dev/null || echo 'unknown'
-    else
-        echo 'unknown'
-    fi
-}
-
-# ---------------------------------------------------------------------------
-# 7. Build the tree view using 'tree' if available, else pure bash fallback
-# ---------------------------------------------------------------------------
-build_tree() {
-    if command -v tree &>/dev/null; then
-        # --fromfile reads the path list from stdin and renders a tree
-        printf '%s\n' "${ALL_FILES[@]}" \
-        | tree --fromfile -a --noreport 2>/dev/null \
-        || _bash_tree
-    else
-        _bash_tree
-    fi
-}
-
-_bash_tree() {
-    # Pure-bash tree: reconstruct directory hierarchy from the flat file list
-    local -A SEEN_DIRS=()
-    local prev_depth=0
-    local line
-
-    for f in "${ALL_FILES[@]}"; do
-        local dir parts depth i prefix
-        dir="$(dirname "$f")"
-        IFS='/' read -ra parts <<< "$f"
-        depth=$(( ${#parts[@]} - 1 ))
-
-        # Print intermediate directories we haven't seen yet
-        local partial=""
-        for (( i=0; i<depth; i++ )); do
-            if [[ -z "$partial" ]]; then
-                partial="${parts[$i]}"
-            else
-                partial="${partial}/${parts[$i]}"
-            fi
-            if [[ -z "${SEEN_DIRS[$partial]+_}" ]]; then
-                SEEN_DIRS["$partial"]=1
-                prefix="$(printf '│   %.0s' $(seq 1 $i))├── "
-                printf '%s%s/\n' "$prefix" "${parts[$i]}"
-            fi
-        done
-
-        # Print the file itself
-        prefix="$(printf '│   %.0s' $(seq 1 $depth))└── "
-        printf '%s%s\n' "$prefix" "${parts[$depth]}"
-    done
-}
-
-# ---------------------------------------------------------------------------
-# 8. Assemble the dump into a variable (stdout + file simultaneously)
-# ---------------------------------------------------------------------------
-mkdir -p "$OUTPUT_DIR"
-
-# We use a temp file to build, then atomic-rename at the end.
-TMP_FILE="$(mktemp "${OUTPUT_DIR}/.dump.XXXXXX")"
-trap 'rm -f "$TMP_FILE"' EXIT
-
-# Tee everything to both stdout and the temp file
-exec > >(tee "$TMP_FILE") 2>&1
-
-# ── Preamble banner ──────────────────────────────────────────────────────────
-cat <<BANNER
-################################################################################
-#                                                                              #
-#   REPOSITORY CONTEXT DUMP                                                    #
-#   Generated for LLM consumption — do not edit manually                       #
-#                                                                              #
-################################################################################
-
-DUMP METADATA
-═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : ${TIMESTAMP}
-  Generator      : ${SCRIPT_NAME}
-  Host           : ${HOSTNAME_VAL}
-  User           : ${USER_VAL}
-  OS             : ${OS_VAL}
-
-REPOSITORY METADATA
-═════════════════════════════════════════════════════════════════════════════════
-  Repository root: ${REPO_ROOT}
-  Branch         : ${GIT_BRANCH}
-  Commit (full)  : ${GIT_COMMIT}
-  Commit (short) : ${GIT_COMMIT_SHORT}
-  Commit date    : ${GIT_COMMIT_DATE}
-  Commit message : ${GIT_COMMIT_MSG}
-  Remote origin  : ${GIT_REMOTE}
-  Files included : ${FILE_COUNT}
-  Excluded path  : ${EXCLUDE_DIR}/
-  Excluded files : ${EXCLUDE_FILES_DISPLAY}
-
-GIT WORKING TREE STATUS (first 20 lines)
-═════════════════════════════════════════════════════════════════════════════════
-BANNER
-
-if [[ -n "$GIT_STATUS_SUMMARY" ]]; then
-    printf '%s\n' "$GIT_STATUS_SUMMARY"
-else
-    echo "  (clean — no uncommitted changes)"
-fi
-
-# ── Self-documentation: dump this script first ───────────────────────────────
-cat <<SELF_HEADER
-
-################################################################################
-# FILE: ${SCRIPT_NAME}  [THIS SCRIPT — included for full context]
-################################################################################
-SELF_HEADER
-
-printf '\n--- METADATA ---\n'
-_self_size="$(wc -c < "$SCRIPT_PATH")"
-_self_mtime="$(stat --format='%y' "$SCRIPT_PATH" 2>/dev/null \
-               || stat -f '%Sm' -t '%Y-%m-%d %H:%M:%S %z' "$SCRIPT_PATH" 2>/dev/null \
-               || echo 'unavailable')"
-_self_perms="$(stat --format='%A' "$SCRIPT_PATH" 2>/dev/null \
-               || stat -f '%Sp' "$SCRIPT_PATH" 2>/dev/null \
-               || echo 'unavailable')"
-_self_sha="$(file_sha256 "$SCRIPT_PATH")"
-
-printf '  %-22s %s\n'  "File name:"       "$SCRIPT_NAME"
-printf '  %-22s %s\n'  "Relative path:"   "$(realpath --relative-to="$REPO_ROOT" "$SCRIPT_PATH" 2>/dev/null || echo "$SCRIPT_PATH")"
-printf '  %-22s %s\n'  "Size:"            "$(human_size "$_self_size") (${_self_size} bytes)"
-printf '  %-22s %s\n'  "Last modified:"   "$_self_mtime"
-printf '  %-22s %s\n'  "Permissions:"     "$_self_perms"
-printf '  %-22s %s\n'  "SHA-256:"         "$_self_sha"
-printf '  %-22s %s\n'  "MIME type:"       "$(file_mime "$SCRIPT_PATH")"
-printf '\n--- CONTENT ---\n'
-cat "$SCRIPT_PATH"
-
-# ── File tree ─────────────────────────────────────────────────────────────────
-cat <<TREE_HEADER
-
-################################################################################
-# FILE TREE  (all ${FILE_COUNT} included files)
-################################################################################
-.
-TREE_HEADER
-
-build_tree
-echo ""
-
-# ── Per-file content dump ─────────────────────────────────────────────────────
-TOTAL_BYTES=0
-
-for rel_path in "${ALL_FILES[@]}"; do
-    abs_path="${REPO_ROOT}/${rel_path}"
-
-    # Skip if the file no longer exists on disk (deleted but still indexed)
-    [[ -f "$abs_path" ]] || continue
-
-    # ── Metadata collection ────────────────────────────────────────────────
-    file_size="$(wc -c < "$abs_path" 2>/dev/null || echo 0)"
-    TOTAL_BYTES=$(( TOTAL_BYTES + file_size ))
-
-    file_mtime="$(stat --format='%y' "$abs_path" 2>/dev/null \
-                  || stat -f '%Sm' -t '%Y-%m-%d %H:%M:%S %z' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_perms="$(stat --format='%A' "$abs_path" 2>/dev/null \
-                  || stat -f '%Sp' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_owner="$(stat --format='%U:%G' "$abs_path" 2>/dev/null \
-                  || stat -f '%Su:%Sg' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_inode="$(stat --format='%i' "$abs_path" 2>/dev/null \
-                  || stat -f '%i' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_links="$(stat --format='%h' "$abs_path" 2>/dev/null \
-                  || stat -f '%l' "$abs_path" 2>/dev/null \
-                  || echo 'unavailable')"
-
-    file_sha="$(file_sha256 "$abs_path")"
-    file_type="$(file_mime "$abs_path")"
-
-    git_log_line="$(git -C "$REPO_ROOT" log -1 --pretty=format:'%h %ai %s' -- "$rel_path" 2>/dev/null || echo 'unavailable')"
-
-    # ── Section header ─────────────────────────────────────────────────────
-    printf '\n'
-    printf '################################################################################\n'
-    printf '# FILE: %s\n' "$rel_path"
-    printf '################################################################################\n'
-    printf '\n--- METADATA ---\n'
-    printf '  %-22s %s\n'  "File name:"       "$(basename "$rel_path")"
-    printf '  %-22s %s\n'  "Relative path:"   "$rel_path"
-    printf '  %-22s %s\n'  "Absolute path:"   "$abs_path"
-    printf '  %-22s %s\n'  "Size:"            "$(human_size "$file_size") (${file_size} bytes)"
-    printf '  %-22s %s\n'  "Last modified:"   "$file_mtime"
-    printf '  %-22s %s\n'  "Permissions:"     "$file_perms"
-    printf '  %-22s %s\n'  "Owner:"           "$file_owner"
-    printf '  %-22s %s\n'  "Inode:"           "$file_inode"
-    printf '  %-22s %s\n'  "Hard links:"      "$file_links"
-    printf '  %-22s %s\n'  "MIME type:"       "$file_type"
-    printf '  %-22s %s\n'  "SHA-256:"         "$file_sha"
-    printf '  %-22s %s\n'  "Last git commit:" "$git_log_line"
-    printf '\n--- CONTENT ---\n'
-
-    # ── Content emission ───────────────────────────────────────────────────
-    # Binary files: emit a notice instead of raw bytes
-    if [[ "$file_type" == application/octet-stream ]] \
-    || [[ "$file_type" == image/* ]] \
-    || [[ "$file_type" == audio/* ]] \
-    || [[ "$file_type" == video/* ]] \
-    || ! file --brief "$abs_path" 2>/dev/null | grep -qi 'text\|script\|xml\|json\|yaml\|svg\|source\|empty'; then
-        printf '[Binary file — content omitted. Size: %s, SHA-256: %s]\n' \
-            "$(human_size "$file_size")" "$file_sha"
-    else
-        cat "$abs_path"
-        # Ensure there is always a trailing newline so the next header aligns
-        [[ "$(tail -c1 "$abs_path" | wc -c)" -gt 0 ]] \
-            && [[ "$(tail -c1 "$abs_path")" != $'\n' ]] \
-            && printf '\n'
-    fi
-done
-
-# ── Summary footer ────────────────────────────────────────────────────────────
-cat <<FOOTER
-
-################################################################################
-# DUMP SUMMARY
-################################################################################
-  Files dumped   : ${FILE_COUNT}
-  Total size     : $(human_size "$TOTAL_BYTES") (${TOTAL_BYTES} bytes)
-  Output file    : ${OUTPUT_FILE}
-  Completed at   : $(date --iso-8601=seconds)
-################################################################################
-# END OF DUMP
-################################################################################
-FOOTER
-
-# ---------------------------------------------------------------------------
-# 9. Atomic rename — avoids partial writes being read by concurrent processes
-# ---------------------------------------------------------------------------
-mv -f "$TMP_FILE" "$OUTPUT_FILE"
-
-
-################################################################################
-# FILE: .gitignore
-################################################################################
-
---- METADATA ---
-  File name:             .gitignore
-  Relative path:         .gitignore
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/.gitignore
-  Size:                  253 B (253 bytes)
-  Last modified:         2026-09-17 08:47:46.004089290 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830114
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               fe718e7babb14f3cbad2d97f08889b9ce5215ed3fe0e43b2b8cfbfb3b9b844e8
-  Last git commit:       086293b 2023-11-04 20:53:28 -0400 add all files
-
---- CONTENT ---
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-
-################################################################################
-# FILE: index.html
-################################################################################
-
---- METADATA ---
-  File name:             index.html
-  Relative path:         index.html
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/index.html
-  Size:                  356 B (356 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830121
-  Hard links:            1
-  MIME type:             text/html
-  SHA-256:               df8930a5a756243f2553058a585f3d6a9f57ac5676b09d53ab0e8c5e4a849913
-  Last git commit:       086293b 2023-11-04 20:53:28 -0400 add all files
-
---- CONTENT ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
-</html>
-
-
-################################################################################
-# FILE: package.json
-################################################################################
-
---- METADATA ---
-  File name:             package.json
-  Relative path:         package.json
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/package.json
-  Size:                  379 B (379 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830122
-  Hard links:            1
-  MIME type:             application/json
-  SHA-256:               221c354a6866501c91a83956dc7c406e20a0d4d18562932322499e50ac540e2c
-  Last git commit:       7beaedc 2023-11-04 20:58:47 -0400 add package signals
-
---- CONTENT ---
-{
-  "name": "myvanillats202311",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
-  },
-  "dependencies": {
-    "@preact/signals-core": "^1.5.0",
-    "@vitejs/plugin-basic-ssl": "^1.0.1"
-  }
-}
-
-
-################################################################################
-# FILE: public/vite.svg
-################################################################################
-
---- METADATA ---
-  File name:             vite.svg
-  Relative path:         public/vite.svg
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/public/vite.svg
-  Size:                  1.4 KiB (1497 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830124
-  Hard links:            1
-  MIME type:             image/svg+xml
-  SHA-256:               4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb
-  Last git commit:       086293b 2023-11-04 20:53:28 -0400 add all files
-
---- CONTENT ---
-[Binary file — content omitted. Size: 1.4 KiB, SHA-256: 4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb]
-
-################################################################################
-# FILE: src/counter.ts
-################################################################################
-
---- METADATA ---
-  File name:             counter.ts
-  Relative path:         src/counter.ts
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/counter.ts
-  Size:                  428 B (428 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830126
-  Hard links:            1
-  MIME type:             application/javascript
-  SHA-256:               11921f6af1b0ffc3738bda33feb85c0959b59f122705878d39d394635d44bb4f
-  Last git commit:       f98bf01 2023-11-05 19:10:43 -0500 build signals
-
---- CONTENT ---
-export function setupCounter(element: HTMLButtonElement) {
-  let counter = 0;
-  const setCounter = (count: number) => {
-    counter = count
-    element.innerHTML = `count is ${counter}`
-  }
-  element.addEventListener('click', () => setCounter(counter + 1))
-  setCounter(0);
-}
-
-export function randomIntFromInterval(min: number, max: number) { // min and max included 
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-################################################################################
-# FILE: src/main.ts
-################################################################################
-
---- METADATA ---
-  File name:             main.ts
-  Relative path:         src/main.ts
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/main.ts
-  Size:                  2.6 KiB (2673 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830127
-  Hard links:            1
-  MIME type:             application/javascript
-  SHA-256:               d354cd5562c0a815b62cc75d2543d07cb7ae27c297a32ed8c76429b97ba3bed1
-  Last git commit:       079245b 2023-11-12 09:16:51 -0500 build signals
-
---- CONTENT ---
-import { randomIntFromInterval } from "./counter";
-import "./style.css";
-import { signal, computed, effect } from "@preact/signals-core";
-const counter = signal(1);
-const resetPressed = signal(false);
-const result = computed(() => counter.value * 10);
-let randomSeed = signal(randomIntFromInterval(1, 9));
-let randomizedResult = computed(() => counter.value * randomSeed.value);
-
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
-    <h1>Signals in Vanilla JS</h1>
-    <div class="card">
-      <button type="button" id="incrementCounter">count is <span class="counter">${counter.value}</span></button>
-      <button type="reset" id="reset">Reset</button>
-    </div>
-    <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
-    <h1>
-      <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> = <span class="randomizedResult">${randomizedResult}</span>.
-    </h1>
-  </div>
-`;
-
-function setCounter() {
-  const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
-  const resultElement = document.querySelector<HTMLSpanElement>(".result");
-  const randomSeedElements = document.querySelectorAll<HTMLSpanElement>(".randomSeed");
-  const randomizedResultElements = document.querySelectorAll<HTMLSpanElement>(".randomizedResult");
-
-  if (!counterElements?.length || !resultElement || !randomSeedElements?.length || !randomizedResultElements?.length) {
-    return;
-  }
-
-  counterElements.forEach((element) => {
-    element.innerText = counter.value.toString();
-  });
-
-  resultElement.innerText = result.value.toString();
-  // randomSeedElement.innerText = randomSeed.value.toString();
-  randomSeedElements.forEach((element) => {
-    element.innerText = randomSeed.value.toString();
-  });
-  // randomizedResultElement.innerText = randomizedResult.value.toString();
-  randomizedResultElements.forEach((element) => {
-    element.innerText = randomizedResult.value.toString();
-  });
-}
-
-const button = document.getElementById("incrementCounter");
-const resetButton = document.getElementById("reset");
-
-button?.addEventListener("click", () => {
-  counter.value++;
-});
-
-resetButton?.addEventListener("click", () => {
-  counter.value = 0;
-  randomSeed.value = randomIntFromInterval(1, 99);
-  console.info({ new: randomSeed.value });
-  resetPressed.value = true;
-});
-
-effect(setCounter);
-
-setInterval(() => {
-  if (resetPressed.value === false) {
-    counter.value = randomIntFromInterval(1, 9);
-    randomSeed.value = randomIntFromInterval(1, 9);
-    console.info({ counter: counter.value});
-    console.info({ randomSeed: randomSeed.value});
-  }
-}, 5000)
-
-################################################################################
-# FILE: src/style.css
-################################################################################
-
---- METADATA ---
-  File name:             style.css
-  Relative path:         src/style.css
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/style.css
-  Size:                  2.7 KiB (2861 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830128
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               f8ae1413a6ee02d358f6ee81f9963427eb8efb96998bd6e8037162c65e9de7e0
-  Last git commit:       bc9e85b 2023-12-27 13:14:40 -0500 show colors for light mode background
-
---- CONTENT ---
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-
-  :root {
-    /* Define the base hue, saturation, and lightness values */
-    --base-hue: 0;
-    --base-saturation: 40%;
-    --base-lightness: 80%;
-    /* Define the animation duration and direction */
-    --animation-duration: 1s;
-    --animation-direction: alternate;
-  }
-  
-  body {
-    /* Use the hsl() function with the CSS variables to set the background color */
-    background-color: hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));
-    /* Use the animation property to animate the hue value over time */
-    animation: hue-change var(--animation-duration) infinite var(--animation-direction);
-  }
-  
-  /* Use the @keyframes rule to define how the hue value changes */
-  @keyframes hue-change {
-    /* Start from the base hue value */
-    0% {
-      --base-hue: 0;
-    }
-    10% {
-     --base-hue: 36deg; 
-    }
-    20% {
-     --base-hue: 72deg; 
-    }
-    30% {
-     --base-hue: 108deg; 
-    }
-    40% {
-     --base-hue: 144deg; 
-    }
-    50% {
-     --base-hue: 180deg; 
-    }
-    60% {
-     --base-hue: 216deg; 
-    }
-    70% {
-     --base-hue: 252deg; 
-    }
-    80% {
-     --base-hue: 288deg; 
-    }
-    90% {
-     --base-hue: 324deg; 
-    }
-    /* End at the base hue value plus 360 degrees (one full circle) */
-    100% {
-      --base-hue: 360deg;
-    }
-  }  
-}
-
-
-
-################################################################################
-# FILE: src/typescript.svg
-################################################################################
-
---- METADATA ---
-  File name:             typescript.svg
-  Relative path:         src/typescript.svg
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/typescript.svg
-  Size:                  1.4 KiB (1435 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830129
-  Hard links:            1
-  MIME type:             image/svg+xml
-  SHA-256:               f6ead1af17acc3f55ad857f3bc936df8754281e2932c1b472dbb9b36ab873f1c
-  Last git commit:       086293b 2023-11-04 20:53:28 -0400 add all files
-
---- CONTENT ---
-[Binary file — content omitted. Size: 1.4 KiB, SHA-256: f6ead1af17acc3f55ad857f3bc936df8754281e2932c1b472dbb9b36ab873f1c]
-
-################################################################################
-# FILE: src/vite-env.d.ts
-################################################################################
-
---- METADATA ---
-  File name:             vite-env.d.ts
-  Relative path:         src/vite-env.d.ts
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/vite-env.d.ts
-  Size:                  38 B (38 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830130
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5
-  Last git commit:       086293b 2023-11-04 20:53:28 -0400 add all files
-
---- CONTENT ---
-/// <reference types="vite/client" />
-
-
-################################################################################
-# FILE: tsconfig.json
-################################################################################
-
---- METADATA ---
-  File name:             tsconfig.json
-  Relative path:         tsconfig.json
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/tsconfig.json
-  Size:                  527 B (527 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830131
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               eacc61733333e59fe271157d746cf12c89e57177fa74855799c058841f9c06c1
-  Last git commit:       086293b 2023-11-04 20:53:28 -0400 add all files
-
---- CONTENT ---
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"]
-}
-
-
-################################################################################
-# FILE: vite.config.ts
-################################################################################
-
---- METADATA ---
-  File name:             vite.config.ts
-  Relative path:         vite.config.ts
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/vite.config.ts
-  Size:                  252 B (252 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830132
-  Hard links:            1
-  MIME type:             application/javascript
-  SHA-256:               fcb883df0e6f2ba28ea309b5ec0893330cf32b1b9c3eefc86a47374f229fbf95
-  Last git commit:       f1dfa9e 2023-11-05 18:20:06 -0500 output to docs folder
-
---- CONTENT ---
-import { defineConfig } from "vite";
-import basicSsl from "@vitejs/plugin-basic-ssl";
-
-export default defineConfig({
-    server: {
-        port: 3000,
-        https: true,
-    },
-    plugins: [basicSsl()],
-    build: {
-        outDir: 'docs'
-    }
-});
-
-
-################################################################################
-# DUMP SUMMARY
-################################################################################
-  Files dumped   : 16
-  Total size     : 37.1 KiB (38051 bytes)
-  Output file    : /home/kushal/src/ts/learnsignal.github.io/docs/llm/dump.txt
-  Completed at   : 2026-09-17T08:53:48-04:00
-################################################################################
-# END OF DUMP
-################################################################################
-
-real	0m0.457s
-user	0m0.218s
-sys	0m0.301s
-yarn install v1.22.22
-(node:21354) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-(Use `node --trace-deprecation ...` to show where the warning was created)
-[1/4] Resolving packages...
-[2/4] Fetching packages...
-[3/4] Linking dependencies...
-[4/4] Building fresh packages...
-Done in 3.06s.
-
-real	0m3.185s
-user	0m1.897s
-sys	0m0.852s
-yarn outdated v1.22.22
-(node:21393) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-(Use `node --trace-deprecation ...` to show where the warning was created)
-info Color legend : 
- "<red>"    : Major Update backward-incompatible updates 
- "<yellow>" : Minor Update backward-compatible features 
- "<green>"  : Patch Update backward-compatible bug fixes
-Package                  Current Wanted Latest Package Type    URL                                                    
-@preact/signals-core     1.5.0   1.14.4 1.14.4 dependencies    https://preactjs.com                                   
-@vitejs/plugin-basic-ssl 1.0.1   1.2.0  2.3.0  dependencies    https://github.com/vitejs/vite-plugin-basic-ssl/#readme
-typescript               5.2.2   5.9.3  7.0.2  devDependencies https://www.typescriptlang.org/                        
-vite                     4.5.0   4.5.14 8.3.0  devDependencies https://vite.dev                                       
-Done in 1.60s.
-
-real	0m1.755s
-user	0m0.537s
-sys	0m0.224s
-yarn run v1.22.22
-$ tsc && vite build
-vite v4.5.0 building for production...
-✓ 6 modules transformed.
-docs/index.html                 0.45 kB │ gzip: 0.29 kB
-docs/assets/index-4dd0c42a.css  1.80 kB │ gzip: 0.81 kB
-docs/assets/index-1f8fe633.js   6.24 kB │ gzip: 2.33 kB
-✓ built in 89ms
-Done in 0.70s.
-
-real	0m0.823s
-user	0m0.981s
-sys	0m0.188s
 kushal@fedora:~/src/ts/learnsignal.github.io$ cd ~/src/ts/learnsignal.github.io/; time yarn; time yarn outdated; time yarn build; time bash export.sh;
 yarn install v1.22.22
 [1/4] Resolving packages...
-⠁ (node:21627) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(node:22741) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-[2/4] Fetching packages...
-[3/4] Linking dependencies...
-[4/4] Building fresh packages...
-success Saved lockfile.
-Done in 6.03s.
+success Already up-to-date.
+Done in 0.04s.
 
-real	0m6.161s
-user	0m4.215s
-sys	0m1.449s
+real	0m0.152s
+user	0m0.127s
+sys	0m0.037s
 yarn outdated v1.22.22
-(node:21641) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(node:22752) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-Done in 1.57s.
+Done in 1.45s.
 
-real	0m1.709s
-user	0m0.496s
-sys	0m0.203s
+real	0m1.611s
+user	0m0.528s
+sys	0m0.214s
 yarn run v1.22.22
 $ tsc && vite build
 vite v8.3.0 building client environment for production...
@@ -1621,14 +24,14 @@ vite v8.3.0 building client environment for production...
 computing gzip size...
 docs/index.html                 0.45 kB │ gzip: 0.29 kB
 docs/assets/index-CDc0323N.css  1.95 kB │ gzip: 0.84 kB
-docs/assets/index-Crn50l-9.js   6.63 kB │ gzip: 2.48 kB
+docs/assets/index-BIdlVyUp.js   6.64 kB │ gzip: 2.48 kB
 
-✓ built in 37ms
-Done in 0.28s.
+✓ built in 30ms
+Done in 0.23s.
 
-real	0m0.397s
-user	0m0.363s
-sys	0m0.129s
+real	0m0.346s
+user	0m0.338s
+sys	0m0.106s
 ################################################################################
 #                                                                              #
 #   REPOSITORY CONTEXT DUMP                                                    #
@@ -1638,7 +41,7 @@ sys	0m0.129s
 
 DUMP METADATA
 ═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : 2026-09-17T08:56:18-04:00
+  Generated at   : 2026-09-17T08:58:52-04:00
   Generator      : export.sh
   Host           : fedora
   User           : kushal
@@ -1648,23 +51,23 @@ REPOSITORY METADATA
 ═════════════════════════════════════════════════════════════════════════════════
   Repository root: /home/kushal/src/ts/learnsignal.github.io
   Branch         : main
-  Commit (full)  : 70636336b780061524a51f8b8c769bcd75e1aeec
-  Commit (short) : 7063633
-  Commit date    : 2026-09-17 08:56:07 -0400
-  Commit message : update all packages
+  Commit (full)  : 46dc15a95b27483cf1ae0aa60598f0c435fe5498
+  Commit (short) : 46dc15a
+  Commit date    : 2026-09-17 08:56:57 -0400
+  Commit message : run scripts
   Remote origin  : git@github.com:learnsignal/learnsignal.github.io.git
-  Files included : 18
+  Files included : 17
   Excluded path  : docs/llm/
   Excluded files : yarn.lock, .pnp.cjs, .pnp.loader.mjs
 
 GIT WORKING TREE STATUS (first 20 lines)
 ═════════════════════════════════════════════════════════════════════════════════
- D docs/assets/index-1f8fe633.js
- D docs/assets/index-4dd0c42a.css
+ D docs/assets/index-Crn50l-9.js
  M docs/index.html
- M yarn.lock
-?? docs/assets/index-CDc0323N.css
-?? docs/assets/index-Crn50l-9.js
+ D docs/llm/dump.txt
+ D docs/llm/terminal.txt
+ M src/main.ts
+?? docs/assets/index-BIdlVyUp.js
 
 ################################################################################
 # FILE: export.sh  [THIS SCRIPT — included for full context]
@@ -2066,14 +469,13 @@ FOOTER
 mv -f "$TMP_FILE" "$OUTPUT_FILE"
 
 ################################################################################
-# FILE TREE  (all 18 included files)
+# FILE TREE  (all 17 included files)
 ################################################################################
 .
 .
 ├── docs
 │   ├── assets
-│   │   ├── index-1f8fe633.js
-│   │   ├── index-4dd0c42a.css
+│   │   ├── index-BIdlVyUp.js
 │   │   ├── index-CDc0323N.css
 │   │   └── index-Crn50l-9.js
 │   ├── index.html
@@ -2095,43 +497,21 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
 
 
 ################################################################################
-# FILE: docs/assets/index-CDc0323N.css
+# FILE: docs/assets/index-BIdlVyUp.js
 ################################################################################
 
 --- METADATA ---
-  File name:             index-CDc0323N.css
-  Relative path:         docs/assets/index-CDc0323N.css
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CDc0323N.css
-  Size:                  1.9 KiB (1954 bytes)
-  Last modified:         2026-09-17 08:56:18.939381849 -0400
+  File name:             index-BIdlVyUp.js
+  Relative path:         docs/assets/index-BIdlVyUp.js
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-BIdlVyUp.js
+  Size:                  6.4 KiB (6646 bytes)
+  Last modified:         2026-09-17 08:58:52.374299136 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833412
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               2a8a44b4fd4d4bd83160fdaef73d916a39f27d82db61716309fdea35f21552bc
-  Last git commit:       
-
---- CONTENT ---
-:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;color:#ffffffde;font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;background-color:#242424;font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}a{color:#646cff;-webkit-text-decoration:inherit;text-decoration:inherit;font-weight:500}a:hover{color:#535bf2}body{place-items:center;min-width:320px;min-height:100vh;margin:0;display:flex}h1{font-size:3.2em;line-height:1.1}#app{text-align:center;max-width:1280px;margin:0 auto;padding:2rem}.logo{will-change:filter;height:6em;padding:1.5em;transition:filter .3s}.logo:hover{filter:drop-shadow(0 0 2em #646cffaa)}.logo.vanilla:hover{filter:drop-shadow(0 0 2em #3178c6aa)}.card{padding:2em}.read-the-docs{color:#888}button{cursor:pointer;background-color:#1a1a1a;border:1px solid #0000;border-radius:8px;padding:.6em 1.2em;font-family:inherit;font-size:1em;font-weight:500;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-color-scheme:light){:root{color:#213547;background-color:#fff}a:hover{color:#747bff}button{background-color:#f9f9f9}:root{--base-hue:0;--base-saturation:40%;--base-lightness:80%;--animation-duration:1s;--animation-direction:alternate}body{background-color:hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));animation:hue-change var(--animation-duration) infinite var(--animation-direction)}@keyframes hue-change{0%{--base-hue:0}10%{--base-hue:36deg}20%{--base-hue:72deg}30%{--base-hue:108deg}40%{--base-hue:144deg}50%{--base-hue:180deg}60%{--base-hue:216deg}70%{--base-hue:252deg}80%{--base-hue:288deg}90%{--base-hue:324deg}to{--base-hue:360deg}}}
-
-
-################################################################################
-# FILE: docs/assets/index-Crn50l-9.js
-################################################################################
-
---- METADATA ---
-  File name:             index-Crn50l-9.js
-  Relative path:         docs/assets/index-Crn50l-9.js
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-Crn50l-9.js
-  Size:                  6.4 KiB (6637 bytes)
-  Last modified:         2026-09-17 08:56:18.937942769 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63833411
+  Inode:                 63833730
   Hard links:            1
   MIME type:             application/javascript
-  SHA-256:               c4d0b31d94e4f02e9e3d201d13d5f448effb17cc44d7194f8ee9c2221cc622ba
+  SHA-256:               982fc204bc47f114179df72708fe9b4d39060e56fb92ab5bc74e68af15cd2ee1
   Last git commit:       
 
 --- CONTENT ---
@@ -2144,10 +524,33 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
     </div>
     <p>Result: <span class="counter">${T.value}</span> * 10 = <span class="result">10</span></p>
     <h1>
-      <span class="counter">${T.value}</span> * <span class="randomSeed">${O.value}</span> = <span class="randomizedResult">${k}</span>.
+      <span class="counter">${T.value}</span> * <span class="randomSeed">${O.value}</span> 
+        = <span class="randomizedResult">${k}</span>.
     </h1>
   </div>
 `;function A(){let e=document.querySelectorAll(`.counter`),t=document.querySelector(`.result`),n=document.querySelectorAll(`.randomSeed`),r=document.querySelectorAll(`.randomizedResult`);e?.length&&t&&n?.length&&r?.length&&(e.forEach(e=>{e.innerText=T.value.toString()}),t.innerText=D.value.toString(),n.forEach(e=>{e.innerText=O.value.toString()}),r.forEach(e=>{e.innerText=k.value.toString()}))}var j=document.getElementById(`incrementCounter`),M=document.getElementById(`reset`);j?.addEventListener(`click`,()=>{T.value++}),M?.addEventListener(`click`,()=>{T.value=0,O.value=e(1,99),console.info({new:O.value}),E.value=!0}),w(A),setInterval(()=>{E.value===!1&&(T.value=e(1,9),O.value=e(1,9),console.info({counter:T.value}),console.info({randomSeed:O.value}))},5e3);
+
+################################################################################
+# FILE: docs/assets/index-CDc0323N.css
+################################################################################
+
+--- METADATA ---
+  File name:             index-CDc0323N.css
+  Relative path:         docs/assets/index-CDc0323N.css
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CDc0323N.css
+  Size:                  1.9 KiB (1954 bytes)
+  Last modified:         2026-09-17 08:58:52.375488433 -0400
+  Permissions:           -rw-r--r--
+  Owner:                 kushal:kushal
+  Inode:                 63833731
+  Hard links:            1
+  MIME type:             text/plain
+  SHA-256:               2a8a44b4fd4d4bd83160fdaef73d916a39f27d82db61716309fdea35f21552bc
+  Last git commit:       46dc15a 2026-09-17 08:56:57 -0400 run scripts
+
+--- CONTENT ---
+:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;color:#ffffffde;font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;background-color:#242424;font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}a{color:#646cff;-webkit-text-decoration:inherit;text-decoration:inherit;font-weight:500}a:hover{color:#535bf2}body{place-items:center;min-width:320px;min-height:100vh;margin:0;display:flex}h1{font-size:3.2em;line-height:1.1}#app{text-align:center;max-width:1280px;margin:0 auto;padding:2rem}.logo{will-change:filter;height:6em;padding:1.5em;transition:filter .3s}.logo:hover{filter:drop-shadow(0 0 2em #646cffaa)}.logo.vanilla:hover{filter:drop-shadow(0 0 2em #3178c6aa)}.card{padding:2em}.read-the-docs{color:#888}button{cursor:pointer;background-color:#1a1a1a;border:1px solid #0000;border-radius:8px;padding:.6em 1.2em;font-family:inherit;font-size:1em;font-weight:500;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-color-scheme:light){:root{color:#213547;background-color:#fff}a:hover{color:#747bff}button{background-color:#f9f9f9}:root{--base-hue:0;--base-saturation:40%;--base-lightness:80%;--animation-duration:1s;--animation-direction:alternate}body{background-color:hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));animation:hue-change var(--animation-duration) infinite var(--animation-direction)}@keyframes hue-change{0%{--base-hue:0}10%{--base-hue:36deg}20%{--base-hue:72deg}30%{--base-hue:108deg}40%{--base-hue:144deg}50%{--base-hue:180deg}60%{--base-hue:216deg}70%{--base-hue:252deg}80%{--base-hue:288deg}90%{--base-hue:324deg}to{--base-hue:360deg}}}
+
 
 ################################################################################
 # FILE: docs/index.html
@@ -2158,14 +561,14 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/index.html
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/index.html
   Size:                  455 B (455 bytes)
-  Last modified:         2026-09-17 08:56:18.939381849 -0400
+  Last modified:         2026-09-17 08:58:52.375488433 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833413
+  Inode:                 63833732
   Hard links:            1
   MIME type:             text/html
-  SHA-256:               b1f679e289a9969aa62fed23aa5e99ca395b6c3e590a55f38f937a52c692a1fe
-  Last git commit:       4a4ba8b 2023-12-27 13:15:46 -0500 build
+  SHA-256:               788d58dbe02e5598629c4aa84e4b4f5f326c0bb4f95e029975adc897cf479c2f
+  Last git commit:       46dc15a 2026-09-17 08:56:57 -0400 run scripts
 
 --- CONTENT ---
 <!doctype html>
@@ -2175,7 +578,7 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
-    <script type="module" crossorigin src="/assets/index-Crn50l-9.js"></script>
+    <script type="module" crossorigin src="/assets/index-BIdlVyUp.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CDc0323N.css">
   </head>
   <body>
@@ -2193,10 +596,10 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/vite.svg
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/vite.svg
   Size:                  1.4 KiB (1497 bytes)
-  Last modified:         2026-09-17 08:56:18.923112414 -0400
+  Last modified:         2026-09-17 08:58:52.364871575 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833409
+  Inode:                 63833728
   Hard links:            1
   MIME type:             image/svg+xml
   SHA-256:               4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb
@@ -2791,14 +1194,14 @@ export function randomIntFromInterval(min: number, max: number) { // min and max
   File name:             main.ts
   Relative path:         src/main.ts
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/main.ts
-  Size:                  2.6 KiB (2673 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
+  Size:                  2.6 KiB (2682 bytes)
+  Last modified:         2026-09-17 08:58:38.735717469 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
   Inode:                 63830127
   Hard links:            1
   MIME type:             application/javascript
-  SHA-256:               d354cd5562c0a815b62cc75d2543d07cb7ae27c297a32ed8c76429b97ba3bed1
+  SHA-256:               0fa5996f91a4cc28f91b576a5e82da7ef24e545a371cec7c8f4ef7cd614a8dc5
   Last git commit:       079245b 2023-11-12 09:16:51 -0500 build signals
 
 --- CONTENT ---
@@ -2820,7 +1223,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     </div>
     <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
     <h1>
-      <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> = <span class="randomizedResult">${randomizedResult}</span>.
+      <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> 
+        = <span class="randomizedResult">${randomizedResult}</span>.
     </h1>
   </div>
 `;
@@ -3174,15 +1578,15 @@ export default defineConfig({
 ################################################################################
 # DUMP SUMMARY
 ################################################################################
-  Files dumped   : 18
-  Total size     : 37.7 KiB (38614 bytes)
+  Files dumped   : 17
+  Total size     : 37.7 KiB (38632 bytes)
   Output file    : /home/kushal/src/ts/learnsignal.github.io/docs/llm/dump.txt
-  Completed at   : 2026-09-17T08:56:19-04:00
+  Completed at   : 2026-09-17T08:58:52-04:00
 ################################################################################
 # END OF DUMP
 ################################################################################
 
-real	0m0.460s
-user	0m0.202s
-sys	0m0.321s
+real	0m0.458s
+user	0m0.204s
+sys	0m0.320s
 kushal@fedora:~/src/ts/learnsignal.github.io$ 

@@ -7,7 +7,8 @@
     </div>
     <p>Result: <span class="counter">${T.value}</span> * 10 = <span class="result">10</span></p>
     <h1>
-      <span class="counter">${T.value}</span> * <span class="randomSeed">${O.value}</span> = <span class="randomizedResult">${k}</span>.
+      <span class="counter">${T.value}</span> * <span class="randomSeed">${O.value}</span> 
+        = <span class="randomizedResult">${k}</span>.
     </h1>
   </div>
 `;function A(){let e=document.querySelectorAll(`.counter`),t=document.querySelector(`.result`),n=document.querySelectorAll(`.randomSeed`),r=document.querySelectorAll(`.randomizedResult`);e?.length&&t&&n?.length&&r?.length&&(e.forEach(e=>{e.innerText=T.value.toString()}),t.innerText=D.value.toString(),n.forEach(e=>{e.innerText=O.value.toString()}),r.forEach(e=>{e.innerText=k.value.toString()}))}var j=document.getElementById(`incrementCounter`),M=document.getElementById(`reset`);j?.addEventListener(`click`,()=>{T.value++}),M?.addEventListener(`click`,()=>{T.value=0,O.value=e(1,99),console.info({new:O.value}),E.value=!0}),w(A),setInterval(()=>{E.value===!1&&(T.value=e(1,9),O.value=e(1,9),console.info({counter:T.value}),console.info({randomSeed:O.value}))},5e3);
