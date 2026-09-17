@@ -14,15 +14,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -43,25 +34,16 @@ h1 {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
 .card {
   padding: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  justify-content: center;
 }
 
-.read-the-docs {
-  color: #888;
+[data-bind] {
+  font-variant-numeric: tabular-nums;
 }
 
 button {
@@ -72,15 +54,24 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  color: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition: none;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -88,67 +79,8 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
+
   button {
     background-color: #f9f9f9;
   }
-
-  :root {
-    /* Define the base hue, saturation, and lightness values */
-    --base-hue: 0;
-    --base-saturation: 40%;
-    --base-lightness: 80%;
-    /* Define the animation duration and direction */
-    --animation-duration: 1s;
-    --animation-direction: alternate;
-  }
-  
-  body {
-    /* Use the hsl() function with the CSS variables to set the background color */
-    background-color: hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));
-    /* Use the animation property to animate the hue value over time */
-    animation: hue-change var(--animation-duration) infinite var(--animation-direction);
-  }
-  
-  /* Use the @keyframes rule to define how the hue value changes */
-  @keyframes hue-change {
-    /* Start from the base hue value */
-    0% {
-      --base-hue: 0;
-    }
-    10% {
-     --base-hue: 36deg; 
-    }
-    20% {
-     --base-hue: 72deg; 
-    }
-    30% {
-     --base-hue: 108deg; 
-    }
-    40% {
-     --base-hue: 144deg; 
-    }
-    50% {
-     --base-hue: 180deg; 
-    }
-    60% {
-     --base-hue: 216deg; 
-    }
-    70% {
-     --base-hue: 252deg; 
-    }
-    80% {
-     --base-hue: 288deg; 
-    }
-    90% {
-     --base-hue: 324deg; 
-    }
-    /* End at the base hue value plus 360 degrees (one full circle) */
-    100% {
-      --base-hue: 360deg;
-    }
-  }  
 }
-

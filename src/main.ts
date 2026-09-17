@@ -1,73 +1,87 @@
-import { randomIntFromInterval } from "./counter";
-import "./style.css";
 import { signal, computed, effect } from "@preact/signals-core";
-const counter = signal(1);
-const resetPressed = signal(false);
-const result = computed(() => counter.value * 10);
-let randomSeed = signal(randomIntFromInterval(1, 9));
-let randomizedResult = computed(() => counter.value * randomSeed.value);
+import { randomIntFromInterval } from "./random";
+import "./style.css";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+const counter = signal(1);
+const randomSeed = signal(randomIntFromInterval(1, 9));
+const scramblingEnabled = signal(true);
+
+const result = computed(() => {
+  const value = counter.value * 10;
+  console.info({ recomputed: "result", value });
+  return value;
+});
+
+const randomizedResult = computed(() => {
+  const value = counter.value * randomSeed.value;
+  console.info({ recomputed: "randomizedResult", value });
+  return value;
+});
+
+const app = document.querySelector<HTMLDivElement>("#app")!;
+
+app.innerHTML = `
   <div>
     <h1>Signals in Vanilla JS</h1>
     <div class="card">
-      <button type="button" id="incrementCounter">count is <span class="counter">${counter.value}</span></button>
-      <button type="reset" id="reset">Reset</button>
+      <button type="button" id="incrementCounter">count is <span data-bind="counter"></span></button>
+      <button type="button" id="reset">Reset</button>
+      <button type="button" id="toggleScrambling"><span data-bind="scramblingLabel"></span></button>
     </div>
-    <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
+    <p><span data-bind="counter"></span> * 10 = <span data-bind="result"></span></p>
     <h1>
-      <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> 
-        = <span class="randomizedResult">${randomizedResult}</span>.
+      <span data-bind="counter"></span> * <span data-bind="randomSeed"></span>
+        = <span data-bind="randomizedResult"></span>
     </h1>
   </div>
 `;
 
-function setCounter() {
-  const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
-  const resultElement = document.querySelector<HTMLSpanElement>(".result");
-  const randomSeedElements = document.querySelectorAll<HTMLSpanElement>(".randomSeed");
-  const randomizedResultElements = document.querySelectorAll<HTMLSpanElement>(".randomizedResult");
+function bindText(name: string, readText: () => string) {
+  const elements = app.querySelectorAll<HTMLElement>(`[data-bind="${name}"]`);
 
-  if (!counterElements?.length || !resultElement || !randomSeedElements?.length || !randomizedResultElements?.length) {
-    return;
+  if (elements.length === 0) {
+    throw new Error(`Nothing in the page is bound to "${name}"`);
   }
 
-  counterElements.forEach((element) => {
-    element.innerText = counter.value.toString();
-  });
-
-  resultElement.innerText = result.value.toString();
-  // randomSeedElement.innerText = randomSeed.value.toString();
-  randomSeedElements.forEach((element) => {
-    element.innerText = randomSeed.value.toString();
-  });
-  // randomizedResultElement.innerText = randomizedResult.value.toString();
-  randomizedResultElements.forEach((element) => {
-    element.innerText = randomizedResult.value.toString();
+  effect(() => {
+    const text = readText();
+    console.info({ rendered: name, text });
+    elements.forEach((element) => {
+      element.innerText = text;
+    });
   });
 }
 
-const button = document.getElementById("incrementCounter");
-const resetButton = document.getElementById("reset");
+bindText("counter", () => counter.value.toString());
+bindText("result", () => result.value.toString());
+bindText("randomSeed", () => randomSeed.value.toString());
+bindText("randomizedResult", () => randomizedResult.value.toString());
+bindText("scramblingLabel", () =>
+  scramblingEnabled.value ? "Pause scrambling" : "Resume scrambling",
+);
 
-button?.addEventListener("click", () => {
+document.getElementById("incrementCounter")!.addEventListener("click", () => {
   counter.value++;
 });
 
-resetButton?.addEventListener("click", () => {
+document.getElementById("reset")!.addEventListener("click", () => {
   counter.value = 0;
   randomSeed.value = randomIntFromInterval(1, 99);
-  console.info({ new: randomSeed.value });
-  resetPressed.value = true;
 });
 
-effect(setCounter);
+document.getElementById("toggleScrambling")!.addEventListener("click", () => {
+  scramblingEnabled.value = !scramblingEnabled.value;
+});
 
-setInterval(() => {
-  if (resetPressed.value === false) {
+effect(() => {
+  if (!scramblingEnabled.value) {
+    return;
+  }
+
+  const interval = setInterval(() => {
     counter.value = randomIntFromInterval(1, 9);
     randomSeed.value = randomIntFromInterval(1, 9);
-    console.info({ counter: counter.value});
-    console.info({ randomSeed: randomSeed.value});
-  }
-}, 5000)
+  }, 5000);
+
+  return () => clearInterval(interval);
+});

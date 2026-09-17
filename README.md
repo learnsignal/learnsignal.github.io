@@ -2,9 +2,8 @@
 
 A tiny, deliberately boring demo of **fine-grained reactivity without a framework**.
 
-No React. No Preact. No virtual DOM. No components, no JSX, no hooks, no build-time
-magic beyond a bundler. Just `@preact/signals-core`, a handful of `<span>` elements, and
-about 60 lines of TypeScript.
+No React. No Preact. No virtual DOM. No components, no JSX, no hooks. Just
+`@preact/signals-core`, a handful of `<span>` elements, and about 90 lines of TypeScript.
 
 **Live demo:** https://learnsignal.github.io/
 **Source:** https://github.com/learnsignal/learnsignal.github.io
@@ -23,17 +22,18 @@ You don't. The idea is separable, it is small, and it predates all of those fram
 This repo exists to make that separation obvious by removing everything else:
 
 - **Signals are a data structure, not a framework feature.** `@preact/signals-core` is a
-  standalone library with zero UI dependencies. The entire production bundle here —
-  signals runtime, app logic, and Vite's module preload shim — is about 6.6 KiB
-  uncompressed.
+  standalone library with zero UI dependencies, and the whole production bundle here —
+  signals runtime plus app logic — is a few kilobytes uncompressed.
 - **Dependency tracking is automatic.** You never declare what depends on what. No
   dependency arrays, no `useMemo` bookkeeping, no subscribe/unsubscribe lifecycle. You
   read a value; the graph notices.
-- **Updates are surgical.** Nothing diffs. Nothing re-renders. When `counter` changes,
-  exactly the code that read `counter` runs again.
+- **Updates are surgical.** Nothing diffs. Nothing re-renders. When `randomSeed` changes,
+  the spans showing the counter are not touched and `result` is not recomputed. The
+  console proves it.
 - **It composes with anything.** A signal graph can drive innerHTML, a canvas, a
-  WebSocket, a `document.title`, an audio parameter, or a log line. This demo drives
-  `innerText` because that's the least interesting choice available, which is the point.
+  WebSocket, a `document.title`, an audio parameter, or a `setInterval`. This demo drives
+  `innerText` and a timer because those are the least interesting choices available, which
+  is the point.
 - **It shows you the seam.** By the end of this README you should be able to say exactly
   where the library's job ends and yours begins. That boundary is the whole lesson, and
   frameworks hide it from you.
@@ -45,28 +45,27 @@ a page I already have?"* — this repo is the answer, and the answer is: almost 
 
 ## What the demo actually does
 
-The page shows a counter and two derived numbers:
-
 | Thing | Kind | Definition |
 |---|---|---|
-| `counter` | `signal` | Starts at `1`. Incremented by the button. |
-| `resetPressed` | `signal` | Starts at `false`. Latches to `true` on Reset. |
+| `counter` | `signal` | Starts at `1`. Incremented by the first button. |
+| `randomSeed` | `signal` | A random integer, initially 1–9. |
+| `scramblingEnabled` | `signal` | Starts at `true`. Toggled by the third button. |
 | `result` | `computed` | `counter * 10` |
-| `randomSeed` | `signal` | A random integer, initially 1–9 |
 | `randomizedResult` | `computed` | `counter * randomSeed` |
 
 Behaviour:
 
-- **count is N** — clicking increments `counter`. Every span showing the counter updates,
-  and both derived values recompute.
-- **Reset** — sets `counter` to `0`, rolls a new `randomSeed` between 1 and 99, and sets
-  `resetPressed` to `true`.
-- **Every 5 seconds** — while `resetPressed` is still `false`, the timer scrambles both
-  `counter` and `randomSeed` so you can watch the whole graph update with nobody touching
-  the page.
+- **count is N** — increments `counter`. Every span showing the counter updates, and both
+  computeds recompute.
+- **Reset** — sets `counter` to `0` and rolls a new `randomSeed` between 1 and 99.
+- **Pause scrambling / Resume scrambling** — starts and stops a 5-second timer that
+  scrambles `counter` and `randomSeed` on its own. The button's own label is a binding
+  like any other.
 
-Open the console. Every autonomous change logs, so you can correlate a log line with the
-numbers changing on screen.
+Open the console before you touch anything. Every recomputation and every DOM write logs,
+so you can watch which parts of the graph woke up and which stayed asleep. Press Reset a
+few times: `randomSeed` and `randomizedResult` log, `result` does not, because `result`
+never read `randomSeed`.
 
 ---
 
@@ -90,7 +89,8 @@ something reads `.value`. It is *cached*: repeated reads don't recompute. It onl
 invalidates when a signal it actually read has changed.
 
 **`effect(fn)`** — runs `fn` immediately, then re-runs it whenever any signal read during
-the previous run changes. Returns a dispose function.
+the previous run changes. If `fn` returns a function, that function runs as cleanup before
+the next run and on dispose. `effect` itself returns a dispose function.
 
 ### Dependency tracking, concretely
 
@@ -102,11 +102,37 @@ Two consequences that matter:
 
 1. **Dependencies are discovered, not declared.** Branching code gets branch-accurate
    dependencies for free. An `if` that didn't run this time contributes nothing.
-2. **A read that never happens is not a dependency.** If your effect returns early before
-   touching any signal, it has subscribed to nothing and will never run again. This is not
-   a bug in the library; it is the direct consequence of rule 1. It is also the single
-   most common way people get confused by signals, and this repo contains a live example
-   of the pattern (see *Known quirks*).
+2. **A read that never happens is not a dependency.** An effect that returns early before
+   touching any signal has subscribed to nothing and will never run again. This is not a
+   bug in the library; it is the direct consequence of rule 1, and it is the single most
+   common way people get confused by signals.
+
+The timer effect is built around exactly that rule:
+
+```ts
+effect(() => {
+  if (!scramblingEnabled.value) {
+    return;
+  }
+
+  const interval = setInterval(() => {
+    counter.value = randomIntFromInterval(1, 9);
+    randomSeed.value = randomIntFromInterval(1, 9);
+  }, 5000);
+
+  return () => clearInterval(interval);
+});
+```
+
+The early return happens *after* reading `scramblingEnabled.value`, so the effect stays
+subscribed and wakes up again when you resume. The returned cleanup is what tears the
+timer down — the effect owns the interval's whole lifecycle, and nothing else in the app
+knows the timer exists. Move the `.value` read below the `return` and the pause button
+becomes permanent; that one line is the difference.
+
+Note also that the interval callback *writes* signals but reads none, and the effect body
+does not read `counter` or `randomSeed`. Writing a signal never subscribes you to it, so
+there is no feedback loop to guard against.
 
 ### Where the DOM comes in — read this part
 
@@ -115,49 +141,63 @@ Here is the thing the demo is really teaching:
 **`@preact/signals-core` does not touch the DOM. At all.**
 
 The library answers one question: *what changed, and who cares?* It has no opinion about
-what you do with that answer. So this app writes the DOM by hand:
+what you do with that answer. So this app writes the DOM by hand, with one small helper:
 
 ```ts
-function setCounter() {
-  const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
-  const resultElement = document.querySelector<HTMLSpanElement>(".result");
+function bindText(name: string, readText: () => string) {
+  const elements = app.querySelectorAll<HTMLElement>(`[data-bind="${name}"]`);
 
-  counterElements.forEach((element) => {
-    element.innerText = counter.value.toString();
+  if (elements.length === 0) {
+    throw new Error(`Nothing in the page is bound to "${name}"`);
+  }
+
+  effect(() => {
+    const text = readText();
+    elements.forEach((element) => {
+      element.innerText = text;
+    });
   });
-  resultElement.innerText = result.value.toString();
 }
 
-effect(setCounter);
+bindText("counter", () => counter.value.toString());
+bindText("result", () => result.value.toString());
 ```
 
-`setCounter` is a plain function that reads the current values and pushes them into the
-page. Wrapping it in `effect` is what makes it re-run at the right moments — and *only*
-at the right moments.
+Three details carry most of the lesson:
+
+- **The element lookup lives outside the effect.** It runs once, eagerly, and the failure
+  case throws at startup instead of silently producing an effect that never runs again.
+  Only signal reads happen inside the effect body.
+- **One effect per binding.** Each effect subscribes to exactly the signals its own
+  `readText` touched, so a change to `randomSeed` re-runs two bindings and leaves the
+  other three alone. A single effect that rendered everything would re-run everything on
+  every change — correct output, but it would have thrown away the entire point.
+- **`readText` returns a string.** Nothing else in the app knows that the target is a DOM
+  node. Swap `innerText` for a canvas draw or a WebSocket send and the graph above is
+  unchanged.
 
 That is the entire integration story. When you use Solid or Preact Signals with JSX, the
-framework is generating a tiny `setCounter`-equivalent per dynamic expression, closer to
-the text node than you could reasonably hand-write. Same machinery, better ergonomics,
-much more code shipped. Seeing the hand-written version once makes the framework version
-stop being magic.
+framework generates a tiny `bindText`-equivalent per dynamic expression, closer to the text
+node than you could reasonably hand-write. Same machinery, better ergonomics, much more
+code shipped. Seeing the hand-written version once makes the framework version stop being
+magic.
 
 ### The shape of the code
 
 `src/main.ts` runs top to bottom:
 
 1. Create the signals and computeds.
-2. Write the initial markup into `#app` with a template literal, interpolating current
-   values so the first paint isn't blank.
-3. Define `setCounter`, which syncs every `.counter`, `.result`, `.randomSeed`, and
-   `.randomizedResult` element.
-4. Attach click handlers that *only mutate signals* — they never touch the DOM.
-5. `effect(setCounter)` to connect state to pixels.
-6. A `setInterval` that mutates signals on a timer.
+2. Write the markup into `#app`, with empty `data-bind` spans — no value is duplicated
+   between markup and code, so there is no static text that can drift out of sync.
+3. Define `bindText`.
+4. Bind each piece of state to its spans. The first run of every effect fills the page.
+5. Attach click handlers that *only mutate signals* — they never touch the DOM.
+6. Start the timer effect.
 
-Step 4 is worth pausing on. The event handlers know nothing about rendering. The renderer
-knows nothing about events. Neither knows about the timer. They communicate exclusively
+Step 5 is worth pausing on. The event handlers know nothing about rendering. The bindings
+know nothing about events. Neither knows about the timer. They communicate exclusively
 through signal values, which is why adding the timer in step 6 required no changes to
-steps 3 or 4.
+steps 4 or 5, and why the pause button needed no new rendering code.
 
 ---
 
@@ -168,8 +208,8 @@ steps 3 or 4.
 ├── index.html            dev entry point, loads /src/main.ts as a module
 ├── src/
 │   ├── main.ts           the entire application
-│   ├── counter.ts        randomIntFromInterval helper
-│   ├── style.css         Vite starter styles plus an animated light-mode background
+│   ├── random.ts         randomIntFromInterval helper
+│   ├── style.css         Vite starter styles, trimmed
 │   ├── typescript.svg
 │   └── vite-env.d.ts
 ├── public/vite.svg
@@ -256,28 +296,16 @@ handed to an AI assistant in one paste.
 
 ---
 
-## Known quirks
+## Things to try
 
-These are real, they are in the shipped code, and reading them is more instructive than a
-clean codebase would be.
-
-- **`setCounter` guards before it reads.** If any of the four element lookups comes back
-  empty, the function returns before touching a single `.value`. An effect whose first run
-  takes that path registers *zero* dependencies and is then permanently inert. Here the
-  elements always exist, so it never fires — but it's a live demonstration of why
-  "subscribe by reading" cuts both ways.
-- **One interpolation omits `.value`.** The initial markup embeds `${randomizedResult}`
-  rather than `${randomizedResult.value}`. It renders correctly only because
-  `Signal.prototype.toString()` returns the underlying value. Relying on that is implicit
-  and inconsistent with the three neighbouring interpolations.
-- **The initial `= 10` is hardcoded.** The static markup ships a literal `10` for the
-  result, which happens to be right because `counter` starts at `1`. The first effect run
-  overwrites it with the real value a moment later.
-- **`resetPressed` is a one-way latch.** Once you press Reset, the 5-second randomizer
-  stops for the rest of the session. There is no path back to `false`. That's intentional
-  — it's how you freeze the page to inspect it — but it is not a toggle.
-- **`setupCounter` in `counter.ts` is dead code**, left over from the Vite vanilla-ts
-  starter. Only `randomIntFromInterval` is actually imported.
+- Open the console and press **Reset** repeatedly. `result` never logs a recomputation,
+  because it never read `randomSeed`.
+- Press **count is N** when the counter is already at that value — nothing logs, because
+  writing an equal value is a no-op.
+- Move `if (!scramblingEnabled.value)` below an early `return` in the timer effect and
+  watch **Resume scrambling** stop working forever.
+- Delete a `data-bind="counter"` span from the markup. The remaining ones still update;
+  nothing else notices.
 
 ---
 
@@ -292,8 +320,17 @@ harness, server-side rendering, a UI framework of any kind, additional runtime
 dependencies. If a change makes the demo harder to read in one sitting, it doesn't belong
 here.
 
-Good contributions: fixing the quirks above, sharpening this README, improving type
-safety, or removing code.
+Good contributions: sharpening this README, improving type safety, or removing code.
+
+---
+
+## AI disclaimer
+
+Parts of this repository — including this README, `export.sh`, and revisions to the
+application code — were written or edited with the help of large language models. Every
+line has been reviewed by a human before being committed, but treat the prose as
+explanatory rather than authoritative, and check the source when the two disagree. The
+source is short enough to read in full, which is rather the point.
 
 ---
 
