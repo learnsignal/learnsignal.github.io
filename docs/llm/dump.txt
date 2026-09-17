@@ -7,7 +7,7 @@
 
 DUMP METADATA
 ═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : 2026-09-17T09:34:25-04:00
+  Generated at   : 2026-09-17T09:48:01-04:00
   Generator      : export.sh
   Host           : fedora
   User           : kushal
@@ -17,24 +17,19 @@ REPOSITORY METADATA
 ═════════════════════════════════════════════════════════════════════════════════
   Repository root: /home/kushal/src/ts/learnsignal.github.io
   Branch         : main
-  Commit (full)  : d1c7fd6299b88608b750538bc88c7d44540fb2ca
-  Commit (short) : d1c7fd6
-  Commit date    : 2026-09-17 09:34:15 -0400
-  Commit message : add claude changes
+  Commit (full)  : 27f39a7cde96f4bbea0b4c0181560d67880a8df9
+  Commit (short) : 27f39a7
+  Commit date    : 2026-09-17 09:47:36 -0400
+  Commit message : delete references to counter.ts
   Remote origin  : git@github.com:learnsignal/learnsignal.github.io.git
-  Files included : 20
+  Files included : 17
   Excluded path  : docs/llm/
   Excluded files : yarn.lock, .pnp.cjs, .pnp.loader.mjs
 
 GIT WORKING TREE STATUS (first 20 lines)
 ═════════════════════════════════════════════════════════════════════════════════
- D docs/assets/index-BIdlVyUp.js
- D docs/assets/index-CDc0323N.css
- M docs/index.html
  D docs/llm/dump.txt
  D docs/llm/terminal.txt
-?? docs/assets/index-CW80hWNf.js
-?? docs/assets/index-CkbECzpf.css
 
 ################################################################################
 # FILE: export.sh  [THIS SCRIPT — included for full context]
@@ -436,14 +431,12 @@ FOOTER
 mv -f "$TMP_FILE" "$OUTPUT_FILE"
 
 ################################################################################
-# FILE TREE  (all 20 included files)
+# FILE TREE  (all 17 included files)
 ################################################################################
 .
 .
 ├── docs
 │   ├── assets
-│   │   ├── index-BIdlVyUp.js
-│   │   ├── index-CDc0323N.css
 │   │   ├── index-CkbECzpf.css
 │   │   └── index-CW80hWNf.js
 │   ├── index.html
@@ -456,7 +449,6 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
 │   └── vite.svg
 ├── README.md
 ├── src
-│   ├── counter.ts
 │   ├── main.ts
 │   ├── random.ts
 │   ├── style.css
@@ -475,14 +467,14 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/assets/index-CkbECzpf.css
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CkbECzpf.css
   Size:                  1.2 KiB (1253 bytes)
-  Last modified:         2026-09-17 09:34:25.589928460 -0400
+  Last modified:         2026-09-17 09:48:01.250988778 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63838610
+  Inode:                 63839227
   Hard links:            1
   MIME type:             text/plain
   SHA-256:               aab66a3896c4b5f383f82d27fca8dc0f4ff98036d27fd19a62b66b8029fa0ca2
-  Last git commit:       
+  Last git commit:       08c6dc7 2026-09-17 09:34:39 -0400 run scripts
 
 --- CONTENT ---
 :root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;color:#ffffffde;font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;background-color:#242424;font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}body{place-items:center;min-width:320px;min-height:100vh;margin:0;display:flex}h1{font-size:3.2em;line-height:1.1}#app{text-align:center;max-width:1280px;margin:0 auto;padding:2rem}.card{flex-wrap:wrap;justify-content:center;gap:.75em;padding:2em;display:flex}[data-bind]{font-variant-numeric:tabular-nums}button{color:inherit;cursor:pointer;background-color:#1a1a1a;border:1px solid #0000;border-radius:8px;padding:.6em 1.2em;font-family:inherit;font-size:1em;font-weight:500;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-reduced-motion:reduce){button{transition:none}}@media (prefers-color-scheme:light){:root{color:#213547;background-color:#fff}button{background-color:#f9f9f9}}
@@ -497,14 +489,14 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/assets/index-CW80hWNf.js
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CW80hWNf.js
   Size:                  6.7 KiB (6913 bytes)
-  Last modified:         2026-09-17 09:34:25.589251516 -0400
+  Last modified:         2026-09-17 09:48:01.249988770 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63838609
+  Inode:                 63839226
   Hard links:            1
   MIME type:             application/javascript
   SHA-256:               1f222643df46b2c8d928f114bfa41fad7c60628f638aea7442ef07f68c49e874
-  Last git commit:       
+  Last git commit:       08c6dc7 2026-09-17 09:34:39 -0400 run scripts
 
 --- CONTENT ---
 (function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=Symbol.for(`preact-signals`);function t(){if(o>1)o--;else{var e,t=!1;for((function(){var e=l;for(l=void 0;e!==void 0;){var t=e.S;if(t.v===e.v)for(var n=t.t;n!==void 0;n=n.x)n.i===e.i&&(n.i=t.i);e=e.o}})();a!==void 0;){var n=a;for(a=void 0,s++;n!==void 0;){var r=n.u;if(n.u=void 0,n.f&=-3,!(8&n.f)&&m(n))try{n.c()}catch(n){t||=(e=n,!0)}n=r}}if(s=0,o--,t)throw e}}var n,r=void 0;function i(e){var t=r,i=n;r=void 0,n=void 0;try{return e()}finally{r=t,n=i}}var a=void 0,o=0,s=0,c=0,l=void 0,u=0;function d(e){if(r!==void 0){var t=e.n;if(t===void 0||t.t!==r)return t={i:0,S:e,p:r.s,n:void 0,t:r,e:void 0,x:void 0,r:t},r.s!==void 0&&(r.s.n=t),r.s=t,e.n=t,32&r.f&&e.S(t),t;if(t.i===-1)return t.i=0,t.n!==void 0&&(t.n.p=t.p,t.p!==void 0&&(t.p.n=t.n),t.p=r.s,t.n=void 0,r.s.n=t,r.s=t),t}}function f(e,t){this.v=e,this.i=0,this.n=void 0,this.t=void 0,this.l=0,this.W=t?.watched,this.Z=t?.unwatched,this.name=t?.name}f.prototype.brand=e,f.prototype.h=function(){return!0},f.prototype.S=function(e){var t=this,n=this.t;n!==e&&e.e===void 0&&(e.x=n,this.t=e,n===void 0?i(function(){var e;(e=t.W)==null||e.call(t)}):n.e=e)},f.prototype.U=function(e){var t=this;if(this.t!==void 0){var n=e.e,r=e.x;n!==void 0&&(n.x=r,e.e=void 0),r!==void 0&&(r.e=n,e.x=void 0),e===this.t&&(this.t=r,r===void 0&&i(function(){var e;(e=t.Z)==null||e.call(t)}))}},f.prototype.subscribe=function(e){var t=this;return C(function(){var n=t.value;i(function(){return e(n)})},{name:`sub`})},f.prototype.valueOf=function(){return this.value},f.prototype.toString=function(){return this.value+``},f.prototype.toJSON=function(){return this.value},f.prototype.peek=function(){var e=this;return i(function(){return e.value})},Object.defineProperty(f.prototype,"value",{get:function(){var e=d(this);return e!==void 0&&(e.i=this.i),this.v},set:function(e){if(e!==this.v){if(s>100)throw Error(`Cycle detected`);(function(e){o!==0&&s===0&&e.l!==c&&(e.l=c,l={S:e,v:e.v,i:e.i,o:l})})(this),this.v=e,this.i++,u++,o++;try{for(var n=this.t;n!==void 0;n=n.x)n.t.N()}finally{t()}}}});function p(e,t){return new f(e,t)}function m(e){for(var t=e.s;t!==void 0;t=t.n)if(t.S.i!==t.i||!t.S.h()||t.S.i!==t.i)return!0;return!1}function h(e){for(var t=e.s;t!==void 0;t=t.n){var n=t.S.n;if(n!==void 0&&(t.r=n),t.S.n=t,t.i=-1,t.n===void 0){e.s=t;break}}}function g(e){for(var t=e.s,n=void 0;t!==void 0;){var r=t.p;t.i===-1?(t.S.U(t),r!==void 0&&(r.n=t.n),t.n!==void 0&&(t.n.p=r)):n=t,t.S.n=t.r,t.r!==void 0&&(t.r=void 0),t=r}e.s=n}function _(e,t){f.call(this,void 0,t),this.x=e,this.s=void 0,this.g=u-1,this.f=4}_.prototype=new f,_.prototype.h=function(){if(this.f&=-3,1&this.f)return!1;if((36&this.f)==32||(this.f&=-5,this.g===u))return!0;if(this.g=u,this.f|=1,this.i>0&&!m(this))return this.f&=-2,!0;var e=r;try{h(this),r=this;var t=this.x();(16&this.f||this.v!==t||this.i===0)&&(this.v=t,this.f&=-17,this.i++)}catch(e){this.v=e,this.f|=16,this.i++}return r=e,g(this),this.f&=-2,!0},_.prototype.S=function(e){if(this.t===void 0){this.f|=36;for(var t=this.s;t!==void 0;t=t.n)t.S.S(t)}f.prototype.S.call(this,e)},_.prototype.U=function(e){if(this.t!==void 0&&(f.prototype.U.call(this,e),this.t===void 0)){this.f&=-33;for(var t=this.s;t!==void 0;t=t.n)t.S.U(t)}},_.prototype.N=function(){if(!(2&this.f)){this.f|=6;for(var e=this.t;e!==void 0;e=e.x)e.t.N()}},Object.defineProperty(_.prototype,"value",{get:function(){if(1&this.f)throw Error(`Cycle detected`);var e=d(this);if(this.h(),e!==void 0&&(e.i=this.i),16&this.f)throw this.v;return this.v}});function v(e,t){return new _(e,t)}function y(e){var n=e.m;if(e.m=void 0,typeof n==`function`){o++;var i=r;r=void 0;try{n()}catch(t){throw e.f&=-2,e.f|=8,b(e),t}finally{r=i,t()}}}function b(e){for(var t=e.s;t!==void 0;t=t.n)t.S.U(t);e.x=void 0,e.s=void 0,y(e)}function x(e){if(r!==this)throw Error(`Out-of-order effect`);g(this),r=e,this.f&=-2,8&this.f&&b(this),t()}function S(e,t){this.x=e,this.m=void 0,this.s=void 0,this.u=void 0,this.f=32,this.name=t?.name,n&&n.push(this)}S.prototype.c=function(){var e=this.S();try{if(8&this.f||this.x===void 0)return;var t=this.x();typeof t==`function`&&(this.m=t)}finally{e()}},S.prototype.S=function(){if(1&this.f)throw Error(`Cycle detected`);this.f|=1,this.f&=-9,y(this),h(this),o++;var e=r;return r=this,x.bind(this,e)},S.prototype.N=function(){2&this.f||(this.f|=2,this.u=a,a=this)},S.prototype.d=function(){this.f|=8,1&this.f||b(this)},S.prototype.dispose=function(){this.d()};function C(e,t){var n=new S(e,t);try{n.c()}catch(e){throw n.d(),e}var r=n.d.bind(n);return r[Symbol.dispose]=r,r}function w(e,t){return Math.floor(Math.random()*(t-e+1)+e)}var T=p(1),E=p(w(1,9)),D=p(!0),O=v(()=>{let e=T.value*10;return console.info({recomputed:`result`,value:e}),e}),k=v(()=>{let e=T.value*E.value;return console.info({recomputed:`randomizedResult`,value:e}),e}),A=document.querySelector(`#app`);A.innerHTML=`
@@ -532,14 +524,14 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/index.html
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/index.html
   Size:                  455 B (455 bytes)
-  Last modified:         2026-09-17 09:34:25.589928460 -0400
+  Last modified:         2026-09-17 09:48:01.250988778 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63838611
+  Inode:                 63839228
   Hard links:            1
   MIME type:             text/html
   SHA-256:               267a24ccc828f39e6d23ee4bd502e6bd92bbb6236e3a9a1014b1eb032ae8f716
-  Last git commit:       e7d4106 2026-09-17 08:59:45 -0400 insert new line
+  Last git commit:       08c6dc7 2026-09-17 09:34:39 -0400 run scripts
 
 --- CONTENT ---
 <!doctype html>
@@ -567,10 +559,10 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/vite.svg
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/vite.svg
   Size:                  1.4 KiB (1497 bytes)
-  Last modified:         2026-09-17 09:34:25.581573708 -0400
+  Last modified:         2026-09-17 09:48:01.234591091 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63838607
+  Inode:                 63839224
   Hard links:            1
   MIME type:             image/svg+xml
   SHA-256:               4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb
@@ -1132,15 +1124,15 @@ dist-ssr
   File name:             README.md
   Relative path:         README.md
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/README.md
-  Size:                  13.6 KiB (13999 bytes)
-  Last modified:         2026-09-17 09:33:59.464144008 -0400
+  Size:                  13.9 KiB (14261 bytes)
+  Last modified:         2026-09-17 09:47:23.384849393 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
   Inode:                 63837766
   Hard links:            1
   MIME type:             application/javascript
-  SHA-256:               2583212f6e160a3d0c04ee7466278f4bfe7e1259e91e89044d20eed7a392e813
-  Last git commit:       d1c7fd6 2026-09-17 09:34:15 -0400 add claude changes
+  SHA-256:               da791488057d52028c5350bc08e85f0e203f9a59c6bb5d07f0d51ccb628b068e
+  Last git commit:       27f39a7 2026-09-17 09:47:36 -0400 delete references to counter.ts
 
 --- CONTENT ---
 # Signals in Vanilla JS
@@ -1148,7 +1140,7 @@ dist-ssr
 A tiny, deliberately boring demo of **fine-grained reactivity without a framework**.
 
 No React. No Preact. No virtual DOM. No components, no JSX, no hooks. Just
-`@preact/signals-core`, a handful of `<span>` elements, and about 90 lines of TypeScript.
+`@preact/signals-core`, a handful of `<span>` elements, and under 100 lines of TypeScript.
 
 **Live demo:** https://learnsignal.github.io/
 **Source:** https://github.com/learnsignal/learnsignal.github.io
@@ -1168,7 +1160,7 @@ This repo exists to make that separation obvious by removing everything else:
 
 - **Signals are a data structure, not a framework feature.** `@preact/signals-core` is a
   standalone library with zero UI dependencies, and the whole production bundle here —
-  signals runtime plus app logic — is a few kilobytes uncompressed.
+  signals runtime plus app logic — is under 7 KB uncompressed.
 - **Dependency tracking is automatic.** You never declare what depends on what. No
   dependency arrays, no `useMemo` bookkeeping, no subscribe/unsubscribe lifecycle. You
   read a value; the graph notices.
@@ -1359,10 +1351,12 @@ steps 4 or 5, and why the pause button needed no new rendering code.
 │   └── vite-env.d.ts
 ├── public/vite.svg
 ├── docs/                 BUILD OUTPUT, committed on purpose — this is what GitHub Pages serves
+│   └── llm/              export.sh output, excluded from the dump it produces
 ├── export.sh             dumps the whole repo to docs/llm/dump.txt for feeding to an LLM
 ├── vite.config.ts
 ├── tsconfig.json
-└── package.json
+├── package.json
+└── yarn.lock
 ```
 
 `docs/` is generated. Don't edit it by hand; run the build.
@@ -1371,15 +1365,18 @@ steps 4 or 5, and why the pause button needed no new rendering code.
 
 ## Running it
 
-Requires Node and Yarn. The repo uses **Yarn Plug'n'Play with Zero-Installs** — the
-lockfile, `.pnp.cjs`, and `.pnp.loader.mjs` are committed, so there is usually no install
-step at all.
+Requires Node and Yarn (the lockfile is Yarn classic, v1). Dependencies install into
+`node_modules`, which is gitignored, so clone and install before anything else:
 
 ```bash
-yarn dev       # https://localhost:3000
-yarn build     # type-check, then bundle into docs/
-yarn preview   # serve the built docs/ locally
+yarn install
+yarn dev
+yarn build
+yarn preview
 ```
+
+`yarn dev` serves https://localhost:3000. `yarn build` type-checks and then bundles into
+`docs/`. `yarn preview` serves the built `docs/` locally.
 
 **The dev server is HTTPS.** `@vitejs/plugin-basic-ssl` mints a self-signed certificate,
 so your browser will warn you the first time; accept it and move on. Config:
@@ -1428,8 +1425,8 @@ assets with **absolute** paths (`/assets/index-*.js`). That works because this i
 `docs/llm/dump.txt`: repo metadata, working-tree status, a file tree, then each file with
 its size, permissions, mtime, SHA-256, MIME type, and last commit. Binary files get a
 placeholder instead of raw bytes. It includes its own source first, excludes its own
-output directory, and excludes the Yarn PnP artifacts — which are tracked for Zero-Installs
-but are pure noise in a context window.
+output directory, and excludes `yarn.lock` — 22 KB of resolved URLs and integrity hashes
+that is pure noise in a context window.
 
 ```bash
 bash export.sh
@@ -1437,7 +1434,8 @@ bash export.sh
 
 It writes to a temp file and atomically renames, so a concurrent reader never sees a
 partial dump. It is unrelated to the signals demo; it exists so the whole repo can be
-handed to an AI assistant in one paste.
+handed to an AI assistant in one paste. `docs/llm/terminal.txt` sitting beside it is just
+a saved shell transcript of an install-and-build run, kept for the same purpose.
 
 ---
 
@@ -1492,39 +1490,6 @@ This project is free and open source. A `LICENSE` file has not yet been added to
 repository; until one is, treat the code as "intended to be open, licence pending" and
 open an issue if you need a specific one.
 
-
-################################################################################
-# FILE: src/counter.ts
-################################################################################
-
---- METADATA ---
-  File name:             counter.ts
-  Relative path:         src/counter.ts
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/counter.ts
-  Size:                  428 B (428 bytes)
-  Last modified:         2026-09-17 08:47:46.004573652 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63830126
-  Hard links:            1
-  MIME type:             application/javascript
-  SHA-256:               11921f6af1b0ffc3738bda33feb85c0959b59f122705878d39d394635d44bb4f
-  Last git commit:       f98bf01 2023-11-05 19:10:43 -0500 build signals
-
---- CONTENT ---
-export function setupCounter(element: HTMLButtonElement) {
-  let counter = 0;
-  const setCounter = (count: number) => {
-    counter = count
-    element.innerHTML = `count is ${counter}`
-  }
-  element.addEventListener('click', () => setCounter(counter + 1))
-  setCounter(0);
-}
-
-export function randomIntFromInterval(min: number, max: number) { // min and max included 
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
 
 ################################################################################
 # FILE: src/main.ts
@@ -1889,10 +1854,10 @@ export default defineConfig({
 ################################################################################
 # DUMP SUMMARY
 ################################################################################
-  Files dumped   : 20
-  Total size     : 49.6 KiB (50830 bytes)
+  Files dumped   : 17
+  Total size     : 49.4 KiB (50664 bytes)
   Output file    : /home/kushal/src/ts/learnsignal.github.io/docs/llm/dump.txt
-  Completed at   : 2026-09-17T09:34:26-04:00
+  Completed at   : 2026-09-17T09:48:01-04:00
 ################################################################################
 # END OF DUMP
 ################################################################################
