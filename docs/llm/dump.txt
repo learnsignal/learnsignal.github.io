@@ -7,7 +7,7 @@
 
 DUMP METADATA
 ═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : 2026-09-17T08:58:52-04:00
+  Generated at   : 2026-09-17T09:11:43-04:00
   Generator      : export.sh
   Host           : fedora
   User           : kushal
@@ -17,10 +17,10 @@ REPOSITORY METADATA
 ═════════════════════════════════════════════════════════════════════════════════
   Repository root: /home/kushal/src/ts/learnsignal.github.io
   Branch         : main
-  Commit (full)  : 46dc15a95b27483cf1ae0aa60598f0c435fe5498
-  Commit (short) : 46dc15a
-  Commit date    : 2026-09-17 08:56:57 -0400
-  Commit message : run scripts
+  Commit (full)  : e1d56980b3232f48dec3eaf2118a013f41ac86a7
+  Commit (short) : e1d5698
+  Commit date    : 2026-09-17 09:11:28 -0400
+  Commit message : add readme with claude
   Remote origin  : git@github.com:learnsignal/learnsignal.github.io.git
   Files included : 17
   Excluded path  : docs/llm/
@@ -28,12 +28,8 @@ REPOSITORY METADATA
 
 GIT WORKING TREE STATUS (first 20 lines)
 ═════════════════════════════════════════════════════════════════════════════════
- D docs/assets/index-Crn50l-9.js
- M docs/index.html
  D docs/llm/dump.txt
  D docs/llm/terminal.txt
- M src/main.ts
-?? docs/assets/index-BIdlVyUp.js
 
 ################################################################################
 # FILE: export.sh  [THIS SCRIPT — included for full context]
@@ -442,8 +438,7 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
 ├── docs
 │   ├── assets
 │   │   ├── index-BIdlVyUp.js
-│   │   ├── index-CDc0323N.css
-│   │   └── index-Crn50l-9.js
+│   │   └── index-CDc0323N.css
 │   ├── index.html
 │   └── vite.svg
 ├── export.sh
@@ -452,6 +447,7 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
 ├── package.json
 ├── public
 │   └── vite.svg
+├── README.md
 ├── src
 │   ├── counter.ts
 │   ├── main.ts
@@ -471,14 +467,14 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/assets/index-BIdlVyUp.js
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-BIdlVyUp.js
   Size:                  6.4 KiB (6646 bytes)
-  Last modified:         2026-09-17 08:58:52.374299136 -0400
+  Last modified:         2026-09-17 09:11:43.189251804 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833730
+  Inode:                 63837983
   Hard links:            1
   MIME type:             application/javascript
   SHA-256:               982fc204bc47f114179df72708fe9b4d39060e56fb92ab5bc74e68af15cd2ee1
-  Last git commit:       
+  Last git commit:       e7d4106 2026-09-17 08:59:45 -0400 insert new line
 
 --- CONTENT ---
 (function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();function e(e,t){return Math.floor(Math.random()*(t-e+1)+e)}var t=Symbol.for(`preact-signals`);function n(){if(s>1)s--;else{var e,t=!1;for((function(){var e=u;for(u=void 0;e!==void 0;){var t=e.S;if(t.v===e.v)for(var n=t.t;n!==void 0;n=n.x)n.i===e.i&&(n.i=t.i);e=e.o}})();o!==void 0;){var n=o;for(o=void 0,c++;n!==void 0;){var r=n.u;if(n.u=void 0,n.f&=-3,!(8&n.f)&&h(n))try{n.c()}catch(n){t||=(e=n,!0)}n=r}}if(c=0,s--,t)throw e}}var r,i=void 0;function a(e){var t=i,n=r;i=void 0,r=void 0;try{return e()}finally{i=t,r=n}}var o=void 0,s=0,c=0,l=0,u=void 0,d=0;function f(e){if(i!==void 0){var t=e.n;if(t===void 0||t.t!==i)return t={i:0,S:e,p:i.s,n:void 0,t:i,e:void 0,x:void 0,r:t},i.s!==void 0&&(i.s.n=t),i.s=t,e.n=t,32&i.f&&e.S(t),t;if(t.i===-1)return t.i=0,t.n!==void 0&&(t.n.p=t.p,t.p!==void 0&&(t.p.n=t.n),t.p=i.s,t.n=void 0,i.s.n=t,i.s=t),t}}function p(e,t){this.v=e,this.i=0,this.n=void 0,this.t=void 0,this.l=0,this.W=t?.watched,this.Z=t?.unwatched,this.name=t?.name}p.prototype.brand=t,p.prototype.h=function(){return!0},p.prototype.S=function(e){var t=this,n=this.t;n!==e&&e.e===void 0&&(e.x=n,this.t=e,n===void 0?a(function(){var e;(e=t.W)==null||e.call(t)}):n.e=e)},p.prototype.U=function(e){var t=this;if(this.t!==void 0){var n=e.e,r=e.x;n!==void 0&&(n.x=r,e.e=void 0),r!==void 0&&(r.e=n,e.x=void 0),e===this.t&&(this.t=r,r===void 0&&a(function(){var e;(e=t.Z)==null||e.call(t)}))}},p.prototype.subscribe=function(e){var t=this;return w(function(){var n=t.value;a(function(){return e(n)})},{name:`sub`})},p.prototype.valueOf=function(){return this.value},p.prototype.toString=function(){return this.value+``},p.prototype.toJSON=function(){return this.value},p.prototype.peek=function(){var e=this;return a(function(){return e.value})},Object.defineProperty(p.prototype,"value",{get:function(){var e=f(this);return e!==void 0&&(e.i=this.i),this.v},set:function(e){if(e!==this.v){if(c>100)throw Error(`Cycle detected`);(function(e){s!==0&&c===0&&e.l!==l&&(e.l=l,u={S:e,v:e.v,i:e.i,o:u})})(this),this.v=e,this.i++,d++,s++;try{for(var t=this.t;t!==void 0;t=t.x)t.t.N()}finally{n()}}}});function m(e,t){return new p(e,t)}function h(e){for(var t=e.s;t!==void 0;t=t.n)if(t.S.i!==t.i||!t.S.h()||t.S.i!==t.i)return!0;return!1}function g(e){for(var t=e.s;t!==void 0;t=t.n){var n=t.S.n;if(n!==void 0&&(t.r=n),t.S.n=t,t.i=-1,t.n===void 0){e.s=t;break}}}function _(e){for(var t=e.s,n=void 0;t!==void 0;){var r=t.p;t.i===-1?(t.S.U(t),r!==void 0&&(r.n=t.n),t.n!==void 0&&(t.n.p=r)):n=t,t.S.n=t.r,t.r!==void 0&&(t.r=void 0),t=r}e.s=n}function v(e,t){p.call(this,void 0,t),this.x=e,this.s=void 0,this.g=d-1,this.f=4}v.prototype=new p,v.prototype.h=function(){if(this.f&=-3,1&this.f)return!1;if((36&this.f)==32||(this.f&=-5,this.g===d))return!0;if(this.g=d,this.f|=1,this.i>0&&!h(this))return this.f&=-2,!0;var e=i;try{g(this),i=this;var t=this.x();(16&this.f||this.v!==t||this.i===0)&&(this.v=t,this.f&=-17,this.i++)}catch(e){this.v=e,this.f|=16,this.i++}return i=e,_(this),this.f&=-2,!0},v.prototype.S=function(e){if(this.t===void 0){this.f|=36;for(var t=this.s;t!==void 0;t=t.n)t.S.S(t)}p.prototype.S.call(this,e)},v.prototype.U=function(e){if(this.t!==void 0&&(p.prototype.U.call(this,e),this.t===void 0)){this.f&=-33;for(var t=this.s;t!==void 0;t=t.n)t.S.U(t)}},v.prototype.N=function(){if(!(2&this.f)){this.f|=6;for(var e=this.t;e!==void 0;e=e.x)e.t.N()}},Object.defineProperty(v.prototype,"value",{get:function(){if(1&this.f)throw Error(`Cycle detected`);var e=f(this);if(this.h(),e!==void 0&&(e.i=this.i),16&this.f)throw this.v;return this.v}});function y(e,t){return new v(e,t)}function b(e){var t=e.m;if(e.m=void 0,typeof t==`function`){s++;var r=i;i=void 0;try{t()}catch(t){throw e.f&=-2,e.f|=8,x(e),t}finally{i=r,n()}}}function x(e){for(var t=e.s;t!==void 0;t=t.n)t.S.U(t);e.x=void 0,e.s=void 0,b(e)}function S(e){if(i!==this)throw Error(`Out-of-order effect`);_(this),i=e,this.f&=-2,8&this.f&&x(this),n()}function C(e,t){this.x=e,this.m=void 0,this.s=void 0,this.u=void 0,this.f=32,this.name=t?.name,r&&r.push(this)}C.prototype.c=function(){var e=this.S();try{if(8&this.f||this.x===void 0)return;var t=this.x();typeof t==`function`&&(this.m=t)}finally{e()}},C.prototype.S=function(){if(1&this.f)throw Error(`Cycle detected`);this.f|=1,this.f&=-9,b(this),g(this),s++;var e=i;return i=this,S.bind(this,e)},C.prototype.N=function(){2&this.f||(this.f|=2,this.u=o,o=this)},C.prototype.d=function(){this.f|=8,1&this.f||x(this)},C.prototype.dispose=function(){this.d()};function w(e,t){var n=new C(e,t);try{n.c()}catch(e){throw n.d(),e}var r=n.d.bind(n);return r[Symbol.dispose]=r,r}var T=m(1),E=m(!1),D=y(()=>T.value*10),O=m(e(1,9)),k=y(()=>T.value*O.value);document.querySelector(`#app`).innerHTML=`
@@ -505,10 +501,10 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/assets/index-CDc0323N.css
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CDc0323N.css
   Size:                  1.9 KiB (1954 bytes)
-  Last modified:         2026-09-17 08:58:52.375488433 -0400
+  Last modified:         2026-09-17 09:11:43.190023360 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833731
+  Inode:                 63837984
   Hard links:            1
   MIME type:             text/plain
   SHA-256:               2a8a44b4fd4d4bd83160fdaef73d916a39f27d82db61716309fdea35f21552bc
@@ -527,14 +523,14 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/index.html
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/index.html
   Size:                  455 B (455 bytes)
-  Last modified:         2026-09-17 08:58:52.375488433 -0400
+  Last modified:         2026-09-17 09:11:43.190023360 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833732
+  Inode:                 63837985
   Hard links:            1
   MIME type:             text/html
   SHA-256:               788d58dbe02e5598629c4aa84e4b4f5f326c0bb4f95e029975adc897cf479c2f
-  Last git commit:       46dc15a 2026-09-17 08:56:57 -0400 run scripts
+  Last git commit:       e7d4106 2026-09-17 08:59:45 -0400 insert new line
 
 --- CONTENT ---
 <!doctype html>
@@ -562,10 +558,10 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/vite.svg
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/vite.svg
   Size:                  1.4 KiB (1497 bytes)
-  Last modified:         2026-09-17 08:58:52.364871575 -0400
+  Last modified:         2026-09-17 09:11:43.175836053 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63833728
+  Inode:                 63837981
   Hard links:            1
   MIME type:             image/svg+xml
   SHA-256:               4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb
@@ -1120,6 +1116,338 @@ dist-ssr
 [Binary file — content omitted. Size: 1.4 KiB, SHA-256: 4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb]
 
 ################################################################################
+# FILE: README.md
+################################################################################
+
+--- METADATA ---
+  File name:             README.md
+  Relative path:         README.md
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/README.md
+  Size:                  12.4 KiB (12732 bytes)
+  Last modified:         2026-09-17 09:11:00.282858880 -0400
+  Permissions:           -rw-r--r--
+  Owner:                 kushal:kushal
+  Inode:                 63837766
+  Hard links:            1
+  MIME type:             application/javascript
+  SHA-256:               3090e54b3419a5a3756da945baf6db325dd9844b02611369469b130885090b15
+  Last git commit:       e1d5698 2026-09-17 09:11:28 -0400 add readme with claude
+
+--- CONTENT ---
+# Signals in Vanilla JS
+
+A tiny, deliberately boring demo of **fine-grained reactivity without a framework**.
+
+No React. No Preact. No virtual DOM. No components, no JSX, no hooks, no build-time
+magic beyond a bundler. Just `@preact/signals-core`, a handful of `<span>` elements, and
+about 60 lines of TypeScript.
+
+**Live demo:** https://learnsignal.github.io/
+**Source:** https://github.com/learnsignal/learnsignal.github.io
+
+---
+
+## Why should you care?
+
+Most people first meet signals inside a framework — Solid, Preact, Angular, Svelte 5,
+Vue's `ref`. That packaging makes it very hard to tell which part is *the idea* and which
+part is *the framework*. The reactivity gets tangled up with rendering, and you end up
+believing you need the whole stack to get any of it.
+
+You don't. The idea is separable, it is small, and it predates all of those frameworks.
+
+This repo exists to make that separation obvious by removing everything else:
+
+- **Signals are a data structure, not a framework feature.** `@preact/signals-core` is a
+  standalone library with zero UI dependencies. The entire production bundle here —
+  signals runtime, app logic, and Vite's module preload shim — is about 6.6 KiB
+  uncompressed.
+- **Dependency tracking is automatic.** You never declare what depends on what. No
+  dependency arrays, no `useMemo` bookkeeping, no subscribe/unsubscribe lifecycle. You
+  read a value; the graph notices.
+- **Updates are surgical.** Nothing diffs. Nothing re-renders. When `counter` changes,
+  exactly the code that read `counter` runs again.
+- **It composes with anything.** A signal graph can drive innerHTML, a canvas, a
+  WebSocket, a `document.title`, an audio parameter, or a log line. This demo drives
+  `innerText` because that's the least interesting choice available, which is the point.
+- **It shows you the seam.** By the end of this README you should be able to say exactly
+  where the library's job ends and yours begins. That boundary is the whole lesson, and
+  frameworks hide it from you.
+
+If you have ever wondered *"what would it cost me to use signals in a plain script tag on
+a page I already have?"* — this repo is the answer, and the answer is: almost nothing.
+
+---
+
+## What the demo actually does
+
+The page shows a counter and two derived numbers:
+
+| Thing | Kind | Definition |
+|---|---|---|
+| `counter` | `signal` | Starts at `1`. Incremented by the button. |
+| `resetPressed` | `signal` | Starts at `false`. Latches to `true` on Reset. |
+| `result` | `computed` | `counter * 10` |
+| `randomSeed` | `signal` | A random integer, initially 1–9 |
+| `randomizedResult` | `computed` | `counter * randomSeed` |
+
+Behaviour:
+
+- **count is N** — clicking increments `counter`. Every span showing the counter updates,
+  and both derived values recompute.
+- **Reset** — sets `counter` to `0`, rolls a new `randomSeed` between 1 and 99, and sets
+  `resetPressed` to `true`.
+- **Every 5 seconds** — while `resetPressed` is still `false`, the timer scrambles both
+  `counter` and `randomSeed` so you can watch the whole graph update with nobody touching
+  the page.
+
+Open the console. Every autonomous change logs, so you can correlate a log line with the
+numbers changing on screen.
+
+---
+
+## How it works
+
+### The three primitives
+
+```ts
+import { signal, computed, effect } from "@preact/signals-core";
+
+const counter = signal(1);
+const result = computed(() => counter.value * 10);
+effect(() => console.log(result.value));
+```
+
+**`signal(initial)`** — a box around a value, read and written through `.value`. Writing a
+value that is `Object.is`-equal to the current one does nothing at all.
+
+**`computed(fn)`** — a derived, read-only signal. It is *lazy*: `fn` does not run until
+something reads `.value`. It is *cached*: repeated reads don't recompute. It only
+invalidates when a signal it actually read has changed.
+
+**`effect(fn)`** — runs `fn` immediately, then re-runs it whenever any signal read during
+the previous run changes. Returns a dispose function.
+
+### Dependency tracking, concretely
+
+There is no registration step. While `fn` is executing, the library keeps a pointer to
+"the currently running consumer." Every `.value` read links that signal to that consumer.
+When the run ends, links that weren't touched this time are dropped.
+
+Two consequences that matter:
+
+1. **Dependencies are discovered, not declared.** Branching code gets branch-accurate
+   dependencies for free. An `if` that didn't run this time contributes nothing.
+2. **A read that never happens is not a dependency.** If your effect returns early before
+   touching any signal, it has subscribed to nothing and will never run again. This is not
+   a bug in the library; it is the direct consequence of rule 1. It is also the single
+   most common way people get confused by signals, and this repo contains a live example
+   of the pattern (see *Known quirks*).
+
+### Where the DOM comes in — read this part
+
+Here is the thing the demo is really teaching:
+
+**`@preact/signals-core` does not touch the DOM. At all.**
+
+The library answers one question: *what changed, and who cares?* It has no opinion about
+what you do with that answer. So this app writes the DOM by hand:
+
+```ts
+function setCounter() {
+  const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
+  const resultElement = document.querySelector<HTMLSpanElement>(".result");
+
+  counterElements.forEach((element) => {
+    element.innerText = counter.value.toString();
+  });
+  resultElement.innerText = result.value.toString();
+}
+
+effect(setCounter);
+```
+
+`setCounter` is a plain function that reads the current values and pushes them into the
+page. Wrapping it in `effect` is what makes it re-run at the right moments — and *only*
+at the right moments.
+
+That is the entire integration story. When you use Solid or Preact Signals with JSX, the
+framework is generating a tiny `setCounter`-equivalent per dynamic expression, closer to
+the text node than you could reasonably hand-write. Same machinery, better ergonomics,
+much more code shipped. Seeing the hand-written version once makes the framework version
+stop being magic.
+
+### The shape of the code
+
+`src/main.ts` runs top to bottom:
+
+1. Create the signals and computeds.
+2. Write the initial markup into `#app` with a template literal, interpolating current
+   values so the first paint isn't blank.
+3. Define `setCounter`, which syncs every `.counter`, `.result`, `.randomSeed`, and
+   `.randomizedResult` element.
+4. Attach click handlers that *only mutate signals* — they never touch the DOM.
+5. `effect(setCounter)` to connect state to pixels.
+6. A `setInterval` that mutates signals on a timer.
+
+Step 4 is worth pausing on. The event handlers know nothing about rendering. The renderer
+knows nothing about events. Neither knows about the timer. They communicate exclusively
+through signal values, which is why adding the timer in step 6 required no changes to
+steps 3 or 4.
+
+---
+
+## Project layout
+
+```
+.
+├── index.html            dev entry point, loads /src/main.ts as a module
+├── src/
+│   ├── main.ts           the entire application
+│   ├── counter.ts        randomIntFromInterval helper
+│   ├── style.css         Vite starter styles plus an animated light-mode background
+│   ├── typescript.svg
+│   └── vite-env.d.ts
+├── public/vite.svg
+├── docs/                 BUILD OUTPUT, committed on purpose — this is what GitHub Pages serves
+├── export.sh             dumps the whole repo to docs/llm/dump.txt for feeding to an LLM
+├── vite.config.ts
+├── tsconfig.json
+└── package.json
+```
+
+`docs/` is generated. Don't edit it by hand; run the build.
+
+---
+
+## Running it
+
+Requires Node and Yarn. The repo uses **Yarn Plug'n'Play with Zero-Installs** — the
+lockfile, `.pnp.cjs`, and `.pnp.loader.mjs` are committed, so there is usually no install
+step at all.
+
+```bash
+yarn dev       # https://localhost:3000
+yarn build     # type-check, then bundle into docs/
+yarn preview   # serve the built docs/ locally
+```
+
+**The dev server is HTTPS.** `@vitejs/plugin-basic-ssl` mints a self-signed certificate,
+so your browser will warn you the first time; accept it and move on. Config:
+
+```ts
+export default defineConfig({
+  server: { port: 3000, https: true },
+  plugins: [basicSsl()],
+  build: { outDir: "docs" },
+});
+```
+
+Dependencies are deliberately few: `@preact/signals-core` and `@vitejs/plugin-basic-ssl`
+at runtime/dev, `typescript` and `vite` as dev dependencies. TypeScript runs in `strict`
+mode with `noUnusedLocals` and `noUnusedParameters`, and `yarn build` type-checks before
+bundling, so a type error fails the build rather than shipping.
+
+---
+
+## Deployment
+
+GitHub Pages is configured to serve the **`/docs` folder on the `main` branch**. There is
+no CI, no deploy action, no `gh-pages` branch. The flow is:
+
+```bash
+yarn build
+git add docs
+git commit -m "build"
+git push
+```
+
+Pages picks it up. That's why `build.outDir` is `docs` instead of the usual `dist`, and
+why `dist/` is gitignored while `docs/` is tracked.
+
+One detail worth knowing if you fork this: the generated `docs/index.html` references
+assets with **absolute** paths (`/assets/index-*.js`). That works because this is an
+*organisation* Pages site served from the domain root. If you deploy the same output to a
+*project* Pages site — `https://you.github.io/some-repo/` — every asset will 404. Set
+`base: "/some-repo/"` in `vite.config.ts` and rebuild.
+
+---
+
+## The LLM dump script
+
+`export.sh` walks every git-tracked file and writes a single annotated text file to
+`docs/llm/dump.txt`: repo metadata, working-tree status, a file tree, then each file with
+its size, permissions, mtime, SHA-256, MIME type, and last commit. Binary files get a
+placeholder instead of raw bytes. It includes its own source first, excludes its own
+output directory, and excludes the Yarn PnP artifacts — which are tracked for Zero-Installs
+but are pure noise in a context window.
+
+```bash
+bash export.sh
+```
+
+It writes to a temp file and atomically renames, so a concurrent reader never sees a
+partial dump. It is unrelated to the signals demo; it exists so the whole repo can be
+handed to an AI assistant in one paste.
+
+---
+
+## Known quirks
+
+These are real, they are in the shipped code, and reading them is more instructive than a
+clean codebase would be.
+
+- **`setCounter` guards before it reads.** If any of the four element lookups comes back
+  empty, the function returns before touching a single `.value`. An effect whose first run
+  takes that path registers *zero* dependencies and is then permanently inert. Here the
+  elements always exist, so it never fires — but it's a live demonstration of why
+  "subscribe by reading" cuts both ways.
+- **One interpolation omits `.value`.** The initial markup embeds `${randomizedResult}`
+  rather than `${randomizedResult.value}`. It renders correctly only because
+  `Signal.prototype.toString()` returns the underlying value. Relying on that is implicit
+  and inconsistent with the three neighbouring interpolations.
+- **The initial `= 10` is hardcoded.** The static markup ships a literal `10` for the
+  result, which happens to be right because `counter` starts at `1`. The first effect run
+  overwrites it with the real value a moment later.
+- **`resetPressed` is a one-way latch.** Once you press Reset, the 5-second randomizer
+  stops for the rest of the session. There is no path back to `false`. That's intentional
+  — it's how you freeze the page to inspect it — but it is not a toggle.
+- **`setupCounter` in `counter.ts` is dead code**, left over from the Vite vanilla-ts
+  starter. Only `randomIntFromInterval` is actually imported.
+
+---
+
+## Scope
+
+Small and single purpose, on purpose. This repo demonstrates signals in vanilla
+TypeScript and nothing else. It is not a starter template, not a component library, not a
+state-management recommendation, and not a benchmark.
+
+Ideas that are explicitly out of scope: routing, a component abstraction, a testing
+harness, server-side rendering, a UI framework of any kind, additional runtime
+dependencies. If a change makes the demo harder to read in one sitting, it doesn't belong
+here.
+
+Good contributions: fixing the quirks above, sharpening this README, improving type
+safety, or removing code.
+
+---
+
+## Further reading
+
+- `@preact/signals-core` — https://github.com/preactjs/signals
+- TC39 Signals proposal — https://github.com/tc39/proposal-signals
+
+---
+
+## License
+
+This project is free and open source. A `LICENSE` file has not yet been added to the
+repository; until one is, treat the code as "intended to be open, licence pending" and
+open an issue if you need a specific one.
+
+
+################################################################################
 # FILE: src/counter.ts
 ################################################################################
 
@@ -1168,7 +1496,7 @@ export function randomIntFromInterval(min: number, max: number) { // min and max
   Hard links:            1
   MIME type:             application/javascript
   SHA-256:               0fa5996f91a4cc28f91b576a5e82da7ef24e545a371cec7c8f4ef7cd614a8dc5
-  Last git commit:       079245b 2023-11-12 09:16:51 -0500 build signals
+  Last git commit:       e7d4106 2026-09-17 08:59:45 -0400 insert new line
 
 --- CONTENT ---
 import { randomIntFromInterval } from "./counter";
@@ -1545,9 +1873,9 @@ export default defineConfig({
 # DUMP SUMMARY
 ################################################################################
   Files dumped   : 17
-  Total size     : 37.7 KiB (38632 bytes)
+  Total size     : 50.1 KiB (51364 bytes)
   Output file    : /home/kushal/src/ts/learnsignal.github.io/docs/llm/dump.txt
-  Completed at   : 2026-09-17T08:58:52-04:00
+  Completed at   : 2026-09-17T09:11:43-04:00
 ################################################################################
 # END OF DUMP
 ################################################################################
