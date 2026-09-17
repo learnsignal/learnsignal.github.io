@@ -7,7 +7,7 @@
 
 DUMP METADATA
 ═════════════════════════════════════════════════════════════════════════════════
-  Generated at   : 2026-09-17T09:11:43-04:00
+  Generated at   : 2026-09-17T09:34:25-04:00
   Generator      : export.sh
   Host           : fedora
   User           : kushal
@@ -17,19 +17,24 @@ REPOSITORY METADATA
 ═════════════════════════════════════════════════════════════════════════════════
   Repository root: /home/kushal/src/ts/learnsignal.github.io
   Branch         : main
-  Commit (full)  : e1d56980b3232f48dec3eaf2118a013f41ac86a7
-  Commit (short) : e1d5698
-  Commit date    : 2026-09-17 09:11:28 -0400
-  Commit message : add readme with claude
+  Commit (full)  : d1c7fd6299b88608b750538bc88c7d44540fb2ca
+  Commit (short) : d1c7fd6
+  Commit date    : 2026-09-17 09:34:15 -0400
+  Commit message : add claude changes
   Remote origin  : git@github.com:learnsignal/learnsignal.github.io.git
-  Files included : 17
+  Files included : 20
   Excluded path  : docs/llm/
   Excluded files : yarn.lock, .pnp.cjs, .pnp.loader.mjs
 
 GIT WORKING TREE STATUS (first 20 lines)
 ═════════════════════════════════════════════════════════════════════════════════
+ D docs/assets/index-BIdlVyUp.js
+ D docs/assets/index-CDc0323N.css
+ M docs/index.html
  D docs/llm/dump.txt
  D docs/llm/terminal.txt
+?? docs/assets/index-CW80hWNf.js
+?? docs/assets/index-CkbECzpf.css
 
 ################################################################################
 # FILE: export.sh  [THIS SCRIPT — included for full context]
@@ -431,14 +436,16 @@ FOOTER
 mv -f "$TMP_FILE" "$OUTPUT_FILE"
 
 ################################################################################
-# FILE TREE  (all 17 included files)
+# FILE TREE  (all 20 included files)
 ################################################################################
 .
 .
 ├── docs
 │   ├── assets
 │   │   ├── index-BIdlVyUp.js
-│   │   └── index-CDc0323N.css
+│   │   ├── index-CDc0323N.css
+│   │   ├── index-CkbECzpf.css
+│   │   └── index-CW80hWNf.js
 │   ├── index.html
 │   └── vite.svg
 ├── export.sh
@@ -451,6 +458,7 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
 ├── src
 │   ├── counter.ts
 │   ├── main.ts
+│   ├── random.ts
 │   ├── style.css
 │   ├── typescript.svg
 │   └── vite-env.d.ts
@@ -459,60 +467,61 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
 
 
 ################################################################################
-# FILE: docs/assets/index-BIdlVyUp.js
+# FILE: docs/assets/index-CkbECzpf.css
 ################################################################################
 
 --- METADATA ---
-  File name:             index-BIdlVyUp.js
-  Relative path:         docs/assets/index-BIdlVyUp.js
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-BIdlVyUp.js
-  Size:                  6.4 KiB (6646 bytes)
-  Last modified:         2026-09-17 09:11:43.189251804 -0400
+  File name:             index-CkbECzpf.css
+  Relative path:         docs/assets/index-CkbECzpf.css
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CkbECzpf.css
+  Size:                  1.2 KiB (1253 bytes)
+  Last modified:         2026-09-17 09:34:25.589928460 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63837983
+  Inode:                 63838610
   Hard links:            1
-  MIME type:             application/javascript
-  SHA-256:               982fc204bc47f114179df72708fe9b4d39060e56fb92ab5bc74e68af15cd2ee1
-  Last git commit:       e7d4106 2026-09-17 08:59:45 -0400 insert new line
+  MIME type:             text/plain
+  SHA-256:               aab66a3896c4b5f383f82d27fca8dc0f4ff98036d27fd19a62b66b8029fa0ca2
+  Last git commit:       
 
 --- CONTENT ---
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();function e(e,t){return Math.floor(Math.random()*(t-e+1)+e)}var t=Symbol.for(`preact-signals`);function n(){if(s>1)s--;else{var e,t=!1;for((function(){var e=u;for(u=void 0;e!==void 0;){var t=e.S;if(t.v===e.v)for(var n=t.t;n!==void 0;n=n.x)n.i===e.i&&(n.i=t.i);e=e.o}})();o!==void 0;){var n=o;for(o=void 0,c++;n!==void 0;){var r=n.u;if(n.u=void 0,n.f&=-3,!(8&n.f)&&h(n))try{n.c()}catch(n){t||=(e=n,!0)}n=r}}if(c=0,s--,t)throw e}}var r,i=void 0;function a(e){var t=i,n=r;i=void 0,r=void 0;try{return e()}finally{i=t,r=n}}var o=void 0,s=0,c=0,l=0,u=void 0,d=0;function f(e){if(i!==void 0){var t=e.n;if(t===void 0||t.t!==i)return t={i:0,S:e,p:i.s,n:void 0,t:i,e:void 0,x:void 0,r:t},i.s!==void 0&&(i.s.n=t),i.s=t,e.n=t,32&i.f&&e.S(t),t;if(t.i===-1)return t.i=0,t.n!==void 0&&(t.n.p=t.p,t.p!==void 0&&(t.p.n=t.n),t.p=i.s,t.n=void 0,i.s.n=t,i.s=t),t}}function p(e,t){this.v=e,this.i=0,this.n=void 0,this.t=void 0,this.l=0,this.W=t?.watched,this.Z=t?.unwatched,this.name=t?.name}p.prototype.brand=t,p.prototype.h=function(){return!0},p.prototype.S=function(e){var t=this,n=this.t;n!==e&&e.e===void 0&&(e.x=n,this.t=e,n===void 0?a(function(){var e;(e=t.W)==null||e.call(t)}):n.e=e)},p.prototype.U=function(e){var t=this;if(this.t!==void 0){var n=e.e,r=e.x;n!==void 0&&(n.x=r,e.e=void 0),r!==void 0&&(r.e=n,e.x=void 0),e===this.t&&(this.t=r,r===void 0&&a(function(){var e;(e=t.Z)==null||e.call(t)}))}},p.prototype.subscribe=function(e){var t=this;return w(function(){var n=t.value;a(function(){return e(n)})},{name:`sub`})},p.prototype.valueOf=function(){return this.value},p.prototype.toString=function(){return this.value+``},p.prototype.toJSON=function(){return this.value},p.prototype.peek=function(){var e=this;return a(function(){return e.value})},Object.defineProperty(p.prototype,"value",{get:function(){var e=f(this);return e!==void 0&&(e.i=this.i),this.v},set:function(e){if(e!==this.v){if(c>100)throw Error(`Cycle detected`);(function(e){s!==0&&c===0&&e.l!==l&&(e.l=l,u={S:e,v:e.v,i:e.i,o:u})})(this),this.v=e,this.i++,d++,s++;try{for(var t=this.t;t!==void 0;t=t.x)t.t.N()}finally{n()}}}});function m(e,t){return new p(e,t)}function h(e){for(var t=e.s;t!==void 0;t=t.n)if(t.S.i!==t.i||!t.S.h()||t.S.i!==t.i)return!0;return!1}function g(e){for(var t=e.s;t!==void 0;t=t.n){var n=t.S.n;if(n!==void 0&&(t.r=n),t.S.n=t,t.i=-1,t.n===void 0){e.s=t;break}}}function _(e){for(var t=e.s,n=void 0;t!==void 0;){var r=t.p;t.i===-1?(t.S.U(t),r!==void 0&&(r.n=t.n),t.n!==void 0&&(t.n.p=r)):n=t,t.S.n=t.r,t.r!==void 0&&(t.r=void 0),t=r}e.s=n}function v(e,t){p.call(this,void 0,t),this.x=e,this.s=void 0,this.g=d-1,this.f=4}v.prototype=new p,v.prototype.h=function(){if(this.f&=-3,1&this.f)return!1;if((36&this.f)==32||(this.f&=-5,this.g===d))return!0;if(this.g=d,this.f|=1,this.i>0&&!h(this))return this.f&=-2,!0;var e=i;try{g(this),i=this;var t=this.x();(16&this.f||this.v!==t||this.i===0)&&(this.v=t,this.f&=-17,this.i++)}catch(e){this.v=e,this.f|=16,this.i++}return i=e,_(this),this.f&=-2,!0},v.prototype.S=function(e){if(this.t===void 0){this.f|=36;for(var t=this.s;t!==void 0;t=t.n)t.S.S(t)}p.prototype.S.call(this,e)},v.prototype.U=function(e){if(this.t!==void 0&&(p.prototype.U.call(this,e),this.t===void 0)){this.f&=-33;for(var t=this.s;t!==void 0;t=t.n)t.S.U(t)}},v.prototype.N=function(){if(!(2&this.f)){this.f|=6;for(var e=this.t;e!==void 0;e=e.x)e.t.N()}},Object.defineProperty(v.prototype,"value",{get:function(){if(1&this.f)throw Error(`Cycle detected`);var e=f(this);if(this.h(),e!==void 0&&(e.i=this.i),16&this.f)throw this.v;return this.v}});function y(e,t){return new v(e,t)}function b(e){var t=e.m;if(e.m=void 0,typeof t==`function`){s++;var r=i;i=void 0;try{t()}catch(t){throw e.f&=-2,e.f|=8,x(e),t}finally{i=r,n()}}}function x(e){for(var t=e.s;t!==void 0;t=t.n)t.S.U(t);e.x=void 0,e.s=void 0,b(e)}function S(e){if(i!==this)throw Error(`Out-of-order effect`);_(this),i=e,this.f&=-2,8&this.f&&x(this),n()}function C(e,t){this.x=e,this.m=void 0,this.s=void 0,this.u=void 0,this.f=32,this.name=t?.name,r&&r.push(this)}C.prototype.c=function(){var e=this.S();try{if(8&this.f||this.x===void 0)return;var t=this.x();typeof t==`function`&&(this.m=t)}finally{e()}},C.prototype.S=function(){if(1&this.f)throw Error(`Cycle detected`);this.f|=1,this.f&=-9,b(this),g(this),s++;var e=i;return i=this,S.bind(this,e)},C.prototype.N=function(){2&this.f||(this.f|=2,this.u=o,o=this)},C.prototype.d=function(){this.f|=8,1&this.f||x(this)},C.prototype.dispose=function(){this.d()};function w(e,t){var n=new C(e,t);try{n.c()}catch(e){throw n.d(),e}var r=n.d.bind(n);return r[Symbol.dispose]=r,r}var T=m(1),E=m(!1),D=y(()=>T.value*10),O=m(e(1,9)),k=y(()=>T.value*O.value);document.querySelector(`#app`).innerHTML=`
+:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;color:#ffffffde;font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;background-color:#242424;font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}body{place-items:center;min-width:320px;min-height:100vh;margin:0;display:flex}h1{font-size:3.2em;line-height:1.1}#app{text-align:center;max-width:1280px;margin:0 auto;padding:2rem}.card{flex-wrap:wrap;justify-content:center;gap:.75em;padding:2em;display:flex}[data-bind]{font-variant-numeric:tabular-nums}button{color:inherit;cursor:pointer;background-color:#1a1a1a;border:1px solid #0000;border-radius:8px;padding:.6em 1.2em;font-family:inherit;font-size:1em;font-weight:500;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-reduced-motion:reduce){button{transition:none}}@media (prefers-color-scheme:light){:root{color:#213547;background-color:#fff}button{background-color:#f9f9f9}}
+
+
+################################################################################
+# FILE: docs/assets/index-CW80hWNf.js
+################################################################################
+
+--- METADATA ---
+  File name:             index-CW80hWNf.js
+  Relative path:         docs/assets/index-CW80hWNf.js
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CW80hWNf.js
+  Size:                  6.7 KiB (6913 bytes)
+  Last modified:         2026-09-17 09:34:25.589251516 -0400
+  Permissions:           -rw-r--r--
+  Owner:                 kushal:kushal
+  Inode:                 63838609
+  Hard links:            1
+  MIME type:             application/javascript
+  SHA-256:               1f222643df46b2c8d928f114bfa41fad7c60628f638aea7442ef07f68c49e874
+  Last git commit:       
+
+--- CONTENT ---
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=Symbol.for(`preact-signals`);function t(){if(o>1)o--;else{var e,t=!1;for((function(){var e=l;for(l=void 0;e!==void 0;){var t=e.S;if(t.v===e.v)for(var n=t.t;n!==void 0;n=n.x)n.i===e.i&&(n.i=t.i);e=e.o}})();a!==void 0;){var n=a;for(a=void 0,s++;n!==void 0;){var r=n.u;if(n.u=void 0,n.f&=-3,!(8&n.f)&&m(n))try{n.c()}catch(n){t||=(e=n,!0)}n=r}}if(s=0,o--,t)throw e}}var n,r=void 0;function i(e){var t=r,i=n;r=void 0,n=void 0;try{return e()}finally{r=t,n=i}}var a=void 0,o=0,s=0,c=0,l=void 0,u=0;function d(e){if(r!==void 0){var t=e.n;if(t===void 0||t.t!==r)return t={i:0,S:e,p:r.s,n:void 0,t:r,e:void 0,x:void 0,r:t},r.s!==void 0&&(r.s.n=t),r.s=t,e.n=t,32&r.f&&e.S(t),t;if(t.i===-1)return t.i=0,t.n!==void 0&&(t.n.p=t.p,t.p!==void 0&&(t.p.n=t.n),t.p=r.s,t.n=void 0,r.s.n=t,r.s=t),t}}function f(e,t){this.v=e,this.i=0,this.n=void 0,this.t=void 0,this.l=0,this.W=t?.watched,this.Z=t?.unwatched,this.name=t?.name}f.prototype.brand=e,f.prototype.h=function(){return!0},f.prototype.S=function(e){var t=this,n=this.t;n!==e&&e.e===void 0&&(e.x=n,this.t=e,n===void 0?i(function(){var e;(e=t.W)==null||e.call(t)}):n.e=e)},f.prototype.U=function(e){var t=this;if(this.t!==void 0){var n=e.e,r=e.x;n!==void 0&&(n.x=r,e.e=void 0),r!==void 0&&(r.e=n,e.x=void 0),e===this.t&&(this.t=r,r===void 0&&i(function(){var e;(e=t.Z)==null||e.call(t)}))}},f.prototype.subscribe=function(e){var t=this;return C(function(){var n=t.value;i(function(){return e(n)})},{name:`sub`})},f.prototype.valueOf=function(){return this.value},f.prototype.toString=function(){return this.value+``},f.prototype.toJSON=function(){return this.value},f.prototype.peek=function(){var e=this;return i(function(){return e.value})},Object.defineProperty(f.prototype,"value",{get:function(){var e=d(this);return e!==void 0&&(e.i=this.i),this.v},set:function(e){if(e!==this.v){if(s>100)throw Error(`Cycle detected`);(function(e){o!==0&&s===0&&e.l!==c&&(e.l=c,l={S:e,v:e.v,i:e.i,o:l})})(this),this.v=e,this.i++,u++,o++;try{for(var n=this.t;n!==void 0;n=n.x)n.t.N()}finally{t()}}}});function p(e,t){return new f(e,t)}function m(e){for(var t=e.s;t!==void 0;t=t.n)if(t.S.i!==t.i||!t.S.h()||t.S.i!==t.i)return!0;return!1}function h(e){for(var t=e.s;t!==void 0;t=t.n){var n=t.S.n;if(n!==void 0&&(t.r=n),t.S.n=t,t.i=-1,t.n===void 0){e.s=t;break}}}function g(e){for(var t=e.s,n=void 0;t!==void 0;){var r=t.p;t.i===-1?(t.S.U(t),r!==void 0&&(r.n=t.n),t.n!==void 0&&(t.n.p=r)):n=t,t.S.n=t.r,t.r!==void 0&&(t.r=void 0),t=r}e.s=n}function _(e,t){f.call(this,void 0,t),this.x=e,this.s=void 0,this.g=u-1,this.f=4}_.prototype=new f,_.prototype.h=function(){if(this.f&=-3,1&this.f)return!1;if((36&this.f)==32||(this.f&=-5,this.g===u))return!0;if(this.g=u,this.f|=1,this.i>0&&!m(this))return this.f&=-2,!0;var e=r;try{h(this),r=this;var t=this.x();(16&this.f||this.v!==t||this.i===0)&&(this.v=t,this.f&=-17,this.i++)}catch(e){this.v=e,this.f|=16,this.i++}return r=e,g(this),this.f&=-2,!0},_.prototype.S=function(e){if(this.t===void 0){this.f|=36;for(var t=this.s;t!==void 0;t=t.n)t.S.S(t)}f.prototype.S.call(this,e)},_.prototype.U=function(e){if(this.t!==void 0&&(f.prototype.U.call(this,e),this.t===void 0)){this.f&=-33;for(var t=this.s;t!==void 0;t=t.n)t.S.U(t)}},_.prototype.N=function(){if(!(2&this.f)){this.f|=6;for(var e=this.t;e!==void 0;e=e.x)e.t.N()}},Object.defineProperty(_.prototype,"value",{get:function(){if(1&this.f)throw Error(`Cycle detected`);var e=d(this);if(this.h(),e!==void 0&&(e.i=this.i),16&this.f)throw this.v;return this.v}});function v(e,t){return new _(e,t)}function y(e){var n=e.m;if(e.m=void 0,typeof n==`function`){o++;var i=r;r=void 0;try{n()}catch(t){throw e.f&=-2,e.f|=8,b(e),t}finally{r=i,t()}}}function b(e){for(var t=e.s;t!==void 0;t=t.n)t.S.U(t);e.x=void 0,e.s=void 0,y(e)}function x(e){if(r!==this)throw Error(`Out-of-order effect`);g(this),r=e,this.f&=-2,8&this.f&&b(this),t()}function S(e,t){this.x=e,this.m=void 0,this.s=void 0,this.u=void 0,this.f=32,this.name=t?.name,n&&n.push(this)}S.prototype.c=function(){var e=this.S();try{if(8&this.f||this.x===void 0)return;var t=this.x();typeof t==`function`&&(this.m=t)}finally{e()}},S.prototype.S=function(){if(1&this.f)throw Error(`Cycle detected`);this.f|=1,this.f&=-9,y(this),h(this),o++;var e=r;return r=this,x.bind(this,e)},S.prototype.N=function(){2&this.f||(this.f|=2,this.u=a,a=this)},S.prototype.d=function(){this.f|=8,1&this.f||b(this)},S.prototype.dispose=function(){this.d()};function C(e,t){var n=new S(e,t);try{n.c()}catch(e){throw n.d(),e}var r=n.d.bind(n);return r[Symbol.dispose]=r,r}function w(e,t){return Math.floor(Math.random()*(t-e+1)+e)}var T=p(1),E=p(w(1,9)),D=p(!0),O=v(()=>{let e=T.value*10;return console.info({recomputed:`result`,value:e}),e}),k=v(()=>{let e=T.value*E.value;return console.info({recomputed:`randomizedResult`,value:e}),e}),A=document.querySelector(`#app`);A.innerHTML=`
   <div>
     <h1>Signals in Vanilla JS</h1>
     <div class="card">
-      <button type="button" id="incrementCounter">count is <span class="counter">${T.value}</span></button>
-      <button type="reset" id="reset">Reset</button>
+      <button type="button" id="incrementCounter">count is <span data-bind="counter"></span></button>
+      <button type="button" id="reset">Reset</button>
+      <button type="button" id="toggleScrambling"><span data-bind="scramblingLabel"></span></button>
     </div>
-    <p>Result: <span class="counter">${T.value}</span> * 10 = <span class="result">10</span></p>
+    <p><span data-bind="counter"></span> * 10 = <span data-bind="result"></span></p>
     <h1>
-      <span class="counter">${T.value}</span> * <span class="randomSeed">${O.value}</span> 
-        = <span class="randomizedResult">${k}</span>.
+      <span data-bind="counter"></span> * <span data-bind="randomSeed"></span>
+        = <span data-bind="randomizedResult"></span>
     </h1>
   </div>
-`;function A(){let e=document.querySelectorAll(`.counter`),t=document.querySelector(`.result`),n=document.querySelectorAll(`.randomSeed`),r=document.querySelectorAll(`.randomizedResult`);e?.length&&t&&n?.length&&r?.length&&(e.forEach(e=>{e.innerText=T.value.toString()}),t.innerText=D.value.toString(),n.forEach(e=>{e.innerText=O.value.toString()}),r.forEach(e=>{e.innerText=k.value.toString()}))}var j=document.getElementById(`incrementCounter`),M=document.getElementById(`reset`);j?.addEventListener(`click`,()=>{T.value++}),M?.addEventListener(`click`,()=>{T.value=0,O.value=e(1,99),console.info({new:O.value}),E.value=!0}),w(A),setInterval(()=>{E.value===!1&&(T.value=e(1,9),O.value=e(1,9),console.info({counter:T.value}),console.info({randomSeed:O.value}))},5e3);
-
-################################################################################
-# FILE: docs/assets/index-CDc0323N.css
-################################################################################
-
---- METADATA ---
-  File name:             index-CDc0323N.css
-  Relative path:         docs/assets/index-CDc0323N.css
-  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/assets/index-CDc0323N.css
-  Size:                  1.9 KiB (1954 bytes)
-  Last modified:         2026-09-17 09:11:43.190023360 -0400
-  Permissions:           -rw-r--r--
-  Owner:                 kushal:kushal
-  Inode:                 63837984
-  Hard links:            1
-  MIME type:             text/plain
-  SHA-256:               2a8a44b4fd4d4bd83160fdaef73d916a39f27d82db61716309fdea35f21552bc
-  Last git commit:       46dc15a 2026-09-17 08:56:57 -0400 run scripts
-
---- CONTENT ---
-:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;color:#ffffffde;font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;background-color:#242424;font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}a{color:#646cff;-webkit-text-decoration:inherit;text-decoration:inherit;font-weight:500}a:hover{color:#535bf2}body{place-items:center;min-width:320px;min-height:100vh;margin:0;display:flex}h1{font-size:3.2em;line-height:1.1}#app{text-align:center;max-width:1280px;margin:0 auto;padding:2rem}.logo{will-change:filter;height:6em;padding:1.5em;transition:filter .3s}.logo:hover{filter:drop-shadow(0 0 2em #646cffaa)}.logo.vanilla:hover{filter:drop-shadow(0 0 2em #3178c6aa)}.card{padding:2em}.read-the-docs{color:#888}button{cursor:pointer;background-color:#1a1a1a;border:1px solid #0000;border-radius:8px;padding:.6em 1.2em;font-family:inherit;font-size:1em;font-weight:500;transition:border-color .25s}button:hover{border-color:#646cff}button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}@media (prefers-color-scheme:light){:root{color:#213547;background-color:#fff}a:hover{color:#747bff}button{background-color:#f9f9f9}:root{--base-hue:0;--base-saturation:40%;--base-lightness:80%;--animation-duration:1s;--animation-direction:alternate}body{background-color:hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));animation:hue-change var(--animation-duration) infinite var(--animation-direction)}@keyframes hue-change{0%{--base-hue:0}10%{--base-hue:36deg}20%{--base-hue:72deg}30%{--base-hue:108deg}40%{--base-hue:144deg}50%{--base-hue:180deg}60%{--base-hue:216deg}70%{--base-hue:252deg}80%{--base-hue:288deg}90%{--base-hue:324deg}to{--base-hue:360deg}}}
-
+`;function j(e,t){let n=A.querySelectorAll(`[data-bind="${e}"]`);if(n.length===0)throw Error(`Nothing in the page is bound to "${e}"`);C(()=>{let r=t();console.info({rendered:e,text:r}),n.forEach(e=>{e.innerText=r})})}j(`counter`,()=>T.value.toString()),j(`result`,()=>O.value.toString()),j(`randomSeed`,()=>E.value.toString()),j(`randomizedResult`,()=>k.value.toString()),j(`scramblingLabel`,()=>D.value?`Pause scrambling`:`Resume scrambling`),document.getElementById(`incrementCounter`).addEventListener(`click`,()=>{T.value++}),document.getElementById(`reset`).addEventListener(`click`,()=>{T.value=0,E.value=w(1,99)}),document.getElementById(`toggleScrambling`).addEventListener(`click`,()=>{D.value=!D.value}),C(()=>{if(!D.value)return;let e=setInterval(()=>{T.value=w(1,9),E.value=w(1,9)},5e3);return()=>clearInterval(e)});
 
 ################################################################################
 # FILE: docs/index.html
@@ -523,13 +532,13 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/index.html
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/index.html
   Size:                  455 B (455 bytes)
-  Last modified:         2026-09-17 09:11:43.190023360 -0400
+  Last modified:         2026-09-17 09:34:25.589928460 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63837985
+  Inode:                 63838611
   Hard links:            1
   MIME type:             text/html
-  SHA-256:               788d58dbe02e5598629c4aa84e4b4f5f326c0bb4f95e029975adc897cf479c2f
+  SHA-256:               267a24ccc828f39e6d23ee4bd502e6bd92bbb6236e3a9a1014b1eb032ae8f716
   Last git commit:       e7d4106 2026-09-17 08:59:45 -0400 insert new line
 
 --- CONTENT ---
@@ -540,8 +549,8 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
-    <script type="module" crossorigin src="/assets/index-BIdlVyUp.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CDc0323N.css">
+    <script type="module" crossorigin src="/assets/index-CW80hWNf.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CkbECzpf.css">
   </head>
   <body>
     <div id="app"></div>
@@ -558,10 +567,10 @@ mv -f "$TMP_FILE" "$OUTPUT_FILE"
   Relative path:         docs/vite.svg
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/docs/vite.svg
   Size:                  1.4 KiB (1497 bytes)
-  Last modified:         2026-09-17 09:11:43.175836053 -0400
+  Last modified:         2026-09-17 09:34:25.581573708 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
-  Inode:                 63837981
+  Inode:                 63838607
   Hard links:            1
   MIME type:             image/svg+xml
   SHA-256:               4a748afd443918bb16591c834c401dae33e87861ab5dbad0811c3a3b4a9214fb
@@ -1123,24 +1132,23 @@ dist-ssr
   File name:             README.md
   Relative path:         README.md
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/README.md
-  Size:                  12.4 KiB (12732 bytes)
-  Last modified:         2026-09-17 09:11:00.282858880 -0400
+  Size:                  13.6 KiB (13999 bytes)
+  Last modified:         2026-09-17 09:33:59.464144008 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
   Inode:                 63837766
   Hard links:            1
   MIME type:             application/javascript
-  SHA-256:               3090e54b3419a5a3756da945baf6db325dd9844b02611369469b130885090b15
-  Last git commit:       e1d5698 2026-09-17 09:11:28 -0400 add readme with claude
+  SHA-256:               2583212f6e160a3d0c04ee7466278f4bfe7e1259e91e89044d20eed7a392e813
+  Last git commit:       d1c7fd6 2026-09-17 09:34:15 -0400 add claude changes
 
 --- CONTENT ---
 # Signals in Vanilla JS
 
 A tiny, deliberately boring demo of **fine-grained reactivity without a framework**.
 
-No React. No Preact. No virtual DOM. No components, no JSX, no hooks, no build-time
-magic beyond a bundler. Just `@preact/signals-core`, a handful of `<span>` elements, and
-about 60 lines of TypeScript.
+No React. No Preact. No virtual DOM. No components, no JSX, no hooks. Just
+`@preact/signals-core`, a handful of `<span>` elements, and about 90 lines of TypeScript.
 
 **Live demo:** https://learnsignal.github.io/
 **Source:** https://github.com/learnsignal/learnsignal.github.io
@@ -1159,17 +1167,18 @@ You don't. The idea is separable, it is small, and it predates all of those fram
 This repo exists to make that separation obvious by removing everything else:
 
 - **Signals are a data structure, not a framework feature.** `@preact/signals-core` is a
-  standalone library with zero UI dependencies. The entire production bundle here —
-  signals runtime, app logic, and Vite's module preload shim — is about 6.6 KiB
-  uncompressed.
+  standalone library with zero UI dependencies, and the whole production bundle here —
+  signals runtime plus app logic — is a few kilobytes uncompressed.
 - **Dependency tracking is automatic.** You never declare what depends on what. No
   dependency arrays, no `useMemo` bookkeeping, no subscribe/unsubscribe lifecycle. You
   read a value; the graph notices.
-- **Updates are surgical.** Nothing diffs. Nothing re-renders. When `counter` changes,
-  exactly the code that read `counter` runs again.
+- **Updates are surgical.** Nothing diffs. Nothing re-renders. When `randomSeed` changes,
+  the spans showing the counter are not touched and `result` is not recomputed. The
+  console proves it.
 - **It composes with anything.** A signal graph can drive innerHTML, a canvas, a
-  WebSocket, a `document.title`, an audio parameter, or a log line. This demo drives
-  `innerText` because that's the least interesting choice available, which is the point.
+  WebSocket, a `document.title`, an audio parameter, or a `setInterval`. This demo drives
+  `innerText` and a timer because those are the least interesting choices available, which
+  is the point.
 - **It shows you the seam.** By the end of this README you should be able to say exactly
   where the library's job ends and yours begins. That boundary is the whole lesson, and
   frameworks hide it from you.
@@ -1181,28 +1190,27 @@ a page I already have?"* — this repo is the answer, and the answer is: almost 
 
 ## What the demo actually does
 
-The page shows a counter and two derived numbers:
-
 | Thing | Kind | Definition |
 |---|---|---|
-| `counter` | `signal` | Starts at `1`. Incremented by the button. |
-| `resetPressed` | `signal` | Starts at `false`. Latches to `true` on Reset. |
+| `counter` | `signal` | Starts at `1`. Incremented by the first button. |
+| `randomSeed` | `signal` | A random integer, initially 1–9. |
+| `scramblingEnabled` | `signal` | Starts at `true`. Toggled by the third button. |
 | `result` | `computed` | `counter * 10` |
-| `randomSeed` | `signal` | A random integer, initially 1–9 |
 | `randomizedResult` | `computed` | `counter * randomSeed` |
 
 Behaviour:
 
-- **count is N** — clicking increments `counter`. Every span showing the counter updates,
-  and both derived values recompute.
-- **Reset** — sets `counter` to `0`, rolls a new `randomSeed` between 1 and 99, and sets
-  `resetPressed` to `true`.
-- **Every 5 seconds** — while `resetPressed` is still `false`, the timer scrambles both
-  `counter` and `randomSeed` so you can watch the whole graph update with nobody touching
-  the page.
+- **count is N** — increments `counter`. Every span showing the counter updates, and both
+  computeds recompute.
+- **Reset** — sets `counter` to `0` and rolls a new `randomSeed` between 1 and 99.
+- **Pause scrambling / Resume scrambling** — starts and stops a 5-second timer that
+  scrambles `counter` and `randomSeed` on its own. The button's own label is a binding
+  like any other.
 
-Open the console. Every autonomous change logs, so you can correlate a log line with the
-numbers changing on screen.
+Open the console before you touch anything. Every recomputation and every DOM write logs,
+so you can watch which parts of the graph woke up and which stayed asleep. Press Reset a
+few times: `randomSeed` and `randomizedResult` log, `result` does not, because `result`
+never read `randomSeed`.
 
 ---
 
@@ -1226,7 +1234,8 @@ something reads `.value`. It is *cached*: repeated reads don't recompute. It onl
 invalidates when a signal it actually read has changed.
 
 **`effect(fn)`** — runs `fn` immediately, then re-runs it whenever any signal read during
-the previous run changes. Returns a dispose function.
+the previous run changes. If `fn` returns a function, that function runs as cleanup before
+the next run and on dispose. `effect` itself returns a dispose function.
 
 ### Dependency tracking, concretely
 
@@ -1238,11 +1247,37 @@ Two consequences that matter:
 
 1. **Dependencies are discovered, not declared.** Branching code gets branch-accurate
    dependencies for free. An `if` that didn't run this time contributes nothing.
-2. **A read that never happens is not a dependency.** If your effect returns early before
-   touching any signal, it has subscribed to nothing and will never run again. This is not
-   a bug in the library; it is the direct consequence of rule 1. It is also the single
-   most common way people get confused by signals, and this repo contains a live example
-   of the pattern (see *Known quirks*).
+2. **A read that never happens is not a dependency.** An effect that returns early before
+   touching any signal has subscribed to nothing and will never run again. This is not a
+   bug in the library; it is the direct consequence of rule 1, and it is the single most
+   common way people get confused by signals.
+
+The timer effect is built around exactly that rule:
+
+```ts
+effect(() => {
+  if (!scramblingEnabled.value) {
+    return;
+  }
+
+  const interval = setInterval(() => {
+    counter.value = randomIntFromInterval(1, 9);
+    randomSeed.value = randomIntFromInterval(1, 9);
+  }, 5000);
+
+  return () => clearInterval(interval);
+});
+```
+
+The early return happens *after* reading `scramblingEnabled.value`, so the effect stays
+subscribed and wakes up again when you resume. The returned cleanup is what tears the
+timer down — the effect owns the interval's whole lifecycle, and nothing else in the app
+knows the timer exists. Move the `.value` read below the `return` and the pause button
+becomes permanent; that one line is the difference.
+
+Note also that the interval callback *writes* signals but reads none, and the effect body
+does not read `counter` or `randomSeed`. Writing a signal never subscribes you to it, so
+there is no feedback loop to guard against.
 
 ### Where the DOM comes in — read this part
 
@@ -1251,49 +1286,63 @@ Here is the thing the demo is really teaching:
 **`@preact/signals-core` does not touch the DOM. At all.**
 
 The library answers one question: *what changed, and who cares?* It has no opinion about
-what you do with that answer. So this app writes the DOM by hand:
+what you do with that answer. So this app writes the DOM by hand, with one small helper:
 
 ```ts
-function setCounter() {
-  const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
-  const resultElement = document.querySelector<HTMLSpanElement>(".result");
+function bindText(name: string, readText: () => string) {
+  const elements = app.querySelectorAll<HTMLElement>(`[data-bind="${name}"]`);
 
-  counterElements.forEach((element) => {
-    element.innerText = counter.value.toString();
+  if (elements.length === 0) {
+    throw new Error(`Nothing in the page is bound to "${name}"`);
+  }
+
+  effect(() => {
+    const text = readText();
+    elements.forEach((element) => {
+      element.innerText = text;
+    });
   });
-  resultElement.innerText = result.value.toString();
 }
 
-effect(setCounter);
+bindText("counter", () => counter.value.toString());
+bindText("result", () => result.value.toString());
 ```
 
-`setCounter` is a plain function that reads the current values and pushes them into the
-page. Wrapping it in `effect` is what makes it re-run at the right moments — and *only*
-at the right moments.
+Three details carry most of the lesson:
+
+- **The element lookup lives outside the effect.** It runs once, eagerly, and the failure
+  case throws at startup instead of silently producing an effect that never runs again.
+  Only signal reads happen inside the effect body.
+- **One effect per binding.** Each effect subscribes to exactly the signals its own
+  `readText` touched, so a change to `randomSeed` re-runs two bindings and leaves the
+  other three alone. A single effect that rendered everything would re-run everything on
+  every change — correct output, but it would have thrown away the entire point.
+- **`readText` returns a string.** Nothing else in the app knows that the target is a DOM
+  node. Swap `innerText` for a canvas draw or a WebSocket send and the graph above is
+  unchanged.
 
 That is the entire integration story. When you use Solid or Preact Signals with JSX, the
-framework is generating a tiny `setCounter`-equivalent per dynamic expression, closer to
-the text node than you could reasonably hand-write. Same machinery, better ergonomics,
-much more code shipped. Seeing the hand-written version once makes the framework version
-stop being magic.
+framework generates a tiny `bindText`-equivalent per dynamic expression, closer to the text
+node than you could reasonably hand-write. Same machinery, better ergonomics, much more
+code shipped. Seeing the hand-written version once makes the framework version stop being
+magic.
 
 ### The shape of the code
 
 `src/main.ts` runs top to bottom:
 
 1. Create the signals and computeds.
-2. Write the initial markup into `#app` with a template literal, interpolating current
-   values so the first paint isn't blank.
-3. Define `setCounter`, which syncs every `.counter`, `.result`, `.randomSeed`, and
-   `.randomizedResult` element.
-4. Attach click handlers that *only mutate signals* — they never touch the DOM.
-5. `effect(setCounter)` to connect state to pixels.
-6. A `setInterval` that mutates signals on a timer.
+2. Write the markup into `#app`, with empty `data-bind` spans — no value is duplicated
+   between markup and code, so there is no static text that can drift out of sync.
+3. Define `bindText`.
+4. Bind each piece of state to its spans. The first run of every effect fills the page.
+5. Attach click handlers that *only mutate signals* — they never touch the DOM.
+6. Start the timer effect.
 
-Step 4 is worth pausing on. The event handlers know nothing about rendering. The renderer
-knows nothing about events. Neither knows about the timer. They communicate exclusively
+Step 5 is worth pausing on. The event handlers know nothing about rendering. The bindings
+know nothing about events. Neither knows about the timer. They communicate exclusively
 through signal values, which is why adding the timer in step 6 required no changes to
-steps 3 or 4.
+steps 4 or 5, and why the pause button needed no new rendering code.
 
 ---
 
@@ -1304,8 +1353,8 @@ steps 3 or 4.
 ├── index.html            dev entry point, loads /src/main.ts as a module
 ├── src/
 │   ├── main.ts           the entire application
-│   ├── counter.ts        randomIntFromInterval helper
-│   ├── style.css         Vite starter styles plus an animated light-mode background
+│   ├── random.ts         randomIntFromInterval helper
+│   ├── style.css         Vite starter styles, trimmed
 │   ├── typescript.svg
 │   └── vite-env.d.ts
 ├── public/vite.svg
@@ -1392,28 +1441,16 @@ handed to an AI assistant in one paste.
 
 ---
 
-## Known quirks
+## Things to try
 
-These are real, they are in the shipped code, and reading them is more instructive than a
-clean codebase would be.
-
-- **`setCounter` guards before it reads.** If any of the four element lookups comes back
-  empty, the function returns before touching a single `.value`. An effect whose first run
-  takes that path registers *zero* dependencies and is then permanently inert. Here the
-  elements always exist, so it never fires — but it's a live demonstration of why
-  "subscribe by reading" cuts both ways.
-- **One interpolation omits `.value`.** The initial markup embeds `${randomizedResult}`
-  rather than `${randomizedResult.value}`. It renders correctly only because
-  `Signal.prototype.toString()` returns the underlying value. Relying on that is implicit
-  and inconsistent with the three neighbouring interpolations.
-- **The initial `= 10` is hardcoded.** The static markup ships a literal `10` for the
-  result, which happens to be right because `counter` starts at `1`. The first effect run
-  overwrites it with the real value a moment later.
-- **`resetPressed` is a one-way latch.** Once you press Reset, the 5-second randomizer
-  stops for the rest of the session. There is no path back to `false`. That's intentional
-  — it's how you freeze the page to inspect it — but it is not a toggle.
-- **`setupCounter` in `counter.ts` is dead code**, left over from the Vite vanilla-ts
-  starter. Only `randomIntFromInterval` is actually imported.
+- Open the console and press **Reset** repeatedly. `result` never logs a recomputation,
+  because it never read `randomSeed`.
+- Press **count is N** when the counter is already at that value — nothing logs, because
+  writing an equal value is a no-op.
+- Move `if (!scramblingEnabled.value)` below an early `return` in the timer effect and
+  watch **Resume scrambling** stop working forever.
+- Delete a `data-bind="counter"` span from the markup. The remaining ones still update;
+  nothing else notices.
 
 ---
 
@@ -1428,8 +1465,17 @@ harness, server-side rendering, a UI framework of any kind, additional runtime
 dependencies. If a change makes the demo harder to read in one sitting, it doesn't belong
 here.
 
-Good contributions: fixing the quirks above, sharpening this README, improving type
-safety, or removing code.
+Good contributions: sharpening this README, improving type safety, or removing code.
+
+---
+
+## AI disclaimer
+
+Parts of this repository — including this README, `export.sh`, and revisions to the
+application code — were written or edited with the help of large language models. Every
+line has been reviewed by a human before being committed, but treat the prose as
+explanatory rather than authoritative, and check the source when the two disagree. The
+source is short enough to read in full, which is rather the point.
 
 ---
 
@@ -1488,90 +1534,129 @@ export function randomIntFromInterval(min: number, max: number) { // min and max
   File name:             main.ts
   Relative path:         src/main.ts
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/main.ts
-  Size:                  2.6 KiB (2682 bytes)
-  Last modified:         2026-09-17 08:58:38.735717469 -0400
+  Size:                  2.5 KiB (2641 bytes)
+  Last modified:         2026-09-17 09:33:21.103675986 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
   Inode:                 63830127
   Hard links:            1
   MIME type:             application/javascript
-  SHA-256:               0fa5996f91a4cc28f91b576a5e82da7ef24e545a371cec7c8f4ef7cd614a8dc5
-  Last git commit:       e7d4106 2026-09-17 08:59:45 -0400 insert new line
+  SHA-256:               203d9c1578c7c0a9a8d62f5a850a39a2afdf603d8a1240830d1d058f90da2b43
+  Last git commit:       d1c7fd6 2026-09-17 09:34:15 -0400 add claude changes
 
 --- CONTENT ---
-import { randomIntFromInterval } from "./counter";
-import "./style.css";
 import { signal, computed, effect } from "@preact/signals-core";
-const counter = signal(1);
-const resetPressed = signal(false);
-const result = computed(() => counter.value * 10);
-let randomSeed = signal(randomIntFromInterval(1, 9));
-let randomizedResult = computed(() => counter.value * randomSeed.value);
+import { randomIntFromInterval } from "./random";
+import "./style.css";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+const counter = signal(1);
+const randomSeed = signal(randomIntFromInterval(1, 9));
+const scramblingEnabled = signal(true);
+
+const result = computed(() => {
+  const value = counter.value * 10;
+  console.info({ recomputed: "result", value });
+  return value;
+});
+
+const randomizedResult = computed(() => {
+  const value = counter.value * randomSeed.value;
+  console.info({ recomputed: "randomizedResult", value });
+  return value;
+});
+
+const app = document.querySelector<HTMLDivElement>("#app")!;
+
+app.innerHTML = `
   <div>
     <h1>Signals in Vanilla JS</h1>
     <div class="card">
-      <button type="button" id="incrementCounter">count is <span class="counter">${counter.value}</span></button>
-      <button type="reset" id="reset">Reset</button>
+      <button type="button" id="incrementCounter">count is <span data-bind="counter"></span></button>
+      <button type="button" id="reset">Reset</button>
+      <button type="button" id="toggleScrambling"><span data-bind="scramblingLabel"></span></button>
     </div>
-    <p>Result: <span class="counter">${counter.value}</span> * 10 = <span class="result">10</span></p>
+    <p><span data-bind="counter"></span> * 10 = <span data-bind="result"></span></p>
     <h1>
-      <span class="counter">${counter.value}</span> * <span class="randomSeed">${randomSeed.value}</span> 
-        = <span class="randomizedResult">${randomizedResult}</span>.
+      <span data-bind="counter"></span> * <span data-bind="randomSeed"></span>
+        = <span data-bind="randomizedResult"></span>
     </h1>
   </div>
 `;
 
-function setCounter() {
-  const counterElements = document.querySelectorAll<HTMLSpanElement>(".counter");
-  const resultElement = document.querySelector<HTMLSpanElement>(".result");
-  const randomSeedElements = document.querySelectorAll<HTMLSpanElement>(".randomSeed");
-  const randomizedResultElements = document.querySelectorAll<HTMLSpanElement>(".randomizedResult");
+function bindText(name: string, readText: () => string) {
+  const elements = app.querySelectorAll<HTMLElement>(`[data-bind="${name}"]`);
 
-  if (!counterElements?.length || !resultElement || !randomSeedElements?.length || !randomizedResultElements?.length) {
-    return;
+  if (elements.length === 0) {
+    throw new Error(`Nothing in the page is bound to "${name}"`);
   }
 
-  counterElements.forEach((element) => {
-    element.innerText = counter.value.toString();
-  });
-
-  resultElement.innerText = result.value.toString();
-  // randomSeedElement.innerText = randomSeed.value.toString();
-  randomSeedElements.forEach((element) => {
-    element.innerText = randomSeed.value.toString();
-  });
-  // randomizedResultElement.innerText = randomizedResult.value.toString();
-  randomizedResultElements.forEach((element) => {
-    element.innerText = randomizedResult.value.toString();
+  effect(() => {
+    const text = readText();
+    console.info({ rendered: name, text });
+    elements.forEach((element) => {
+      element.innerText = text;
+    });
   });
 }
 
-const button = document.getElementById("incrementCounter");
-const resetButton = document.getElementById("reset");
+bindText("counter", () => counter.value.toString());
+bindText("result", () => result.value.toString());
+bindText("randomSeed", () => randomSeed.value.toString());
+bindText("randomizedResult", () => randomizedResult.value.toString());
+bindText("scramblingLabel", () =>
+  scramblingEnabled.value ? "Pause scrambling" : "Resume scrambling",
+);
 
-button?.addEventListener("click", () => {
+document.getElementById("incrementCounter")!.addEventListener("click", () => {
   counter.value++;
 });
 
-resetButton?.addEventListener("click", () => {
+document.getElementById("reset")!.addEventListener("click", () => {
   counter.value = 0;
   randomSeed.value = randomIntFromInterval(1, 99);
-  console.info({ new: randomSeed.value });
-  resetPressed.value = true;
 });
 
-effect(setCounter);
+document.getElementById("toggleScrambling")!.addEventListener("click", () => {
+  scramblingEnabled.value = !scramblingEnabled.value;
+});
 
-setInterval(() => {
-  if (resetPressed.value === false) {
+effect(() => {
+  if (!scramblingEnabled.value) {
+    return;
+  }
+
+  const interval = setInterval(() => {
     counter.value = randomIntFromInterval(1, 9);
     randomSeed.value = randomIntFromInterval(1, 9);
-    console.info({ counter: counter.value});
-    console.info({ randomSeed: randomSeed.value});
-  }
-}, 5000)
+  }, 5000);
+
+  return () => clearInterval(interval);
+});
+
+
+################################################################################
+# FILE: src/random.ts
+################################################################################
+
+--- METADATA ---
+  File name:             random.ts
+  Relative path:         src/random.ts
+  Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/random.ts
+  Size:                  128 B (128 bytes)
+  Last modified:         2026-09-17 09:33:35.208652676 -0400
+  Permissions:           -rw-r--r--
+  Owner:                 kushal:kushal
+  Inode:                 63838406
+  Hard links:            1
+  MIME type:             application/javascript
+  SHA-256:               7ddecfcaf42384e60874bad578fe5488dea878c7c90bbf551431e3256d319194
+  Last git commit:       d1c7fd6 2026-09-17 09:34:15 -0400 add claude changes
+
+--- CONTENT ---
+export function randomIntFromInterval(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 
 ################################################################################
 # FILE: src/style.css
@@ -1581,15 +1666,15 @@ setInterval(() => {
   File name:             style.css
   Relative path:         src/style.css
   Absolute path:         /home/kushal/src/ts/learnsignal.github.io/src/style.css
-  Size:                  2.7 KiB (2861 bytes)
-  Last modified:         2026-09-17 08:47:46.004885259 -0400
+  Size:                  1.3 KiB (1407 bytes)
+  Last modified:         2026-09-17 09:33:42.784655079 -0400
   Permissions:           -rw-r--r--
   Owner:                 kushal:kushal
   Inode:                 63830128
   Hard links:            1
   MIME type:             text/plain
-  SHA-256:               f8ae1413a6ee02d358f6ee81f9963427eb8efb96998bd6e8037162c65e9de7e0
-  Last git commit:       bc9e85b 2023-12-27 13:14:40 -0500 show colors for light mode background
+  SHA-256:               7af5f10bb3abf4687b7faac791b2eeeea235fdc51c300ccb76ea9bfaff052074
+  Last git commit:       d1c7fd6 2026-09-17 09:34:15 -0400 add claude changes
 
 --- CONTENT ---
 :root {
@@ -1606,15 +1691,6 @@ setInterval(() => {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -1637,25 +1713,16 @@ h1 {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
 .card {
   padding: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  justify-content: center;
 }
 
-.read-the-docs {
-  color: #888;
+[data-bind] {
+  font-variant-numeric: tabular-nums;
 }
 
 button {
@@ -1666,15 +1733,24 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  color: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition: none;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -1682,70 +1758,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
+
   button {
     background-color: #f9f9f9;
   }
-
-  :root {
-    /* Define the base hue, saturation, and lightness values */
-    --base-hue: 0;
-    --base-saturation: 40%;
-    --base-lightness: 80%;
-    /* Define the animation duration and direction */
-    --animation-duration: 1s;
-    --animation-direction: alternate;
-  }
-  
-  body {
-    /* Use the hsl() function with the CSS variables to set the background color */
-    background-color: hsl(var(--base-hue), var(--base-saturation), var(--base-lightness));
-    /* Use the animation property to animate the hue value over time */
-    animation: hue-change var(--animation-duration) infinite var(--animation-direction);
-  }
-  
-  /* Use the @keyframes rule to define how the hue value changes */
-  @keyframes hue-change {
-    /* Start from the base hue value */
-    0% {
-      --base-hue: 0;
-    }
-    10% {
-     --base-hue: 36deg; 
-    }
-    20% {
-     --base-hue: 72deg; 
-    }
-    30% {
-     --base-hue: 108deg; 
-    }
-    40% {
-     --base-hue: 144deg; 
-    }
-    50% {
-     --base-hue: 180deg; 
-    }
-    60% {
-     --base-hue: 216deg; 
-    }
-    70% {
-     --base-hue: 252deg; 
-    }
-    80% {
-     --base-hue: 288deg; 
-    }
-    90% {
-     --base-hue: 324deg; 
-    }
-    /* End at the base hue value plus 360 degrees (one full circle) */
-    100% {
-      --base-hue: 360deg;
-    }
-  }  
 }
-
 
 
 ################################################################################
@@ -1872,10 +1889,10 @@ export default defineConfig({
 ################################################################################
 # DUMP SUMMARY
 ################################################################################
-  Files dumped   : 17
-  Total size     : 50.1 KiB (51364 bytes)
+  Files dumped   : 20
+  Total size     : 49.6 KiB (50830 bytes)
   Output file    : /home/kushal/src/ts/learnsignal.github.io/docs/llm/dump.txt
-  Completed at   : 2026-09-17T09:11:43-04:00
+  Completed at   : 2026-09-17T09:34:26-04:00
 ################################################################################
 # END OF DUMP
 ################################################################################
