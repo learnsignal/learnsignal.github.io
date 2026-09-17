@@ -209,7 +209,6 @@ steps 4 or 5, and why the pause button needed no new rendering code.
 ├── src/
 │   ├── main.ts           the entire application
 │   ├── random.ts         randomIntFromInterval helper
-│   ├── counter.ts        unused leftover from the Vite starter
 │   ├── style.css         Vite starter styles, trimmed
 │   ├── typescript.svg
 │   └── vite-env.d.ts
@@ -224,9 +223,6 @@ steps 4 or 5, and why the pause button needed no new rendering code.
 ```
 
 `docs/` is generated. Don't edit it by hand; run the build.
-
-`src/counter.ts` is dead code — nothing imports it. It survives from the Vite scaffold and
-is a fine thing to delete.
 
 ---
 
